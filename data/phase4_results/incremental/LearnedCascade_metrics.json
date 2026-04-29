@@ -1,0 +1,15 @@
+{
+  "name": "LearnedCascade",
+  "accuracy": 0.46266666666666667,
+  "accuracy_routable": 0.5831932773109244,
+  "total_cost": 0.6534468600000001,
+  "avg_cost": 0.0008712624800000001,
+  "cost_per_correct": 0.0018831321613832855,
+  "oracle_efficiency": 100.0,
+  "n_correct": 347,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 0.303519149999999,
+  "avg_cost_routable": 0.0005101162184873933,
+  "cascade_total_cost": null
+}

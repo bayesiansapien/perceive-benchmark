@@ -1,0 +1,89 @@
+{
+  "run_timestamp": "2026-04-29T16:21:49.498181+00:00",
+  "experiment": "1.1b_imc_dataset_holdout",
+  "held_out_datasets": [
+    "SlideVQA",
+    "HierText",
+    "TabFact"
+  ],
+  "n_train_samples": 1363,
+  "n_test_samples": 682,
+  "n_train_observations": 31349,
+  "n_test_observations": 12922,
+  "imc_train_accuracy": 0.8395,
+  "aggregate_auc": 0.6031,
+  "aggregate_label_agreement": 0.3972,
+  "cheapest_correct_routing_agreement": 0.1006,
+  "cheapest_correct_routing_n": 666,
+  "per_model_results": {
+    "a2_flashlite": {
+      "model_name": "gemini-2.5-flash-lite",
+      "n": 2046,
+      "auc": 0.6671,
+      "label_agreement": 0.4531,
+      "pos_rate": 0.1989
+    },
+    "a4_gpt54nano": {
+      "model_name": "gpt-5.4-nano",
+      "n": 682,
+      "auc": 0.5437,
+      "label_agreement": 0.7449,
+      "pos_rate": 0.2331
+    },
+    "b1_gpt54mini": {
+      "model_name": "gpt-5.4-mini",
+      "n": 2248,
+      "auc": 0.5963,
+      "label_agreement": 0.5089,
+      "pos_rate": 0.2562
+    },
+    "b3_sonnet": {
+      "model_name": "claude-sonnet-4-6",
+      "n": 2248,
+      "auc": 0.6237,
+      "label_agreement": 0.3701,
+      "pos_rate": 0.165
+    },
+    "c1_gpt54": {
+      "model_name": "gpt-5.4",
+      "n": 2072,
+      "auc": 0.5933,
+      "label_agreement": 0.3736,
+      "pos_rate": 0.2669
+    },
+    "c2_opus": {
+      "model_name": "claude-opus-4-6",
+      "n": 2072,
+      "auc": 0.6167,
+      "label_agreement": 0.3055,
+      "pos_rate": 0.1742
+    },
+    "c3_gemini_pro": {
+      "model_name": "gemini-2.5-pro",
+      "n": 1554,
+      "auc": 0.657,
+      "label_agreement": 0.2027,
+      "pos_rate": 0.157
+    }
+  },
+  "per_dataset_results": {
+    "SlideVQA": {
+      "n_samples": 560,
+      "n_observations": 11088,
+      "auc": 0.489,
+      "pos_rate": 0.1644
+    },
+    "HierText": {
+      "n_samples": 72,
+      "n_observations": 1216,
+      "auc": 0.4734,
+      "pos_rate": 0.273
+    },
+    "TabFact": {
+      "n_samples": 50,
+      "n_observations": 618,
+      "auc": 0.5772,
+      "pos_rate": 0.835
+    }
+  }
+}

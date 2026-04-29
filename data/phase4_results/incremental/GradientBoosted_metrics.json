@@ -1,0 +1,15 @@
+{
+  "name": "GradientBoosted",
+  "accuracy": 0.496,
+  "accuracy_routable": 0.6252100840336134,
+  "total_cost": 0.19570688,
+  "avg_cost": 0.00026094250666666664,
+  "cost_per_correct": 0.0005260937634408602,
+  "oracle_efficiency": 100.0,
+  "n_correct": 372,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 0.10334703999999945,
+  "avg_cost_routable": 0.00017369250420167973,
+  "cascade_total_cost": null
+}

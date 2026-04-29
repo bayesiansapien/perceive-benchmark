@@ -1,0 +1,46 @@
+# Large data (managed in GCS / HuggingFace)
+pilot_results/all_samples.json
+pilot_results/pilot_results.json
+benchmark_results/
+data/raw/
+data/processed/
+data/anchor_set/anchor_raw_results/
+data/benchmark/
+data/embeddings/
+data/model_eval_results/
+data/anchor_evaluations/
+
+# Session archives
+*.zip
+
+# Scratch files
+do_commit_push.py
+x
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+.claude/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Env / secrets
+.env
+*.key
+credentials.json
+
+# Large model files
+*.onnx
+*.pt
+*.safetensors

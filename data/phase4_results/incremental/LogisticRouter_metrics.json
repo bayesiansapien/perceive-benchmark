@@ -1,0 +1,15 @@
+{
+  "name": "LogisticRouter",
+  "accuracy": 0.484,
+  "accuracy_routable": 0.6100840336134454,
+  "total_cost": 0.14050209,
+  "avg_cost": 0.00018733612,
+  "cost_per_correct": 0.0003870580991735537,
+  "oracle_efficiency": 100.0,
+  "n_correct": 363,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 0.09496212999999934,
+  "avg_cost_routable": 0.00015960021848739384,
+  "cascade_total_cost": null
+}

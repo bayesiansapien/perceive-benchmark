@@ -1,0 +1,204 @@
+# DocRouteBench — Model Pool Configuration (API-only, locked)
+# 7 models, 23 configs, 4 budget levels (B0/B1/B2/B3)
+# Scope: commercially-available API models only (OpenAI, Anthropic, Google)
+# Rationale: API-only ensures full reproducibility without GPU hardware requirements.
+#            Standardized $/M pricing gives unambiguous cost signal for routing.
+#            See data/paper_notes_structural_concerns.md §9 for reviewer defense.
+#
+# Open-weight models (Qwen-VL, Phi-4, InternVL3) excluded from this release.
+# Extension note: a small-tier open model (e.g. Qwen3.5-VL-4B at $0/M) could be
+# added in future work as an additional Pareto point below GPT-5.4-nano.
+#
+# Changes from v1 pool:
+#   REMOVED: claude-haiku-4.5, o4-mini, all self_hosted/DGX GPU models
+#   ADDED:   gpt-5.4-nano (Tier A), claude-opus-4.6 (Tier C), gemini-2.5-pro (Tier C)
+#   MOVED:   gpt-5.4-mini Tier A → Tier B, Sonnet Tier C → Tier B
+
+budget_levels:
+  B0: {tokens: 0,     label: "instruct"}
+  B1: {tokens: 1024,  label: "light thinking"}
+  B2: {tokens: 4096,  label: "moderate thinking"}
+  B3: {tokens: 16384, label: "deep thinking"}
+
+models:
+
+  # ── Tier A: Cheap / Lightweight (3 configs) ─────────────────────────────────
+  # Purpose: baseline, handle T1/T2 easy tasks, maximum cost savings
+  # API cost ceiling: ~$0.10/M input
+
+  a2_flashlite:
+    name: "gemini-2.5-flash-lite"
+    model_id: "gemini-2.5-flash-lite"
+    provider: "google"
+    run_on: "vertex_ai"
+    cost_per_1M_input: 0.05
+    cost_per_1M_output: 0.20
+    cost_per_1M_reasoning: 0.20
+    supports_grounding: true
+    supports_multipage: true
+    max_context_tokens: 1000000
+    budgets: ["B1", "B2", "B3"]
+    notes: "Cheapest API model. Google lightweight. Cannot set B0 (min 1024 thinking tokens)."
+
+  a4_gpt54nano:
+    name: "gpt-5.4-nano"
+    model_id: "gpt-5.4-nano"
+    provider: "openai"
+    run_on: "vertex_ai"
+    cost_per_1M_input: 0.04
+    cost_per_1M_output: 0.16
+    cost_per_1M_reasoning: 0.16
+    supports_grounding: false
+    supports_multipage: true
+    max_context_tokens: 128000
+    budgets: ["B0"]
+    notes: "Cheapest OpenAI model (released 2026-03-17). One-shot instruct. Tier A OpenAI anchor for cost analysis."
+
+  # ── Tier B: Mid-Scale / Workhorse (8 configs) ───────────────────────────────
+  # Purpose: handle T2/T3/T4 medium tasks, the most routing-discriminative tier (50% of benchmark)
+  # API cost range: $0.20–$3.00/M input
+
+  b1_gpt54mini:
+    name: "gpt-5.4-mini"
+    model_id: "gpt-5.4-mini"
+    provider: "openai"
+    run_on: "vertex_ai"
+    cost_per_1M_input: 0.20
+    cost_per_1M_output: 0.80
+    cost_per_1M_reasoning: 0.80
+    supports_grounding: false
+    supports_multipage: true
+    max_context_tokens: 128000
+    budgets: ["B0", "B1", "B2", "B3"]
+    reasoning_effort_map:
+      B0: null
+      B1: "low"
+      B2: "medium"
+      B3: "high"
+    notes: "OpenAI mid-tier. Full 4-budget curve — key for studying reasoning budget non-monotonicity."
+
+  b3_sonnet:
+    name: "claude-sonnet-4-6"
+    model_id: "claude-sonnet-4-6"
+    provider: "anthropic"
+    run_on: "vertex_ai"
+    cost_per_1M_input: 3.00
+    cost_per_1M_output: 15.00
+    cost_per_1M_reasoning: 3.00
+    supports_grounding: false
+    supports_multipage: true
+    max_context_tokens: 200000
+    budgets: ["B0", "B1", "B2", "B3"]
+    notes: "Anthropic mid-tier workhorse. 200K context. Tier B ceiling. Full budget curve."
+
+  # ── Tier C: Frontier (12 configs) ──────────────────────────────────────────
+  # Purpose: handle T5/T6 hard tasks and complex reasoning. Route here only when lower tiers fail.
+  # One frontier model per major API provider.
+  # API cost range: $1.25–$15.00/M input
+
+  c1_gpt54:
+    name: "gpt-5.4"
+    model_id: "gpt-5.4"
+    provider: "openai"
+    run_on: "vertex_ai"
+    cost_per_1M_input: 3.00
+    cost_per_1M_output: 12.00
+    cost_per_1M_reasoning: 12.00
+    supports_grounding: true
+    supports_multipage: true
+    max_context_tokens: 128000
+    budgets: ["B0", "B1", "B2", "B3"]
+    is_calibration_model: true
+    notes: "OpenAI frontier pro (released 2026-03-05). Full budget curve. Native grounding. Calibration model for IMC."
+
+  c2_opus:
+    name: "claude-opus-4-6"
+    model_id: "claude-opus-4-6"
+    provider: "anthropic"
+    run_on: "vertex_ai"
+    cost_per_1M_input: 15.00
+    cost_per_1M_output: 75.00
+    cost_per_1M_reasoning: 15.00
+    supports_grounding: false
+    supports_multipage: true
+    max_context_tokens: 200000
+    budgets: ["B0", "B1", "B2", "B3"]
+    notes: "Anthropic frontier. Most expensive model in pool. Routing ceiling — only justified for hardest samples. B2 gap-filled Apr 2026."
+
+  c3_gemini_pro:
+    name: "gemini-2.5-pro"
+    model_id: "gemini-2.5-pro"
+    provider: "google"
+    run_on: "vertex_ai"
+    cost_per_1M_input: 1.25
+    cost_per_1M_output: 5.00
+    cost_per_1M_reasoning: 3.50
+    supports_grounding: true
+    supports_multipage: true
+    max_context_tokens: 1000000
+    budgets: ["B0", "B1", "B3"]
+    notes: "Google frontier. Most capable Google model. 1M+ context. Replaces Flash Lite for hard tasks."
+
+# ── External Validation Models (IMC experiment 1.1) ─────────────────────────
+# Two new architecture families added post-collection for IMC external validation.
+# NOT part of the core 7-model benchmark. Used only in §5.5 IMC extension experiment.
+# Accessed via OpenRouter (OPENROUTER_API_KEY). Pricing approximate from OpenRouter dashboard.
+
+  ext_qwen3vl:
+    name: "qwen3-vl-30b"
+    model_id: "qwen/qwen3-vl-30b-a3b-instruct"
+    model_id_thinking: "qwen/qwen3-vl-30b-a3b-thinking"
+    provider: "openrouter"
+    model_family: "qwen"
+    run_on: "openrouter"
+    cost_per_1M_input: 0.10
+    cost_per_1M_output: 0.30
+    cost_per_1M_reasoning: 0.30
+    supports_grounding: false
+    supports_multipage: false
+    max_context_tokens: 128000
+    budgets: ["B0", "B1", "B2", "B3"]
+    imc_validation_only: true
+    notes: "Alibaba Qwen3-VL 30B — new family not in core pool. B0 uses instruct variant; B1-B3 use thinking variant with thinking_budget parameter. Confirmed working on OpenRouter."
+
+  ext_llama4scout:
+    name: "llama-4-scout"
+    model_id: "meta-llama/llama-4-scout"
+    provider: "openrouter"
+    model_family: "meta"
+    run_on: "openrouter"
+    cost_per_1M_input: 0.11
+    cost_per_1M_output: 0.34
+    cost_per_1M_reasoning: 0.00
+    supports_grounding: false
+    supports_multipage: false
+    max_context_tokens: 128000
+    budgets: ["B0"]
+    imc_validation_only: true
+    notes: "Meta Llama-4 family — new architecture family not in core 7-model pool. B0 only (no thinking API), consistent with gpt-5.4-nano precedent."
+
+# ── Pool Summary (API-only, locked) ──────────────────────────────────────────
+# Tier A: 2 models,  4 configs  (Flash-Lite B1/B2/B3, GPT-nano B0)
+# Tier B: 2 models,  8 configs  (GPT-mini B0-B3, Sonnet B0-B3)
+# Tier C: 3 models, 12 configs  (GPT-5.4 B0-B3, Opus B0/B1/B3, Gemini Pro B0/B1/B3)
+# TOTAL:  7 models, 24 configs
+#
+# Provider coverage:
+#   OpenAI:    Tier A (nano) → Tier B (mini) → Tier C (GPT-5.4)
+#   Anthropic: Tier B (Sonnet) → Tier C (Opus)
+#   Google:    Tier A (Flash Lite) → Tier C (Gemini Pro)
+#
+# Cost range: $0.04/M (GPT-nano) → $15.00/M (Opus) = 375× spread
+#
+# Excluded (open-weight / self-hosted):
+#   Qwen3.5-VL-4B, Phi-4-Vision, InternVL3-8B, Qwen3.5-35B-A3B
+#   Reason: reproducibility + standardized cost semantics (see paper notes §9)
+#   Future extension: add Qwen3.5-VL-4B as Tier A open model ($0/M Pareto point)
+
+# ── Cost Ordering (API models, input cost/M) ──────────────────────────────────
+# Tier A: Flash Lite $0.05 < GPT-nano $0.06
+# Tier B: GPT-5.4-mini $0.20 < Sonnet $3.00
+# Tier C: Gemini Pro $1.25 < GPT-5.4 $3.00 < Opus $15.00
+# Note: Tiers are capability-based, not strictly cost-ordered across tiers.
+#       Gemini Pro ($1.25) is Tier C by capability despite being cheaper than Sonnet ($3.00).
+#       The router uses observed cost per call (not tier label) for cost optimization.

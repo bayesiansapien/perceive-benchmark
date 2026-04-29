@@ -1,0 +1,15 @@
+{
+  "name": "AlwaysCheapest",
+  "accuracy": 0.44666666666666666,
+  "accuracy_routable": 0.5630252100840336,
+  "total_cost": 0.036705000000000015,
+  "avg_cost": 4.894000000000002e-05,
+  "cost_per_correct": 0.00010956716417910452,
+  "oracle_efficiency": 100.0,
+  "n_correct": 335,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 0.029119300000000334,
+  "avg_cost_routable": 4.894000000000056e-05,
+  "cascade_total_cost": null
+}

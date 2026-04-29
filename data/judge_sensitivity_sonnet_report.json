@@ -1,0 +1,44 @@
+{
+  "alternate_model": "Claude Sonnet 4.6",
+  "original_model": "mistral-large-2512",
+  "n_judged": 7969,
+  "n_flipped": 1623,
+  "flip_rate_pct": 20.366,
+  "stability": "HIGH (>10%)",
+  "by_confidence": {
+    "high": {
+      "n": 7955,
+      "flip_pct": 20.34
+    },
+    "medium": {
+      "n": 14,
+      "flip_pct": 35.71
+    }
+  },
+  "by_task_type": {
+    "T2": {
+      "n": 2429,
+      "flip_pct": 19.23
+    },
+    "T4": {
+      "n": 2954,
+      "flip_pct": 5.86
+    },
+    "T3": {
+      "n": 5,
+      "flip_pct": 0.0
+    },
+    "T5": {
+      "n": 1353,
+      "flip_pct": 9.68
+    },
+    "T1": {
+      "n": 6,
+      "flip_pct": 0.0
+    },
+    "element_localization": {
+      "n": 1222,
+      "flip_pct": 69.72
+    }
+  }
+}

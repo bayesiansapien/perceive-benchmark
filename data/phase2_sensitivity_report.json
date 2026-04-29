@@ -1,0 +1,62 @@
+{
+  "exp1_drop_gemini": {
+    "model_dropped": "gemini_flash",
+    "n_samples": 17586,
+    "same_tier": 16330,
+    "stability": 0.9286,
+    "tier_shift_distribution": {
+      "T1->T1": 7271,
+      "T2->T1": 1013,
+      "T2->T2": 9047,
+      "T2->T3": 116,
+      "T3->T1": 61,
+      "T3->T2": 66,
+      "T3->T3": 12
+    }
+  },
+  "exp2_drop_gpt52": {
+    "model_dropped": "gpt52",
+    "n_samples": 17586,
+    "same_tier": 16259,
+    "stability": 0.9245,
+    "tier_shift_distribution": {
+      "T1->T1": 7271,
+      "T2->T1": 1181,
+      "T2->T2": 8931,
+      "T2->T3": 64,
+      "T3->T1": 56,
+      "T3->T2": 26,
+      "T3->T3": 57
+    }
+  },
+  "exp3_perturbation": {
+    "flip_rate": 0.1,
+    "n_trials": 100,
+    "stability_mean": 0.9035,
+    "stability_std": 0.0023,
+    "stability_min": 0.897,
+    "stability_max": 0.9087
+  },
+  "exp4_complexity_agreement": {
+    "VDS": {
+      "n_compared": 15767,
+      "exact_match": 9988,
+      "agreement_rate": 0.6335
+    },
+    "RDS": {
+      "n_compared": 15669,
+      "exact_match": 10303,
+      "agreement_rate": 0.6575
+    },
+    "SES": {
+      "n_compared": 15569,
+      "exact_match": 10841,
+      "agreement_rate": 0.6963
+    }
+  },
+  "summary": {
+    "min_stability": 0.9035,
+    "all_above_85_pct": true,
+    "conclusion": "Pipeline is robust to probe model choice"
+  }
+}

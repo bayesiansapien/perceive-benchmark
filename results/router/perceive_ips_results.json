@@ -1,0 +1,19 @@
+{
+  "encoder": "None",
+  "seeds": 5,
+  "seed_list": [42, 123, 456, 789, 2024],
+  "accuracies": [0.613333, 0.618667, 0.612, 0.618667, 0.614667],
+  "mean_accuracy": 0.615467,
+  "std_accuracy": 0.002746,
+  "mean_accuracy_pct": 61.55,
+  "hyperparameters": {
+    "epochs_p1": 200,
+    "epochs_p2": 200,
+    "lr_p1": 0.001,
+    "lr_p2": 0.002,
+    "cost_strength": 0.0,
+    "n_features": 48
+  },
+  "verified_on_hf_data": "2026-04-29",
+  "note": "Reproduced locally from HuggingFace data. Run train_perceive_router.py --seeds 5 to reproduce. Requires data/anchor_evaluations/api_results_anchor.jsonl and data/model_eval_results/final_eval_correct.jsonl (both on HuggingFace). The observation mask for remaining samples is derived from final_eval_correct.jsonl entries."
+}

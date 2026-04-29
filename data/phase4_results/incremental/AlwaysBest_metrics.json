@@ -1,0 +1,15 @@
+{
+  "name": "AlwaysBest",
+  "accuracy": 0.6426666666666667,
+  "accuracy_routable": 0.8100840336134454,
+  "total_cost": 22.858034999999997,
+  "avg_cost": 0.030477379999999995,
+  "cost_per_correct": 0.0474233091286307,
+  "oracle_efficiency": 0.0,
+  "n_correct": 482,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 18.134041100000175,
+  "avg_cost_routable": 0.030477380000000293,
+  "cascade_total_cost": null
+}

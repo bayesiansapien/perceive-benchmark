@@ -1,0 +1,15 @@
+{
+  "name": "ComplexityThreshold",
+  "accuracy": 0.548,
+  "accuracy_routable": 0.6907563025210084,
+  "total_cost": 1.5919545499999996,
+  "avg_cost": 0.002122606066666666,
+  "cost_per_correct": 0.0038733687347931867,
+  "oracle_efficiency": 95.3573254983774,
+  "n_correct": 411,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 1.2382846600000135,
+  "avg_cost_routable": 0.002081150689075653,
+  "cascade_total_cost": null
+}

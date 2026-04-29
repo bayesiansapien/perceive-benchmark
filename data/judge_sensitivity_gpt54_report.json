@@ -1,0 +1,44 @@
+{
+  "alternate_model": "GPT-5.4",
+  "original_model": "mistral-large-2512",
+  "n_judged": 7974,
+  "n_flipped": 1645,
+  "flip_rate_pct": 20.63,
+  "stability": "HIGH (>10%)",
+  "by_confidence": {
+    "high": {
+      "n": 7960,
+      "flip_pct": 20.62
+    },
+    "medium": {
+      "n": 14,
+      "flip_pct": 28.57
+    }
+  },
+  "by_task_type": {
+    "T2": {
+      "n": 2429,
+      "flip_pct": 24.29
+    },
+    "T3": {
+      "n": 5,
+      "flip_pct": 20.0
+    },
+    "T4": {
+      "n": 2954,
+      "flip_pct": 6.87
+    },
+    "T5": {
+      "n": 1353,
+      "flip_pct": 9.39
+    },
+    "T1": {
+      "n": 6,
+      "flip_pct": 0.0
+    },
+    "element_localization": {
+      "n": 1227,
+      "flip_pct": 59.01
+    }
+  }
+}

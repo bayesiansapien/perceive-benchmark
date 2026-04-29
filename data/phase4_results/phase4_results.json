@@ -1,0 +1,801 @@
+{
+  "validation_metrics": [
+    {
+      "name": "Oracle",
+      "accuracy": 0.7933333333333333,
+      "accuracy_routable": 1.0,
+      "total_cost": 0.5539832,
+      "avg_cost": 0.0007386442666666667,
+      "cost_per_correct": 0.0009310642016806723,
+      "oracle_efficiency": 100.0,
+      "n_correct": 595,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 0.41567876999999975,
+      "avg_cost_routable": 0.0006986197815126047,
+      "cascade_total_cost": null
+    },
+    {
+      "name": "AlwaysCheapest",
+      "accuracy": 0.44666666666666666,
+      "accuracy_routable": 0.5630252100840336,
+      "total_cost": 0.036705000000000015,
+      "avg_cost": 4.894000000000002e-05,
+      "cost_per_correct": 0.00010956716417910452,
+      "oracle_efficiency": 100.0,
+      "n_correct": 335,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 0.029119300000000334,
+      "avg_cost_routable": 4.894000000000056e-05,
+      "cascade_total_cost": null
+    },
+    {
+      "name": "AlwaysBest",
+      "accuracy": 0.6426666666666667,
+      "accuracy_routable": 0.8100840336134454,
+      "total_cost": 22.858034999999997,
+      "avg_cost": 0.030477379999999995,
+      "cost_per_correct": 0.0474233091286307,
+      "oracle_efficiency": 0.0,
+      "n_correct": 482,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 18.134041100000175,
+      "avg_cost_routable": 0.030477380000000293,
+      "cascade_total_cost": null
+    },
+    {
+      "name": "Random",
+      "accuracy": 0.5866666666666667,
+      "accuracy_routable": 0.7394957983193278,
+      "total_cost": 5.578370649999999,
+      "avg_cost": 0.0074378275333333325,
+      "cost_per_correct": 0.012678115113636363,
+      "oracle_efficiency": 76.74894844528221,
+      "n_correct": 440,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 4.535384329999997,
+      "avg_cost_routable": 0.0076224946722689025,
+      "cascade_total_cost": null
+    },
+    {
+      "name": "ComplexityThreshold",
+      "accuracy": 0.548,
+      "accuracy_routable": 0.6907563025210084,
+      "total_cost": 1.5919545499999996,
+      "avg_cost": 0.002122606066666666,
+      "cost_per_correct": 0.0038733687347931867,
+      "oracle_efficiency": 95.3573254983774,
+      "n_correct": 411,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 1.2382846600000135,
+      "avg_cost_routable": 0.002081150689075653,
+      "cascade_total_cost": null
+    },
+    {
+      "name": "OracleCascade",
+      "accuracy": 0.7933333333333333,
+      "accuracy_routable": 1.0,
+      "total_cost": 0.5539832,
+      "avg_cost": 0.0007386442666666667,
+      "cost_per_correct": 0.0009310642016806723,
+      "oracle_efficiency": 100.0,
+      "n_correct": 595,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 0.41567876999999975,
+      "avg_cost_routable": 0.0006986197815126047,
+      "cascade_total_cost": 29.78619909
+    },
+    {
+      "name": "LogisticRouter",
+      "accuracy": 0.484,
+      "accuracy_routable": 0.6100840336134454,
+      "total_cost": 0.14050209,
+      "avg_cost": 0.00018733612,
+      "cost_per_correct": 0.0003870580991735537,
+      "oracle_efficiency": 100.0,
+      "n_correct": 363,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 0.09496212999999934,
+      "avg_cost_routable": 0.00015960021848739384,
+      "cascade_total_cost": null
+    },
+    {
+      "name": "LearnedCascade",
+      "accuracy": 0.46266666666666667,
+      "accuracy_routable": 0.5831932773109244,
+      "total_cost": 0.6534468600000001,
+      "avg_cost": 0.0008712624800000001,
+      "cost_per_correct": 0.0018831321613832855,
+      "oracle_efficiency": 100.0,
+      "n_correct": 347,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 0.303519149999999,
+      "avg_cost_routable": 0.0005101162184873933,
+      "cascade_total_cost": null
+    },
+    {
+      "name": "CostSensitiveMLP",
+      "accuracy": 0.496,
+      "accuracy_routable": 0.6252100840336134,
+      "total_cost": 0.08661002000000001,
+      "avg_cost": 0.00011548002666666668,
+      "cost_per_correct": 0.00023282263440860216,
+      "oracle_efficiency": 100.0,
+      "n_correct": 372,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 0.053424749999999674,
+      "avg_cost_routable": 8.978949579831879e-05,
+      "cascade_total_cost": null
+    },
+    {
+      "name": "PERCEIVE-MLP",
+      "accuracy": 0.49866666666666665,
+      "accuracy_routable": 0.6285714285714286,
+      "total_cost": 0.07182672000000001,
+      "avg_cost": 9.576896000000001e-05,
+      "cost_per_correct": 0.00019205005347593584,
+      "oracle_efficiency": 100.0,
+      "n_correct": 374,
+      "n_total": 750,
+      "n_routable": 595,
+      "total_cost_routable": 0.04723065999999976,
+      "avg_cost_routable": 7.937926050420127e-05,
+      "cascade_total_cost": null
+    }
+  ],
+  "pareto_frontier": [
+    {
+      "name": "AlwaysCheapest",
+      "avg_cost": 4.894000000000002e-05,
+      "accuracy": 0.44666666666666666
+    },
+    {
+      "name": "PERCEIVE-MLP",
+      "avg_cost": 9.576896000000001e-05,
+      "accuracy": 0.49866666666666665
+    },
+    {
+      "name": "Oracle",
+      "avg_cost": 0.0007386442666666667,
+      "accuracy": 0.7933333333333333
+    },
+    {
+      "name": "OracleCascade",
+      "avg_cost": 0.0007386442666666667,
+      "accuracy": 0.7933333333333333
+    }
+  ],
+  "config_list": [
+    {
+      "model": "a2_flashlite",
+      "budget": "B1",
+      "cost": 0.00014246
+    },
+    {
+      "model": "a2_flashlite",
+      "budget": "B2",
+      "cost": 9.332e-05
+    },
+    {
+      "model": "a2_flashlite",
+      "budget": "B3",
+      "cost": 0.00043329
+    },
+    {
+      "model": "a4_gpt54nano",
+      "budget": "B0",
+      "cost": 4.894e-05
+    },
+    {
+      "model": "b1_gpt54mini",
+      "budget": "B0",
+      "cost": 0.00022614
+    },
+    {
+      "model": "b1_gpt54mini",
+      "budget": "B1",
+      "cost": 0.00043393
+    },
+    {
+      "model": "b1_gpt54mini",
+      "budget": "B2",
+      "cost": 0.00103158
+    },
+    {
+      "model": "b1_gpt54mini",
+      "budget": "B3",
+      "cost": 0.00192311
+    },
+    {
+      "model": "b3_sonnet",
+      "budget": "B0",
+      "cost": 0.00328967
+    },
+    {
+      "model": "b3_sonnet",
+      "budget": "B1",
+      "cost": 0.00390005
+    },
+    {
+      "model": "b3_sonnet",
+      "budget": "B2",
+      "cost": 0.00483883
+    },
+    {
+      "model": "b3_sonnet",
+      "budget": "B3",
+      "cost": 0.0052622
+    },
+    {
+      "model": "c1_gpt54",
+      "budget": "B0",
+      "cost": 0.00316043
+    },
+    {
+      "model": "c1_gpt54",
+      "budget": "B1",
+      "cost": 0.00643326
+    },
+    {
+      "model": "c1_gpt54",
+      "budget": "B2",
+      "cost": 0.01486339
+    },
+    {
+      "model": "c1_gpt54",
+      "budget": "B3",
+      "cost": 0.03047738
+    },
+    {
+      "model": "c2_opus",
+      "budget": "B0",
+      "cost": 0.01557899
+    },
+    {
+      "model": "c2_opus",
+      "budget": "B1",
+      "cost": 0.02181283
+    },
+    {
+      "model": "c2_opus",
+      "budget": "B2",
+      "cost": 0.02325841
+    },
+    {
+      "model": "c2_opus",
+      "budget": "B3",
+      "cost": 0.02409178
+    },
+    {
+      "model": "c3_gemini_pro",
+      "budget": "B0",
+      "cost": 0.00361754
+    },
+    {
+      "model": "c3_gemini_pro",
+      "budget": "B1",
+      "cost": 0.00420533
+    },
+    {
+      "model": "c3_gemini_pro",
+      "budget": "B2",
+      "cost": 0.00464909
+    },
+    {
+      "model": "c3_gemini_pro",
+      "budget": "B3",
+      "cost": 0.00534961
+    }
+  ],
+  "per_tier_breakdown": {
+    "Oracle": {
+      "1": {
+        "accuracy": 0.8235294117647058,
+        "n_samples": 170,
+        "avg_cost": 0.00019404788235294118
+      },
+      "2": {
+        "accuracy": 0.7874396135265701,
+        "n_samples": 414,
+        "avg_cost": 0.0006094064734299517
+      },
+      "3": {
+        "accuracy": 0.7771084337349398,
+        "n_samples": 166,
+        "avg_cost": 0.0016186793975903617
+      }
+    },
+    "AlwaysCheapest": {
+      "1": {
+        "accuracy": 0.5588235294117647,
+        "n_samples": 170,
+        "avg_cost": 4.8940000000000016e-05
+      },
+      "2": {
+        "accuracy": 0.463768115942029,
+        "n_samples": 414,
+        "avg_cost": 4.8940000000000016e-05
+      },
+      "3": {
+        "accuracy": 0.2891566265060241,
+        "n_samples": 166,
+        "avg_cost": 4.8940000000000016e-05
+      }
+    },
+    "AlwaysBest": {
+      "1": {
+        "accuracy": 0.7235294117647059,
+        "n_samples": 170,
+        "avg_cost": 0.030477379999999995
+      },
+      "2": {
+        "accuracy": 0.6376811594202898,
+        "n_samples": 414,
+        "avg_cost": 0.030477379999999995
+      },
+      "3": {
+        "accuracy": 0.572289156626506,
+        "n_samples": 166,
+        "avg_cost": 0.03047737999999999
+      }
+    },
+    "Random": {
+      "1": {
+        "accuracy": 0.6882352941176471,
+        "n_samples": 170,
+        "avg_cost": 0.0084289
+      },
+      "2": {
+        "accuracy": 0.5628019323671497,
+        "n_samples": 414,
+        "avg_cost": 0.0071428182125603855
+      },
+      "3": {
+        "accuracy": 0.5421686746987951,
+        "n_samples": 166,
+        "avg_cost": 0.007158619939759036
+      }
+    },
+    "ComplexityThreshold": {
+      "1": {
+        "accuracy": 0.7,
+        "n_samples": 170,
+        "avg_cost": 0.002724747352941176
+      },
+      "2": {
+        "accuracy": 0.5314009661835749,
+        "n_samples": 414,
+        "avg_cost": 0.0017263578743961351
+      },
+      "3": {
+        "accuracy": 0.43373493975903615,
+        "n_samples": 166,
+        "avg_cost": 0.0024941887951807225
+      }
+    },
+    "OracleCascade": {
+      "1": {
+        "accuracy": 0.8235294117647058,
+        "n_samples": 170,
+        "avg_cost": 0.00019404788235294118
+      },
+      "2": {
+        "accuracy": 0.7874396135265701,
+        "n_samples": 414,
+        "avg_cost": 0.0006094064734299517
+      },
+      "3": {
+        "accuracy": 0.7771084337349398,
+        "n_samples": 166,
+        "avg_cost": 0.0016186793975903617
+      }
+    },
+    "LogisticRouter": {
+      "1": {
+        "accuracy": 0.6176470588235294,
+        "n_samples": 170,
+        "avg_cost": 0.0001763985294117647
+      },
+      "2": {
+        "accuracy": 0.48792270531400966,
+        "n_samples": 414,
+        "avg_cost": 0.00020421048309178744
+      },
+      "3": {
+        "accuracy": 0.3373493975903614,
+        "n_samples": 166,
+        "avg_cost": 0.0001564530120481928
+      }
+    },
+    "LearnedCascade": {
+      "1": {
+        "accuracy": 0.5882352941176471,
+        "n_samples": 170,
+        "avg_cost": 0.0007376125294117649
+      },
+      "2": {
+        "accuracy": 0.4758454106280193,
+        "n_samples": 414,
+        "avg_cost": 0.0009378792270531401
+      },
+      "3": {
+        "accuracy": 0.30120481927710846,
+        "n_samples": 166,
+        "avg_cost": 0.0008419923493975905
+      }
+    },
+    "CostSensitiveMLP": {
+      "1": {
+        "accuracy": 0.5941176470588235,
+        "n_samples": 170,
+        "avg_cost": 6.382900000000002e-05
+      },
+      "2": {
+        "accuracy": 0.4975845410628019,
+        "n_samples": 414,
+        "avg_cost": 0.00011465084541062804
+      },
+      "3": {
+        "accuracy": 0.39156626506024095,
+        "n_samples": 166,
+        "avg_cost": 0.00017044361445783134
+      }
+    },
+    "PERCEIVE-MLP": {
+      "1": {
+        "accuracy": 0.5823529411764706,
+        "n_samples": 170,
+        "avg_cost": 6.314652941176473e-05
+      },
+      "2": {
+        "accuracy": 0.4927536231884058,
+        "n_samples": 414,
+        "avg_cost": 9.561828502415458e-05
+      },
+      "3": {
+        "accuracy": 0.42771084337349397,
+        "n_samples": 166,
+        "avg_cost": 0.0001295532530120482
+      }
+    }
+  },
+  "per_task_breakdown": {
+    "Oracle": {
+      "T1": {
+        "accuracy": 0.32608695652173914,
+        "n_samples": 46,
+        "avg_cost": 0.0010024371739130434
+      },
+      "T2": {
+        "accuracy": 0.896,
+        "n_samples": 125,
+        "avg_cost": 0.0004803796799999999
+      },
+      "T3": {
+        "accuracy": 0.6666666666666666,
+        "n_samples": 45,
+        "avg_cost": 0.0011740237777777777
+      },
+      "T4": {
+        "accuracy": 0.9384615384615385,
+        "n_samples": 260,
+        "avg_cost": 0.0003042570000000001
+      },
+      "T5": {
+        "accuracy": 0.6774193548387096,
+        "n_samples": 217,
+        "avg_cost": 0.0010279141013824886
+      },
+      "element_localization": {
+        "accuracy": 0.8245614035087719,
+        "n_samples": 57,
+        "avg_cost": 0.0016285680701754383
+      }
+    },
+    "AlwaysCheapest": {
+      "T1": {
+        "accuracy": 0.21739130434782608,
+        "n_samples": 46,
+        "avg_cost": 4.8939999999999996e-05
+      },
+      "T2": {
+        "accuracy": 0.528,
+        "n_samples": 125,
+        "avg_cost": 4.8940000000000016e-05
+      },
+      "T3": {
+        "accuracy": 0.1111111111111111,
+        "n_samples": 45,
+        "avg_cost": 4.8939999999999996e-05
+      },
+      "T4": {
+        "accuracy": 0.6423076923076924,
+        "n_samples": 260,
+        "avg_cost": 4.8940000000000016e-05
+      },
+      "T5": {
+        "accuracy": 0.35944700460829493,
+        "n_samples": 217,
+        "avg_cost": 4.894000000000002e-05
+      },
+      "element_localization": {
+        "accuracy": 0.15789473684210525,
+        "n_samples": 57,
+        "avg_cost": 4.894000000000001e-05
+      }
+    },
+    "AlwaysBest": {
+      "T1": {
+        "accuracy": 0.30434782608695654,
+        "n_samples": 46,
+        "avg_cost": 0.03047738
+      },
+      "T2": {
+        "accuracy": 0.736,
+        "n_samples": 125,
+        "avg_cost": 0.030477379999999988
+      },
+      "T3": {
+        "accuracy": 0.4666666666666667,
+        "n_samples": 45,
+        "avg_cost": 0.03047738
+      },
+      "T4": {
+        "accuracy": 0.8653846153846154,
+        "n_samples": 260,
+        "avg_cost": 0.03047738
+      },
+      "T5": {
+        "accuracy": 0.5023041474654378,
+        "n_samples": 217,
+        "avg_cost": 0.03047738
+      },
+      "element_localization": {
+        "accuracy": 0.3684210526315789,
+        "n_samples": 57,
+        "avg_cost": 0.03047738
+      }
+    },
+    "Random": {
+      "T1": {
+        "accuracy": 0.30434782608695654,
+        "n_samples": 46,
+        "avg_cost": 0.007300485217391304
+      },
+      "T2": {
+        "accuracy": 0.672,
+        "n_samples": 125,
+        "avg_cost": 0.007579830240000001
+      },
+      "T3": {
+        "accuracy": 0.35555555555555557,
+        "n_samples": 45,
+        "avg_cost": 0.007373434222222223
+      },
+      "T4": {
+        "accuracy": 0.8153846153846154,
+        "n_samples": 260,
+        "avg_cost": 0.00624650526923077
+      },
+      "T5": {
+        "accuracy": 0.4700460829493088,
+        "n_samples": 217,
+        "avg_cost": 0.00879129599078341
+      },
+      "element_localization": {
+        "accuracy": 0.21052631578947367,
+        "n_samples": 57,
+        "avg_cost": 0.007569515964912281
+      }
+    },
+    "ComplexityThreshold": {
+      "T1": {
+        "accuracy": 0.21739130434782608,
+        "n_samples": 46,
+        "avg_cost": 4.8939999999999996e-05
+      },
+      "T2": {
+        "accuracy": 0.6,
+        "n_samples": 125,
+        "avg_cost": 0.00066256456
+      },
+      "T3": {
+        "accuracy": 0.26666666666666666,
+        "n_samples": 45,
+        "avg_cost": 0.0031604299999999992
+      },
+      "T4": {
+        "accuracy": 0.7692307692307693,
+        "n_samples": 260,
+        "avg_cost": 0.0019180983461538458
+      },
+      "T5": {
+        "accuracy": 0.45622119815668205,
+        "n_samples": 217,
+        "avg_cost": 0.0031604299999999997
+      },
+      "element_localization": {
+        "accuracy": 0.2631578947368421,
+        "n_samples": 57,
+        "avg_cost": 0.0031604299999999997
+      }
+    },
+    "OracleCascade": {
+      "T1": {
+        "accuracy": 0.32608695652173914,
+        "n_samples": 46,
+        "avg_cost": 0.0010024371739130434
+      },
+      "T2": {
+        "accuracy": 0.896,
+        "n_samples": 125,
+        "avg_cost": 0.0004803796799999999
+      },
+      "T3": {
+        "accuracy": 0.6666666666666666,
+        "n_samples": 45,
+        "avg_cost": 0.0011740237777777777
+      },
+      "T4": {
+        "accuracy": 0.9384615384615385,
+        "n_samples": 260,
+        "avg_cost": 0.0003042570000000001
+      },
+      "T5": {
+        "accuracy": 0.6774193548387096,
+        "n_samples": 217,
+        "avg_cost": 0.0010279141013824886
+      },
+      "element_localization": {
+        "accuracy": 0.8245614035087719,
+        "n_samples": 57,
+        "avg_cost": 0.0016285680701754383
+      }
+    },
+    "LogisticRouter": {
+      "T1": {
+        "accuracy": 0.2608695652173913,
+        "n_samples": 46,
+        "avg_cost": 7.933217391304348e-05
+      },
+      "T2": {
+        "accuracy": 0.608,
+        "n_samples": 125,
+        "avg_cost": 7.772512000000004e-05
+      },
+      "T3": {
+        "accuracy": 0.2222222222222222,
+        "n_samples": 45,
+        "avg_cost": 0.0001403331111111111
+      },
+      "T4": {
+        "accuracy": 0.6653846153846154,
+        "n_samples": 260,
+        "avg_cost": 0.0001510568076923077
+      },
+      "T5": {
+        "accuracy": 0.3778801843317972,
+        "n_samples": 217,
+        "avg_cost": 0.00020917336405529955
+      },
+      "element_localization": {
+        "accuracy": 0.17543859649122806,
+        "n_samples": 57,
+        "avg_cost": 0.000634329649122807
+      }
+    },
+    "LearnedCascade": {
+      "T1": {
+        "accuracy": 0.2608695652173913,
+        "n_samples": 46,
+        "avg_cost": 0.00208587695652174
+      },
+      "T2": {
+        "accuracy": 0.536,
+        "n_samples": 125,
+        "avg_cost": 0.00016551888
+      },
+      "T3": {
+        "accuracy": 0.17777777777777778,
+        "n_samples": 45,
+        "avg_cost": 0.0015206575555555555
+      },
+      "T4": {
+        "accuracy": 0.65,
+        "n_samples": 260,
+        "avg_cost": 0.00031660957692307694
+      },
+      "T5": {
+        "accuracy": 0.3640552995391705,
+        "n_samples": 217,
+        "avg_cost": 0.0012881411520737328
+      },
+      "element_localization": {
+        "accuracy": 0.21052631578947367,
+        "n_samples": 57,
+        "avg_cost": 0.0018689815789473686
+      }
+    },
+    "CostSensitiveMLP": {
+      "T1": {
+        "accuracy": 0.2608695652173913,
+        "n_samples": 46,
+        "avg_cost": 0.0002734639130434783
+      },
+      "T2": {
+        "accuracy": 0.568,
+        "n_samples": 125,
+        "avg_cost": 8.363328000000004e-05
+      },
+      "T3": {
+        "accuracy": 0.2,
+        "n_samples": 45,
+        "avg_cost": 0.0001356795555555555
+      },
+      "T4": {
+        "accuracy": 0.7115384615384616,
+        "n_samples": 260,
+        "avg_cost": 6.53751923076923e-05
+      },
+      "T5": {
+        "accuracy": 0.4009216589861751,
+        "n_samples": 217,
+        "avg_cost": 0.0001516361751152074
+      },
+      "element_localization": {
+        "accuracy": 0.14035087719298245,
+        "n_samples": 57,
+        "avg_cost": 0.0001327778947368421
+      }
+    },
+    "PERCEIVE-MLP": {
+      "T1": {
+        "accuracy": 0.2826086956521739,
+        "n_samples": 46,
+        "avg_cost": 0.00010908413043478259
+      },
+      "T2": {
+        "accuracy": 0.568,
+        "n_samples": 125,
+        "avg_cost": 7.512560000000004e-05
+      },
+      "T3": {
+        "accuracy": 0.1111111111111111,
+        "n_samples": 45,
+        "avg_cost": 9.050444444444444e-05
+      },
+      "T4": {
+        "accuracy": 0.7153846153846154,
+        "n_samples": 260,
+        "avg_cost": 6.548584615384616e-05
+      },
+      "T5": {
+        "accuracy": 0.4147465437788018,
+        "n_samples": 217,
+        "avg_cost": 0.0001494301843317972
+      },
+      "element_localization": {
+        "accuracy": 0.15789473684210525,
+        "n_samples": 57,
+        "avg_cost": 6.829438596491229e-05
+      }
+    }
+  },
+  "run_info": {
+    "started_at": "2026-04-20 14:44:12",
+    "completed_at": "2026-04-20 14:45:52",
+    "n_train": 4051,
+    "n_val": 750,
+    "n_features": 560,
+    "n_routable_train": 3318,
+    "n_routable_val": 595
+  }
+}

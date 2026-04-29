@@ -1,0 +1,17 @@
+{
+  "completed_routers": [
+    "Oracle",
+    "AlwaysCheapest",
+    "AlwaysBest",
+    "Random",
+    "ComplexityThreshold",
+    "OracleCascade",
+    "LogisticRouter",
+    "LearnedCascade",
+    "CostSensitiveMLP",
+    "PERCEIVE-MLP"
+  ],
+  "started_at": "2026-04-20 14:44:12",
+  "phase": "completed",
+  "completed_at": "2026-04-20 14:45:52"
+}

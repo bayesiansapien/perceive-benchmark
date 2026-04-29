@@ -1,0 +1,46 @@
+{
+  "experiment_1_dvr": {
+    "violations": 14004,
+    "total_pairs": 171392,
+    "dvr": 0.0817,
+    "target": "< 0.10",
+    "pass": true
+  },
+  "experiment_2_gt_agreement": {
+    "agree": 1244,
+    "total": 1244,
+    "agreement_rate": 1.0,
+    "target": "> 0.92",
+    "pass": true
+  },
+  "experiment_3_cost_r2": {
+    "r2": -0.0023,
+    "target": "> 0.50",
+    "pass": false
+  },
+  "experiment_4_ks_test": {
+    "results": {
+      "tier_final": {
+        "statistic": 0.4594,
+        "p_value": 0.0
+      },
+      "vds_probe_avg": {
+        "statistic": 0.2749,
+        "p_value": 0.0
+      },
+      "rds_probe_avg": {
+        "statistic": 0.2272,
+        "p_value": 0.0
+      },
+      "ses_probe_avg": {
+        "statistic": 0.3921,
+        "p_value": 0.0
+      }
+    },
+    "target": "all p > 0.05",
+    "pass": false
+  },
+  "cost_reduction": 0.6126,
+  "cascade_valid": true,
+  "recommendation": "Proceed with cascade Stage 2 evaluation"
+}

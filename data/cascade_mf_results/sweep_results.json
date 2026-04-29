@@ -1,0 +1,485 @@
+{
+  "sweep": [
+    {
+      "name": "Cascade-MF",
+      "rank": 16,
+      "threshold": 0.3,
+      "n_seeds": 3,
+      "accuracy_mean": 0.4862222222222223,
+      "accuracy_std": 0.0022662308949301345,
+      "avg_cost_mean": 0.004948709115555555,
+      "avg_cost_std": 0.0002667662735754882,
+      "oracle_efficiency_mean": 94.89664341907599,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.48933333333333334,
+          "accuracy_routable": 0.6168067226890757,
+          "avg_cost": 0.004643498653333333,
+          "oracle_efficiency": 95.91676884959597,
+          "n_correct": 367
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.484,
+          "accuracy_routable": 0.6100840336134454,
+          "avg_cost": 0.004909269306666667,
+          "oracle_efficiency": 94.71023183438864,
+          "n_correct": 363
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.48533333333333334,
+          "accuracy_routable": 0.611764705882353,
+          "avg_cost": 0.005293359386666666,
+          "oracle_efficiency": 94.0629295732434,
+          "n_correct": 364
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 16,
+      "threshold": 0.4,
+      "n_seeds": 3,
+      "accuracy_mean": 0.5017777777777778,
+      "accuracy_std": 0.0016629588385662008,
+      "avg_cost_mean": 0.006901101977777776,
+      "avg_cost_std": 0.00031404972887160164,
+      "oracle_efficiency_mean": 91.62524651528175,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.5013333333333333,
+          "accuracy_routable": 0.6319327731092437,
+          "avg_cost": 0.006813025066666666,
+          "oracle_efficiency": 91.68437442152695,
+          "n_correct": 376
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.5,
+          "accuracy_routable": 0.6302521008403361,
+          "avg_cost": 0.0065681488,
+          "oracle_efficiency": 91.85751903516912,
+          "n_correct": 375
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.504,
+          "accuracy_routable": 0.6352941176470588,
+          "avg_cost": 0.007322132066666665,
+          "oracle_efficiency": 91.33384608914916,
+          "n_correct": 378
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 16,
+      "threshold": 0.5,
+      "n_seeds": 3,
+      "accuracy_mean": 0.508,
+      "accuracy_std": 0.004745368112013945,
+      "avg_cost_mean": 0.008361975857777777,
+      "avg_cost_std": 0.00021172808779193377,
+      "oracle_efficiency_mean": 88.63075422840159,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.504,
+          "accuracy_routable": 0.6352941176470588,
+          "avg_cost": 0.00832343268,
+          "oracle_efficiency": 89.06026452163644,
+          "n_correct": 378
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.5146666666666667,
+          "accuracy_routable": 0.6487394957983194,
+          "avg_cost": 0.008124091866666665,
+          "oracle_efficiency": 89.23656907743113,
+          "n_correct": 386
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.5053333333333333,
+          "accuracy_routable": 0.6369747899159663,
+          "avg_cost": 0.008638403026666665,
+          "oracle_efficiency": 87.59542908613716,
+          "n_correct": 379
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 16,
+      "threshold": 0.6,
+      "n_seeds": 3,
+      "accuracy_mean": 0.5146666666666667,
+      "accuracy_std": 0.002177324215807256,
+      "avg_cost_mean": 0.009647132004444446,
+      "avg_cost_std": 0.00020531648551256481,
+      "oracle_efficiency_mean": 85.09873239133229,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.5146666666666667,
+          "accuracy_routable": 0.6487394957983194,
+          "avg_cost": 0.009517705493333334,
+          "oracle_efficiency": 85.49922943132404,
+          "n_correct": 386
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.5173333333333333,
+          "accuracy_routable": 0.6521008403361345,
+          "avg_cost": 0.009486747786666666,
+          "oracle_efficiency": 85.6874534860017,
+          "n_correct": 388
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.512,
+          "accuracy_routable": 0.6453781512605042,
+          "avg_cost": 0.009936942733333334,
+          "oracle_efficiency": 84.1095142566711,
+          "n_correct": 384
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 32,
+      "threshold": 0.3,
+      "n_seeds": 3,
+      "accuracy_mean": 0.48888888888888893,
+      "accuracy_std": 0.0031426968052735383,
+      "avg_cost_mean": 0.004777988524444444,
+      "avg_cost_std": 0.00019272638817797815,
+      "oracle_efficiency_mean": 94.90292780348614,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.49333333333333335,
+          "accuracy_routable": 0.6218487394957983,
+          "avg_cost": 0.004633483399999999,
+          "oracle_efficiency": 94.99427309657001,
+          "n_correct": 370
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.4866666666666667,
+          "accuracy_routable": 0.6134453781512605,
+          "avg_cost": 0.0050503757733333324,
+          "oracle_efficiency": 94.1951903294213,
+          "n_correct": 365
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.4866666666666667,
+          "accuracy_routable": 0.6134453781512605,
+          "avg_cost": 0.0046501063999999995,
+          "oracle_efficiency": 95.51931998446713,
+          "n_correct": 365
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 32,
+      "threshold": 0.4,
+      "n_seeds": 3,
+      "accuracy_mean": 0.49644444444444447,
+      "accuracy_std": 0.0006285393610547182,
+      "avg_cost_mean": 0.006612940808888888,
+      "avg_cost_std": 0.00017082825400169848,
+      "oracle_efficiency_mean": 92.00321878731997,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.49733333333333335,
+          "accuracy_routable": 0.626890756302521,
+          "avg_cost": 0.006498531693333333,
+          "oracle_efficiency": 92.01513822976429,
+          "n_correct": 373
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.496,
+          "accuracy_routable": 0.6252100840336134,
+          "avg_cost": 0.006854417866666665,
+          "oracle_efficiency": 91.83773216133335,
+          "n_correct": 372
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.496,
+          "accuracy_routable": 0.6252100840336134,
+          "avg_cost": 0.006485872866666666,
+          "oracle_efficiency": 92.15678597086227,
+          "n_correct": 372
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 32,
+      "threshold": 0.5,
+      "n_seeds": 3,
+      "accuracy_mean": 0.5057777777777779,
+      "accuracy_std": 0.0012570787221094365,
+      "avg_cost_mean": 0.008094050391111109,
+      "avg_cost_std": 0.00019721845390082308,
+      "oracle_efficiency_mean": 89.24151217911488,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.504,
+          "accuracy_routable": 0.6352941176470588,
+          "avg_cost": 0.0079323644,
+          "oracle_efficiency": 89.55497079509146,
+          "n_correct": 378
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.5066666666666667,
+          "accuracy_routable": 0.6386554621848739,
+          "avg_cost": 0.008371707786666665,
+          "oracle_efficiency": 88.72500723942463,
+          "n_correct": 380
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.5066666666666667,
+          "accuracy_routable": 0.6386554621848739,
+          "avg_cost": 0.007978078986666665,
+          "oracle_efficiency": 89.44455850282856,
+          "n_correct": 380
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 32,
+      "threshold": 0.6,
+      "n_seeds": 3,
+      "accuracy_mean": 0.5177777777777778,
+      "accuracy_std": 0.0006285393610547444,
+      "avg_cost_mean": 0.009607312013333332,
+      "avg_cost_std": 0.00016047869814301525,
+      "oracle_efficiency_mean": 85.01966778551589,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.5173333333333333,
+          "accuracy_routable": 0.6521008403361345,
+          "avg_cost": 0.009395122546666666,
+          "oracle_efficiency": 85.3972578175626,
+          "n_correct": 388
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.5173333333333333,
+          "accuracy_routable": 0.6521008403361345,
+          "avg_cost": 0.009783133653333333,
+          "oracle_efficiency": 84.63107876855341,
+          "n_correct": 388
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.5186666666666667,
+          "accuracy_routable": 0.653781512605042,
+          "avg_cost": 0.009643679839999999,
+          "oracle_efficiency": 85.03066677043168,
+          "n_correct": 389
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 64,
+      "threshold": 0.3,
+      "n_seeds": 3,
+      "accuracy_mean": 0.4871111111111111,
+      "accuracy_std": 0.0006285393610546921,
+      "avg_cost_mean": 0.004936495008888889,
+      "avg_cost_std": 0.00027170588922782626,
+      "oracle_efficiency_mean": 94.66442805270246,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.4866666666666667,
+          "accuracy_routable": 0.6134453781512605,
+          "avg_cost": 0.004696056933333333,
+          "oracle_efficiency": 94.98550394527341,
+          "n_correct": 365
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.488,
+          "accuracy_routable": 0.6151260504201681,
+          "avg_cost": 0.00531628732,
+          "oracle_efficiency": 93.90580201550706,
+          "n_correct": 366
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.4866666666666667,
+          "accuracy_routable": 0.6134453781512605,
+          "avg_cost": 0.004797140773333333,
+          "oracle_efficiency": 95.10197819732691,
+          "n_correct": 365
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 64,
+      "threshold": 0.4,
+      "n_seeds": 3,
+      "accuracy_mean": 0.49733333333333335,
+      "accuracy_std": 0.0037712361663282566,
+      "avg_cost_mean": 0.006549523577777776,
+      "avg_cost_std": 0.0001977892188610551,
+      "oracle_efficiency_mean": 92.10464687831366,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.492,
+          "accuracy_routable": 0.6201680672268908,
+          "avg_cost": 0.0064626098799999985,
+          "oracle_efficiency": 92.50395569712894,
+          "n_correct": 369
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.5,
+          "accuracy_routable": 0.6302521008403361,
+          "avg_cost": 0.006823231093333332,
+          "oracle_efficiency": 91.51118448766921,
+          "n_correct": 375
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.5,
+          "accuracy_routable": 0.6302521008403361,
+          "avg_cost": 0.00636272976,
+          "oracle_efficiency": 92.29880045014286,
+          "n_correct": 375
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 64,
+      "threshold": 0.5,
+      "n_seeds": 3,
+      "accuracy_mean": 0.5062222222222221,
+      "accuracy_std": 0.004399775527382983,
+      "avg_cost_mean": 0.008013963568888888,
+      "avg_cost_std": 6.490876899239843e-05,
+      "oracle_efficiency_mean": 89.66026839343897,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.512,
+          "accuracy_routable": 0.6453781512605042,
+          "avg_cost": 0.007981142173333334,
+          "oracle_efficiency": 89.91437895490867,
+          "n_correct": 384
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.5053333333333333,
+          "accuracy_routable": 0.6369747899159663,
+          "avg_cost": 0.008104615693333334,
+          "oracle_efficiency": 89.21501804506775,
+          "n_correct": 379
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.5013333333333333,
+          "accuracy_routable": 0.6319327731092437,
+          "avg_cost": 0.00795613284,
+          "oracle_efficiency": 89.85140818034047,
+          "n_correct": 376
+        }
+      ]
+    },
+    {
+      "name": "Cascade-MF",
+      "rank": 64,
+      "threshold": 0.6,
+      "n_seeds": 3,
+      "accuracy_mean": 0.520888888888889,
+      "accuracy_std": 0.0031426968052735123,
+      "avg_cost_mean": 0.009381286671111112,
+      "avg_cost_std": 0.000143215571081657,
+      "oracle_efficiency_mean": 86.00316486849188,
+      "per_seed": [
+        {
+          "seed": 42,
+          "accuracy": 0.5186666666666667,
+          "accuracy_routable": 0.653781512605042,
+          "avg_cost": 0.009380336666666668,
+          "oracle_efficiency": 86.02601739435131,
+          "n_correct": 389
+        },
+        {
+          "seed": 123,
+          "accuracy": 0.5186666666666667,
+          "accuracy_routable": 0.653781512605042,
+          "avg_cost": 0.009206361066666667,
+          "oracle_efficiency": 86.20157193726375,
+          "n_correct": 389
+        },
+        {
+          "seed": 456,
+          "accuracy": 0.5253333333333333,
+          "accuracy_routable": 0.6621848739495798,
+          "avg_cost": 0.009557162279999998,
+          "oracle_efficiency": 85.78190527386056,
+          "n_correct": 394
+        }
+      ]
+    }
+  ],
+  "best": {
+    "name": "Cascade-MF",
+    "rank": 64,
+    "threshold": 0.6,
+    "n_seeds": 3,
+    "accuracy_mean": 0.520888888888889,
+    "accuracy_std": 0.0031426968052735123,
+    "avg_cost_mean": 0.009381286671111112,
+    "avg_cost_std": 0.000143215571081657,
+    "oracle_efficiency_mean": 86.00316486849188,
+    "per_seed": [
+      {
+        "seed": 42,
+        "accuracy": 0.5186666666666667,
+        "accuracy_routable": 0.653781512605042,
+        "avg_cost": 0.009380336666666668,
+        "oracle_efficiency": 86.02601739435131,
+        "n_correct": 389
+      },
+      {
+        "seed": 123,
+        "accuracy": 0.5186666666666667,
+        "accuracy_routable": 0.653781512605042,
+        "avg_cost": 0.009206361066666667,
+        "oracle_efficiency": 86.20157193726375,
+        "n_correct": 389
+      },
+      {
+        "seed": 456,
+        "accuracy": 0.5253333333333333,
+        "accuracy_routable": 0.6621848739495798,
+        "avg_cost": 0.009557162279999998,
+        "oracle_efficiency": 85.78190527386056,
+        "n_correct": 394
+      }
+    ]
+  }
+}

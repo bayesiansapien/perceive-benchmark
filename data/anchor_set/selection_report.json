@@ -1,0 +1,199 @@
+{
+  "anchor_size": 1500,
+  "validation_size": 750,
+  "total_benchmark_size": 4801,
+  "sigma": 2.44949,
+  "elapsed_seconds": 71.06,
+  "constraints": {
+    "per_task_min": {
+      "T1": 100,
+      "T2": 170,
+      "T3": 100,
+      "T4": 220,
+      "T5": 150,
+      "T6": 110
+    },
+    "per_tier_min": {
+      "1": 200,
+      "2": 480,
+      "3": 200
+    },
+    "per_dataset_min": 15
+  },
+  "anchor_distribution": {
+    "by_task": {
+      "T1": 177,
+      "T2": 461,
+      "T3": 108,
+      "T4": 478,
+      "T5": 165,
+      "T6": 111
+    },
+    "by_tier": {
+      "1": 754,
+      "2": 501,
+      "3": 245
+    },
+    "by_dataset": {
+      "CORD": 15,
+      "ChartQA": 34,
+      "DocVQA": 340,
+      "FUNSD": 34,
+      "HierText": 18,
+      "InfographicVQA": 26,
+      "MP-DocVQA": 61,
+      "PubLayNet": 219,
+      "RVL-CDIP": 177,
+      "SROIE": 215,
+      "ST-VQA": 77,
+      "SlideVQA": 104,
+      "TabFact": 15,
+      "TextVQA": 102,
+      "VisualMRC": 41,
+      "WTQ": 22
+    }
+  },
+  "validation_distribution": {
+    "by_tier": {
+      "1": 150,
+      "2": 413,
+      "3": 187
+    },
+    "by_task": {
+      "T1": 46,
+      "T2": 125,
+      "T3": 45,
+      "T4": 260,
+      "T5": 217,
+      "T6": 57
+    }
+  },
+  "constraint_checks": {
+    "per_task_min": {
+      "T1": {
+        "required": 100,
+        "actual": 177,
+        "satisfied": true
+      },
+      "T2": {
+        "required": 170,
+        "actual": 461,
+        "satisfied": true
+      },
+      "T3": {
+        "required": 100,
+        "actual": 108,
+        "satisfied": true
+      },
+      "T4": {
+        "required": 220,
+        "actual": 478,
+        "satisfied": true
+      },
+      "T5": {
+        "required": 150,
+        "actual": 165,
+        "satisfied": true
+      },
+      "T6": {
+        "required": 110,
+        "actual": 111,
+        "satisfied": true
+      }
+    },
+    "per_tier_min": {
+      "1": {
+        "required": 200,
+        "actual": 754,
+        "satisfied": true
+      },
+      "2": {
+        "required": 480,
+        "actual": 501,
+        "satisfied": true
+      },
+      "3": {
+        "required": 200,
+        "actual": 245,
+        "satisfied": true
+      }
+    },
+    "per_dataset_min": {
+      "RVL-CDIP": {
+        "required": 15,
+        "actual": 177,
+        "satisfied": true
+      },
+      "FUNSD": {
+        "required": 15,
+        "actual": 34,
+        "satisfied": true
+      },
+      "CORD": {
+        "required": 15,
+        "actual": 15,
+        "satisfied": true
+      },
+      "SROIE": {
+        "required": 15,
+        "actual": 215,
+        "satisfied": true
+      },
+      "TextVQA": {
+        "required": 15,
+        "actual": 102,
+        "satisfied": true
+      },
+      "ST-VQA": {
+        "required": 15,
+        "actual": 77,
+        "satisfied": true
+      },
+      "HierText": {
+        "required": 15,
+        "actual": 18,
+        "satisfied": true
+      },
+      "PubLayNet": {
+        "required": 15,
+        "actual": 219,
+        "satisfied": true
+      },
+      "DocVQA": {
+        "required": 15,
+        "actual": 340,
+        "satisfied": true
+      },
+      "InfographicVQA": {
+        "required": 15,
+        "actual": 26,
+        "satisfied": true
+      },
+      "ChartQA": {
+        "required": 15,
+        "actual": 34,
+        "satisfied": true
+      },
+      "TabFact": {
+        "required": 15,
+        "actual": 15,
+        "satisfied": true
+      },
+      "VisualMRC": {
+        "required": 15,
+        "actual": 41,
+        "satisfied": true
+      },
+      "MP-DocVQA": {
+        "required": 15,
+        "actual": 61,
+        "satisfied": true
+      },
+      "SlideVQA": {
+        "required": 15,
+        "actual": 104,
+        "satisfied": true
+      }
+    }
+  }
+}

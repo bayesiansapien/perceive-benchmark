@@ -1,0 +1,114 @@
+# DocRouteBench — Complexity Annotation Rubric
+# Used by LLM judges (Gemini 3.1 Pro + GPT-5.4 + Opus 4.6 tiebreak)
+
+# ── VDS: Visual Dependency Score ─────────────────────────────────────
+VDS:
+  name: "Visual Dependency Score"
+  description: "How much of the correct answer requires visual processing beyond text extraction?"
+  levels:
+    1:
+      label: "Text-Sufficient"
+      rule: "If a perfect OCR output alone is sufficient to answer, VDS=1"
+      example: "What is the company name on this invoice?"
+    2:
+      label: "Layout-Required"
+      rule: "If the answer changes depending on WHERE elements appear spatially, VDS=2"
+      example: "What is written in the bottom-right corner of this form?"
+    3:
+      label: "Visual-Element"
+      rule: "If the answer requires reading a chart bar, line, icon, or non-text visual, VDS=3"
+      example: "What does the bar chart show for Q3 revenue?"
+    4:
+      label: "Cross-Modal-Fusion"
+      rule: "If removing either the text or the visual element makes the question unanswerable, VDS=4"
+      example: "Based on the trend in the chart, what does the caption claim is the cause?"
+
+# ── RDS: Reasoning Depth Score ───────────────────────────────────────
+RDS:
+  name: "Reasoning Depth Score"
+  description: "How many inferential steps are required between document evidence and final answer?"
+  levels:
+    1:
+      label: "Direct Lookup"
+      rule: "Answer is literally stated in the document. Find → Copy → Done."
+      example: "What is the invoice number?"
+    2:
+      label: "Single Inference"
+      rule: "One computational or logical step beyond lookup (compare, compute ratio, apply condition)."
+      example: "Is the total amount above $500?"
+    3:
+      label: "Multi-Step"
+      rule: "Two or more sequential inferential steps. Derive intermediate value, use it further."
+      example: "What percentage of the total cost is attributed to labor?"
+    4:
+      label: "Multi-Hop + Schema"
+      rule: "Multiple steps AND requires domain knowledge or cross-section referencing not explicit."
+      example: "Based on the balance sheet and the notes on page 7, calculate the debt-to-equity ratio."
+
+# ── SES: Spatial Extent Score ────────────────────────────────────────
+SES:
+  name: "Spatial Extent Score"
+  description: "How much spatial area of the document must be processed?"
+  levels:
+    1:
+      label: "Local"
+      rule: "Evidence is in one location — single cell, field, or bounding box."
+      example: "What is the vendor address?"
+    2:
+      label: "Regional"
+      rule: "Evidence spans a connected region — single table, paragraph, or figure+caption."
+      example: "Summarize the findings in the methodology section."
+    3:
+      label: "Page-Level"
+      rule: "Full page scan required — evidence is distributed across disconnected regions."
+      example: "List all items mentioned anywhere on this page."
+    4:
+      label: "Multi-Page"
+      rule: "Evidence spans two or more pages — any cross-page reference or aggregation."
+      example: "What is the total budget across all departments mentioned in this filing?"
+
+# ── Composite score ───────────────────────────────────────────────────
+composite:
+  formula: "0.30 * VDS + 0.45 * RDS + 0.25 * SES"
+  weights:
+    VDS: 0.30
+    RDS: 0.45
+    SES: 0.25
+  tiers:
+    1: {range: [1.0, 2.2], label: "Easy",   routing: "Tier A models consistently optimal"}
+    2: {range: [2.3, 3.4], label: "Medium", routing: "Model selection and budget level discriminative"}
+    3: {range: [3.5, 5.0], label: "Hard",   routing: "Frontier models + deep thinking required"}
+
+# ── Judge prompt template ─────────────────────────────────────────────
+judge_prompt: |
+  You are annotating a document understanding query for routing complexity.
+  Given: [document image] + [query] + [ground truth answer]
+
+  Score the query on THREE axes (1-4 each):
+
+  VDS (Visual Dependency Score):
+    1 = Answer derivable from text extraction alone
+    2 = Answer requires knowing spatial layout/position
+    3 = Answer requires reading a visual element (chart/figure/icon)
+    4 = Answer requires BOTH text and visual elements simultaneously
+
+  RDS (Reasoning Depth Score):
+    1 = Direct lookup (answer literally stated in document)
+    2 = Single inference step (compare, compute ratio, apply condition)
+    3 = Multi-step reasoning (chain of 2+ inferences)
+    4 = Multi-hop with domain knowledge required
+
+  SES (Spatial Extent Score):
+    1 = Local (single cell, field, or bounding box)
+    2 = Regional (single table, paragraph, or figure+caption)
+    3 = Page-level (distributed across full page)
+    4 = Multi-page (cross-page evidence required)
+
+  Return ONLY valid JSON:
+  {"VDS": <1-4>, "RDS": <1-4>, "SES": <1-4>, "rationale": "<one sentence>"}
+
+# ── Agreement thresholds ──────────────────────────────────────────────
+agreement:
+  strong_threshold: 1          # |J1-J2| <= 1 per axis = strong agreement
+  kappa_target: 0.70           # target Cohen's kappa per axis
+  kappa_minimum: 0.60          # below this: refine rubric and re-annotate

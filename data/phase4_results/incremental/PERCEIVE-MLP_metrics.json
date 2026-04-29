@@ -1,0 +1,15 @@
+{
+  "name": "PERCEIVE-MLP",
+  "accuracy": 0.49866666666666665,
+  "accuracy_routable": 0.6285714285714286,
+  "total_cost": 0.07182672000000001,
+  "avg_cost": 9.576896000000001e-05,
+  "cost_per_correct": 0.00019205005347593584,
+  "oracle_efficiency": 100.0,
+  "n_correct": 374,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 0.04723065999999976,
+  "avg_cost_routable": 7.937926050420127e-05,
+  "cascade_total_cost": null
+}

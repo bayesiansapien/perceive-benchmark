@@ -1,0 +1,15 @@
+{
+  "name": "DecisionTree",
+  "accuracy": 0.5,
+  "accuracy_routable": 0.6302521008403361,
+  "total_cost": 0.14235595999999998,
+  "avg_cost": 0.00018980794666666664,
+  "cost_per_correct": 0.0003796158933333333,
+  "oracle_efficiency": 100.0,
+  "n_correct": 375,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 0.08916995999999942,
+  "avg_cost_routable": 0.00014986547899159566,
+  "cascade_total_cost": null
+}

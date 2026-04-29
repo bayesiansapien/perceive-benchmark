@@ -1,0 +1,97 @@
+{
+  "run_timestamp": "2026-04-29T16:23:25.391719+00:00",
+  "k_seed": 25,
+  "n_anchor": 1500,
+  "n_seed": 25,
+  "n_eval": 1475,
+  "imc_training_obs": 34500,
+  "results": {
+    "ext_qwen3vl": {
+      "model_name": "qwen3-vl-30b",
+      "provider": "openrouter",
+      "model_family": "qwen",
+      "budgets": [
+        "B0",
+        "B1",
+        "B2",
+        "B3"
+      ],
+      "budget_results": {
+        "B0": {
+          "n": 1475,
+          "auc": 0.8448,
+          "label_agreement": 0.8122,
+          "mean_gt_correct": 0.6027
+        },
+        "B1": {
+          "n": 1475,
+          "auc": 0.8383,
+          "label_agreement": 0.7831,
+          "mean_gt_correct": 0.6156
+        },
+        "B2": {
+          "n": 1475,
+          "auc": 0.8358,
+          "label_agreement": 0.7871,
+          "mean_gt_correct": 0.6251
+        },
+        "B3": {
+          "n": 1475,
+          "auc": 0.8326,
+          "label_agreement": 0.7925,
+          "mean_gt_correct": 0.6197
+        }
+      },
+      "tier_breakdown": {
+        "1": {
+          "n": 787,
+          "accuracy": 0.8729,
+          "gt_correct_rate": 0.7332
+        },
+        "2": {
+          "n": 485,
+          "accuracy": 0.7938,
+          "gt_correct_rate": 0.4887
+        },
+        "3": {
+          "n": 203,
+          "accuracy": 0.6207,
+          "gt_correct_rate": 0.3695
+        }
+      }
+    },
+    "ext_llama4scout": {
+      "model_name": "llama-4-scout",
+      "provider": "openrouter",
+      "model_family": "meta",
+      "budgets": [
+        "B0"
+      ],
+      "budget_results": {
+        "B0": {
+          "n": 1475,
+          "auc": 0.8727,
+          "label_agreement": 0.819,
+          "mean_gt_correct": 0.5363
+        }
+      },
+      "tier_breakdown": {
+        "1": {
+          "n": 787,
+          "accuracy": 0.845,
+          "gt_correct_rate": 0.695
+        },
+        "2": {
+          "n": 485,
+          "accuracy": 0.8495,
+          "gt_correct_rate": 0.3876
+        },
+        "3": {
+          "n": 203,
+          "accuracy": 0.6453,
+          "gt_correct_rate": 0.2759
+        }
+      }
+    }
+  }
+}

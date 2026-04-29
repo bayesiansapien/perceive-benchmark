@@ -1,0 +1,15 @@
+{
+  "name": "CostSensitiveMLP",
+  "accuracy": 0.496,
+  "accuracy_routable": 0.6252100840336134,
+  "total_cost": 0.08661002000000001,
+  "avg_cost": 0.00011548002666666668,
+  "cost_per_correct": 0.00023282263440860216,
+  "oracle_efficiency": 100.0,
+  "n_correct": 372,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 0.053424749999999674,
+  "avg_cost_routable": 8.978949579831879e-05,
+  "cascade_total_cost": null
+}

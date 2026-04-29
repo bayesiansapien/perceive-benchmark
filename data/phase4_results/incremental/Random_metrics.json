@@ -1,0 +1,15 @@
+{
+  "name": "Random",
+  "accuracy": 0.5866666666666667,
+  "accuracy_routable": 0.7394957983193278,
+  "total_cost": 5.578370649999999,
+  "avg_cost": 0.0074378275333333325,
+  "cost_per_correct": 0.012678115113636363,
+  "oracle_efficiency": 76.74894844528221,
+  "n_correct": 440,
+  "n_total": 750,
+  "n_routable": 595,
+  "total_cost_routable": 4.535384329999997,
+  "avg_cost_routable": 0.0076224946722689025,
+  "cascade_total_cost": null
+}

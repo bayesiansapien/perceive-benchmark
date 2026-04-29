@@ -1,0 +1,12 @@
+{
+  "oracle_acc": 0.7933333333333333,
+  "perceive_ips_acc": 0.615467,
+  "acc_tier_only": 0.6626666666666666,
+  "acc_tier_task": 0.6626666666666666,
+  "gap_total_pp": 17.79,
+  "gap_unroutable_pct": 20.67,
+  "gap_tier_signal_pp": 13.07,
+  "gap_task_marginal_pp": 0.0,
+  "gap_residual_pp": 4.72,
+  "n_val": 750
+}

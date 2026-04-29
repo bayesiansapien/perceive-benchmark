@@ -1,0 +1,255 @@
+# DocRouteBench — Dataset Configuration
+# 18 datasets across 6 task families
+# All entries are observed (gold standard — no inference in core benchmark)
+
+datasets:
+
+  # ── T1: Document Classification ─────────────────────────────────────
+  rvlcdip:
+    full_name: "RVL-CDIP"
+    hf_id: "aharley/rvl_cdip"
+    config: null
+    split: "test"
+    task_type: "T1"
+    sample_budget: 350
+    metric: "exact_match"
+    image_field: "image"
+    label_field: "label"
+    label_map:
+      0: "letter"
+      1: "form"
+      2: "email"
+      3: "handwritten"
+      4: "advertisement"
+      5: "scientific report"
+      6: "scientific publication"
+      7: "specification"
+      8: "file folder"
+      9: "news article"
+      10: "budget"
+      11: "invoice"
+      12: "presentation"
+      13: "questionnaire"
+      14: "resume"
+      15: "memo"
+    has_chart: false
+    has_table: false
+    num_pages: 1
+    notes: "400K images, 16 classes. Stratified sample ~12 per class."
+
+  # ── T2: Structured Field Extraction ─────────────────────────────────
+  funsd:
+    full_name: "FUNSD"
+    hf_id: "nielsr/funsd-layoutlmv3"
+    config: null
+    split: "test"
+    task_type: "T2"
+    sample_budget: 200
+    metric: "field_f1"
+    image_field: "image"
+    notes: "50 forms. Generate multiple QA pairs per form from entity links."
+
+  cord:
+    full_name: "CORD"
+    hf_id: "naver-clova-ix/cord-v2"
+    config: null
+    split: "test"
+    task_type: "T2"
+    sample_budget: 150
+    metric: "field_f1"
+    image_field: "image"
+    notes: "100 receipts with 30 semantic fields. Use all test samples."
+
+  sroie:
+    full_name: "SROIE"
+    hf_id: "darentang/sroie"
+    config: null
+    split: "test"
+    task_type: "T2"
+    sample_budget: 200
+    metric: "field_f1"
+    image_field: "image"
+    notes: "347 receipts with 4 key fields: company, date, address, total."
+
+  textvqa:
+    full_name: "TextVQA"
+    hf_id: "lmms-lab/textvqa"
+    config: null
+    split: "validation"
+    task_type: "T2"
+    sample_budget: 200
+    metric: "vqa_accuracy"
+    image_field: "image"
+    question_field: "question"
+    answer_field: "answers"   # list of 10 human answers
+    notes: "Scene text QA. Correct if predicted matches >= 3 of 10 annotators."
+
+  stvqa:
+    full_name: "ST-VQA"
+    hf_id: "vikhyatk/st-vqa"
+    config: null
+    split: "validation"
+    task_type: "T2"
+    sample_budget: 150
+    metric: "anls"
+    image_field: "image"
+    question_field: "question"
+    answer_field: "answers"
+    notes: "ICDAR 2019 scene text VQA. Slightly harder than TextVQA."
+
+  hiertext:
+    full_name: "HierText"
+    hf_id: "google-research-datasets/hiertext"
+    config: null
+    split: "validation"
+    task_type: "T2"
+    sample_budget: 100
+    metric: "field_f1"
+    image_field: "image"
+    notes: "Convert hierarchical text annotations to recognition QA tasks."
+
+  # ── T3: Layout & Spatial Reasoning ───────────────────────────────────
+  publaynet:
+    full_name: "PubLayNet"
+    hf_id: "ds4sd/DocLayNet"
+    config: null
+    split: "validation"
+    task_type: "T3+T6"               # generates both T3 (layout) and T6 (grounding bbox) samples
+    task_type_split: {T3: 400, T6: 400}
+    sample_budget: 800
+    metric: "exact_match"            # T3 uses exact_match; T6 uses iou (set per-sample)
+    image_field: "image"
+    notes: "Convert layout detection labels to spatial QA. Also T6 grounding."
+
+  # docbank: DROPPED
+  # Reason: 47GB images require manual Azure download, HF mirror broken,
+  # redistribution prohibited. See: https://github.com/doc-analysis/DocBank
+  # Sample budget redistributed to publaynet (+50) and mpdocvqa (+50).
+
+  # ── T4: Semantic & Compositional QA ─────────────────────────────────
+  docvqa:
+    full_name: "DocVQA"
+    hf_id: "lmms-lab/DocVQA"
+    config: "DocVQA"
+    split: "validation"       # test split has no GT; use validation
+    task_type: "T4"
+    sample_budget: 550        # core dataset, oversample
+    metric: "anls"
+    image_field: "image"
+    question_field: "question"
+    answer_field: "answers"   # list of acceptable answers
+    has_table: true
+    notes: "Core document VQA. Validation split has GT answers."
+
+  infographicvqa:
+    full_name: "InfographicVQA"
+    hf_id: "lmms-lab/InfographicVQA"
+    config: null
+    split: "validation"
+    task_type: "T4"
+    sample_budget: 200
+    metric: "anls"
+    image_field: "image"
+    question_field: "question"
+    answer_field: "answers"
+    has_chart: true
+    notes: "Dense infographics. High VDS (3-4). Cross-modal fusion required."
+
+  chartqa:
+    full_name: "ChartQA"
+    hf_id: "lmms-lab/ChartQA"
+    config: null
+    split: "test"
+    task_type: "T4"
+    sample_budget: 275
+    metric: "relaxed_accuracy"
+    image_field: "image"
+    question_field: "question"
+    answer_field: "answer"    # single answer string
+    has_chart: true
+    notes: "Bar/line/pie charts. Human subset is harder (multi-step numerical)."
+
+  tabfact:
+    full_name: "TabFact"
+    hf_id: "ibm/tab_fact"
+    config: null
+    split: "test"
+    task_type: "T4"
+    sample_budget: 150
+    metric: "exact_match"
+    image_field: null         # table rendered as image
+    question_field: "statement"
+    answer_field: "label"     # 0=refuted, 1=entailed
+    has_table: true
+    notes: "Binary fact verification over tables. Balanced sample."
+
+  wtq:
+    full_name: "WikiTableQuestions"
+    hf_id: "stanford-nlp/wikitablequestions"
+    config: null
+    split: "test"
+    task_type: "T4"
+    sample_budget: 150
+    metric: "denotation"
+    image_field: null         # table rendered as image
+    question_field: "question"
+    answer_field: "answers"   # list of answers
+    has_table: true
+    notes: "Multi-step table reasoning. Use official denotation accuracy."
+
+  visualmrc:
+    full_name: "VisualMRC"
+    hf_id: "nttmdlab-nlp/VisualMRC"
+    config: null
+    split: "test"
+    task_type: "T4"
+    sample_budget: 150
+    metric: "rouge_cider"
+    image_field: "image"
+    question_field: "question"
+    answer_field: "answer"
+    notes: "Webpage screenshots. Abstractive answers."
+
+  # ── T5: Multi-Page / Long-Document ───────────────────────────────────
+  mpdocvqa:
+    full_name: "MP-DocVQA"
+    hf_id: "lmms-lab/MP-DocVQA"
+    config: null
+    split: "val"
+    task_type: "T5"
+    sample_budget: 500
+    metric: "anls"
+    image_field: "image"
+    question_field: "question"
+    answer_field: "answers"
+    num_pages_field: "num_pages"
+    has_table: true
+    notes: "Up to 20 pages. Cross-page reasoning. SES=4 by definition."
+
+  slidevqa:
+    full_name: "SlideVQA"
+    hf_id: "Ahren09/SlideVQA"
+    config: null
+    split: "test"
+    task_type: "T5"
+    sample_budget: 375
+    metric: "slidevqa_em"     # exact match + relaxed for arithmetic
+    image_field: "images"     # list of slide images
+    question_field: "question"
+    answer_field: "answer"
+    notes: "Slide decks (20 slides). 3 subtypes: single/multi/arithmetic."
+
+  # deepform: DROPPED
+  # Reason: PDFs require multi-day download from DocumentCloud.
+  # See: https://github.com/jstray/deepform
+  # Budget redistributed to mpdocvqa (+100) and slidevqa (+50).
+
+# ── Sampling parameters ──────────────────────────────────────────────
+sampling:
+  total_target: 5000
+  min_per_dataset: 100        # no dataset has fewer than 100 samples
+  tier_distribution:          # routing-optimized (oversamples medium/hard)
+    tier_1: 0.25              # easy — cheap models win
+    tier_2: 0.50              # medium — routing decisions live here
+    tier_3: 0.25              # hard — frontier required
+  random_seed: 42
