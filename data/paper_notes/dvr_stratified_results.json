@@ -1,0 +1,88 @@
+{
+  "dvr_full_cascade_population": {
+    "samples_audited": 1738,
+    "candidate_cheaper_checks": 1708,
+    "violations": 8,
+    "dvr": 0.0047,
+    "ci_lo": 0.0024,
+    "ci_hi": 0.0092,
+    "samples_with_at_least_one_violation": 7
+  },
+  "dvr_gt_validated_subset": {
+    "samples_audited": 1738,
+    "candidate_cheaper_checks": 1708,
+    "violations": 8,
+    "dvr": 0.0047,
+    "ci_lo": 0.0024,
+    "ci_hi": 0.0092,
+    "samples_with_at_least_one_violation": 7
+  },
+  "dvr_by_task": {
+    "T1": {
+      "samples_audited": 54,
+      "candidate_cheaper_checks": 16,
+      "violations": 0,
+      "dvr": 0.0,
+      "ci_lo": 0.0,
+      "ci_hi": 0.1936,
+      "samples_with_at_least_one_violation": 0
+    },
+    "T2": {
+      "samples_audited": 544,
+      "candidate_cheaper_checks": 284,
+      "violations": 1,
+      "dvr": 0.0035,
+      "ci_lo": 0.0006,
+      "ci_hi": 0.0197,
+      "samples_with_at_least_one_violation": 1
+    },
+    "T3": {
+      "samples_audited": 109,
+      "candidate_cheaper_checks": 250,
+      "violations": 4,
+      "dvr": 0.016,
+      "ci_lo": 0.0062,
+      "ci_hi": 0.0404,
+      "samples_with_at_least_one_violation": 3
+    },
+    "T4": {
+      "samples_audited": 696,
+      "candidate_cheaper_checks": 341,
+      "violations": 2,
+      "dvr": 0.0059,
+      "ci_lo": 0.0016,
+      "ci_hi": 0.0211,
+      "samples_with_at_least_one_violation": 2
+    },
+    "T5": {
+      "samples_audited": 238,
+      "candidate_cheaper_checks": 477,
+      "violations": 1,
+      "dvr": 0.0021,
+      "ci_lo": 0.0004,
+      "ci_hi": 0.0118,
+      "samples_with_at_least_one_violation": 1
+    },
+    "T6": {
+      "samples_audited": 97,
+      "candidate_cheaper_checks": 340,
+      "violations": 0,
+      "dvr": 0.0,
+      "ci_lo": 0.0,
+      "ci_hi": 0.0112,
+      "samples_with_at_least_one_violation": 0
+    }
+  },
+  "cost_regret_gt_validated_subset": {
+    "n": 1738,
+    "mean_regret_uUSD": 3.102,
+    "max_regret_uUSD": 2101.77,
+    "p95_regret_uUSD": 0.0,
+    "n_zero_regret": 1731,
+    "frac_zero_regret": 0.996
+  },
+  "population_sizes": {
+    "full_cascade_evaluated": 2250,
+    "gt_validated_routable": 1831
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "k-NN Router (RouteLLM-style, Ong et al. 2024)",
+  "k_selected": 5,
+  "n_seeds": 5,
+  "accuracy_mean": 0.5114666666666667,
+  "accuracy_std": 0.00677774134780738,
+  "avg_cost_mean": 0.0008220121093333333,
+  "avg_cost_std": 3.902871347145319e-05,
+  "oracle_efficiency_mean": 100.0,
+  "per_seed": [
+    {
+      "k": 5,
+      "seed": 42,
+      "accuracy": 0.5066666666666667,
+      "accuracy_routable": 0.6386554621848739,
+      "avg_cost": 0.00084383384,
+      "oracle_efficiency": 100.0,
+      "n_correct": 380
+    },
+    {
+      "k": 5,
+      "seed": 123,
+      "accuracy": 0.5093333333333333,
+      "accuracy_routable": 0.6420168067226891,
+      "avg_cost": 0.0008825171866666666,
+      "oracle_efficiency": 100.0,
+      "n_correct": 382
+    },
+    {
+      "k": 5,
+      "seed": 456,
+      "accuracy": 0.5026666666666667,
+      "accuracy_routable": 0.6336134453781512,
+      "avg_cost": 0.0008174027866666668,
+      "oracle_efficiency": 100.0,
+      "n_correct": 377
+    },
+    {
+      "k": 5,
+      "seed": 789,
+      "accuracy": 0.5186666666666667,
+      "accuracy_routable": 0.653781512605042,
+      "avg_cost": 0.0007683564,
+      "oracle_efficiency": 100.0,
+      "n_correct": 389
+    },
+    {
+      "k": 5,
+      "seed": 2024,
+      "accuracy": 0.52,
+      "accuracy_routable": 0.6554621848739496,
+      "avg_cost": 0.0007979503333333332,
+      "oracle_efficiency": 100.0,
+      "n_correct": 390
+    }
+  ]
+}
