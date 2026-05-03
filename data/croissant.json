@@ -2,14 +2,52 @@
   "@context": {
     "@language": "en",
     "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
     "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
     "dct": "http://purl.org/dc/terms/",
-    "ml": "http://mlcommons.org/schema/",
-    "sc": "https://schema.org/"
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileProperty": "cr:fileProperty",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "personalSensitiveInformation": "cr:personalSensitiveInformation",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#"
   },
   "@type": "sc:Dataset",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
   "name": "PERCEIVE",
-  "description": "PERCEIVE (Psychophysics-grounded Elicitation for Routing Cost-Efficiency In Vision-Language Evaluation) is a VLM routing benchmark of 4,801 document-image QA samples across 16 public datasets and 6 task families. Each sample is annotated with psychophysical complexity scores (Visual Dependency Score, Reasoning Depth Score, Spatial Extent Score on an ordinal 1-4 scale), stratified into Easy, Medium, and Hard tiers via Bayesian threshold estimation, and evaluated across 7 commercial VLMs at 4 reasoning-budget levels (28 configurations). Routing labels indicating the cheapest-correct model-budget configuration per query are derived via a QUEST-style adaptive cascade achieving 60.7% cost reduction with 100% ground-truth label agreement. The benchmark includes a 1,500-sample exhaustively-evaluated anchor set (split=anchor), a 750-sample held-out validation set (split=validation), and 2,551 test queries (split=test). Supports incremental model-pool extension via Inductive Matrix Completion.",
+  "description": "PERCEIVE (Psychophysics-driven Elicitation for Routing Cost-Efficiency In Vision-Language Evaluation) is a VLM routing benchmark of 4,801 document-image QA samples across 16 public datasets and 6 task families. Each sample is annotated with psychophysical complexity scores (Visual Dependency Score, Reasoning Depth Score, Spatial Extent Score on an ordinal 1-4 scale), stratified into Easy, Medium, and Hard tiers via Bayesian threshold estimation, and evaluated across 7 commercial VLMs at up to 4 reasoning-budget levels (24 valid configurations). Routing labels indicating the cheapest-correct model-budget configuration per query are derived via a QUEST-style adaptive cascade achieving 60.7% cost reduction with 100% ground-truth label agreement. The benchmark includes a 1,500-sample exhaustively-evaluated anchor set (split=anchor), a 750-sample held-out validation set (split=validation), and 2,551 test queries (split=test). Supports incremental model-pool extension via Inductive Matrix Completion.",
   "url": "https://huggingface.co/datasets/quantiphi-routing/perceive-benchmark",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "version": "1.0",
@@ -26,30 +64,25 @@
     "inductive-matrix-completion"
   ],
   "creator": {
-    "@type": "sc:Organization",
-    "name": "Phi Labs, Quantiphi"
+    "@type": "Organization",
+    "name": "Phi Labs, Quantiphi",
+    "url": "https://github.com/bayesiansapien/perceive-benchmark"
   },
   "datePublished": "2026",
-  "citeAs": "@inproceedings{perceive2026,\n  title={{PERCEIVE}: A Self-Expanding Benchmark for Psychophysics-grounded Elicitation of Routing Cost-Efficiency In Vision-Language Evaluation},\n  author={Bhatti, Amit Singh and P M, Harikrishnan and Vaddina, Vishal},\n  booktitle={NeurIPS Datasets and Benchmarks Track},\n  year={2026}\n}",
+  "citeAs": "@inproceedings{perceive2026,\n  title={{PERCEIVE}: A Self-Expanding Benchmark for Psychophysics-driven Elicitation of Routing Cost-Efficiency In Vision-Language Evaluation},\n  author={Bhatti, Amit Singh and P M, Harikrishnan and Vaddina, Vishal},\n  booktitle={NeurIPS Datasets and Benchmarks Track},\n  year={2026}\n}",
 
-  "task": [
-    { "@type": "cr:Task", "name": "visual-question-answering" },
-    { "@type": "cr:Task", "name": "document-understanding" },
-    { "@type": "cr:Task", "name": "model-routing" }
-  ],
   "isAccessibleForFree": true,
+  "isLiveDataset": false,
 
-  "cr:dataCollection": "Samples are derived from 16 publicly available document-image datasets spanning six task families. No new images were collected; all source images were obtained through their respective official distribution channels (HuggingFace Hub or original dataset repositories). A stratified submodular facility-location sampler selected 4,801 samples from a candidate pool of 15,482, targeting a 25/50/25 Easy/Medium/Hard tier distribution. Psychophysical complexity annotations (VDS, RDS, SES) were elicited automatically from a three-model probe oracle (GPT-4o, Claude-3.5-Sonnet, Gemini-1.5-Pro) using a structured prompt (Appendix C of the paper). No human annotators were employed for complexity scoring.",
-  "cr:dataCollectionType": "Derived dataset: samples selected and re-annotated from pre-existing public datasets. No new data collection from human subjects.",
-  "cr:dataAnnotationProtocol": "Ground-truth routing labels were derived via a QUEST-style adaptive cascade (Appendix D). Three probe models independently estimate VDS/RDS/SES scores; a Bayesian posterior over psychophysical thresholds assigns each sample to a difficulty tier. Model-budget evaluations use a symbolic-neural arbiter: rule-based scorers (ANLS, exact match, IoU, F1) with a Mistral-based neural fallback for ambiguous cases and a GPT-4o oracle arbiter for conflicts. Routing labels were cross-validated against the 750-sample validation set, achieving 100% ground-truth agreement on the DVR metric.",
-  "cr:dataAnnotationPlatform": "Fully automated pipeline; no crowdsourcing platforms used. All annotation was performed programmatically using commercial VLM APIs (Anthropic, Google, OpenAI, Mistral) under their respective terms of service.",
-  "cr:machineAnnotationTools": "Probe oracle: GPT-4o, Claude-3.5-Sonnet, Gemini-1.5-Pro. Neural judge: Mistral-Large. Oracle arbiter: GPT-4o. Routing evaluation models: Claude-3.5-Haiku, Claude-3.5-Sonnet, Claude-3.7-Sonnet, Gemini-2.0-Flash, Gemini-2.0-Pro, GPT-4o-mini, GPT-4o (each at 4 reasoning-budget levels).",
-  "cr:annotatorDemographics": "No human annotators. Complexity scores are machine-elicited from three commercial VLMs. Source dataset ground-truth answers are inherited from original dataset releases created by their respective research teams; demographic information about those original annotators is not available in PERCEIVE.",
-  "cr:dataUseCases": "Intended for: (1) benchmarking VLM routing and cost-efficiency strategies on document-understanding tasks; (2) evaluating psychophysics-grounded complexity metrics for vision-language tasks; (3) studying the relationship between task complexity and model capability across document types; (4) training and validating routing classifiers. Not intended for: training generative models, evaluating general-purpose VLM capability (no open-ended generation tasks), or human subject research.",
-  "cr:dataLimitations": "Source coverage: 16 document-image datasets spanning commercial documents, scientific publications, and web images; natural scene images and medical imaging are not represented. Language: English only. Model pool: 7 commercial VLMs as of early 2026; IMC generalises to new models within known document types (AUC 0.876) but degrades on novel document types (AUC 0.60 holdout). Unroutable ceiling: 20.7% of samples are unanswerable by any configuration in the pool. Probe stability: tier assignments are stable (>90%) under single-model dropout and 10% perturbation.",
-  "cr:personalSensitiveInformation": "No personally identifiable information. Source datasets contain document images from public domain sources. PERCEIVE adds no PII beyond what is present in the original datasets.",
-  "cr:ethicsReviewProcess": "Dataset derived entirely from publicly available datasets under their respective licenses. No human subjects research conducted. No new web scraping. Commercial API usage performed under vendor terms of service. Dataset contains no hate speech, adult content, or content targeting protected groups.",
-  "cr:dataBiases": "Source datasets skew toward English-language Western business documents (invoices, receipts, forms) and academic publications. Chart and table datasets reflect US/European data conventions. These biases are inherited from source datasets and documented here to guide appropriate use.",
+  "rai:dataCollection": "Samples are derived from 16 publicly available document-image datasets spanning six task families. No new images were collected; all source images were obtained through their respective official distribution channels (HuggingFace Hub or original dataset repositories). A stratified submodular facility-location sampler selected 4,801 samples from a candidate pool of 15,482, targeting a 25/50/25 Easy/Medium/Hard tier distribution. Psychophysical complexity annotations (VDS, RDS, SES) were elicited automatically from a three-model probe oracle (GPT-4o, Claude-3.5-Sonnet, Gemini-1.5-Pro) using a structured prompt (Appendix C of the paper). No human annotators were employed for complexity scoring.",
+  "rai:dataAnnotationProtocol": "Ground-truth routing labels were derived via a QUEST-style adaptive cascade (Appendix D). Three probe models independently estimate VDS/RDS/SES scores; a Bayesian posterior over psychophysical thresholds assigns each sample to a difficulty tier. Model-budget evaluations use a symbolic-neural arbiter: rule-based scorers (ANLS, exact match, IoU, F1) with a Mistral-based neural fallback for ambiguous cases and a GPT-4o oracle arbiter for conflicts. Routing labels were cross-validated against the 750-sample validation set, achieving 100% ground-truth agreement on the DVR metric.",
+  "rai:dataBiases": "Source datasets skew toward English-language Western business documents (invoices, receipts, forms) and academic publications. Chart and table datasets reflect US/European data conventions. These biases are inherited from source datasets and documented here to guide appropriate use.",
+  "rai:dataLimitations": "Source coverage: 16 document-image datasets spanning commercial documents, scientific publications, and web images; natural scene images and medical imaging are not represented. Language: English only. Model pool: 7 commercial VLMs as of early 2026; IMC generalises to new models within known document types (AUC 0.876) but degrades on novel document types (AUC 0.60 holdout). Unroutable ceiling: 20.7% of samples are unanswerable by any configuration in the pool. Probe stability: tier assignments are stable (>90%) under single-model dropout and 10% perturbation.",
+  "rai:personalSensitiveInformation": "No personally identifiable information. Source datasets contain document images from public domain sources. PERCEIVE adds no PII beyond what is present in the original datasets.",
+  "rai:dataSocialImpact": "Primary benefit: reduces inference costs for document-understanding applications by routing queries to the cheapest sufficient VLM. The benchmark enables reproducible evaluation of routing policies, reducing redundant API expenditure. The model pool covers only commercial APIs; open-source model routing is not directly supported, which may limit applicability in cost-sensitive or privacy-constrained settings. No high-risk social applications (healthcare decisions, legal judgments, surveillance) are intended or validated.",
+  "rai:dataUseCases": "Intended for: (1) benchmarking VLM routing and cost-efficiency strategies on document-understanding tasks; (2) evaluating psychophysics-grounded complexity metrics for vision-language tasks; (3) studying the relationship between task complexity and model capability across document types; (4) training and validating routing classifiers. Not intended for: training generative models, evaluating general-purpose VLM capability (no open-ended generation tasks), or human subject research.",
+  "rai:hasSyntheticData": false,
+  "prov:wasGeneratedBy": "PERCEIVE benchmark construction pipeline: (1) submodular facility-location sampling from 16 source datasets; (2) psychophysical complexity annotation via three-model probe oracle using QUEST-style adaptive cascade; (3) exhaustive model-budget evaluation across 24 valid configurations (7 VLMs × up to 4 reasoning budgets) for the 1,500-sample anchor set; (4) QUEST-style cascade label propagation to remaining 3,301 samples; (5) routing label derivation as cheapest-correct configuration per sample.",
 
   "dct:source": [
     { "@type": "sc:Dataset", "name": "DocVQA", "url": "https://huggingface.co/datasets/lmms-lab/DocVQA", "license": "https://rrc.cvc.uab.es/?ch=17", "dct:rights": "DocVQA license — academic research use only." },
@@ -135,20 +168,20 @@
       "description": "Records from benchmark_5000.jsonl. Each record is one document-image QA sample with psychophysical complexity annotations and split assignment.",
       "source": { "fileObject": { "@id": "benchmark_5000_jsonl" } },
       "field": [
-        { "@type": "cr:Field", "@id": "benchmark_records/sample_id", "name": "sample_id", "description": "Unique identifier combining source dataset name and index.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.sample_id" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/split", "name": "split", "description": "Dataset split: anchor (1,500 exhaustively-evaluated samples), validation (750 held-out), or test (2,551 cascade-labeled queries).", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.split" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/source_dataset", "name": "source_dataset", "description": "Source dataset name. One of: DocVQA, SlideVQA, TextVQA, ChartQA, SROIE, InfographicVQA, PubLayNet, RVL-CDIP, MP-DocVQA, ST-VQA, VisualMRC, FUNSD, HierText, WTQ, CORD, TabFact.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.source_dataset" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/task_type", "name": "task_type", "description": "Task family: T1 (document classification), T2 (structured field extraction), T3 (layout and spatial reasoning), T4 (semantic and compositional QA), T5 (multi-page QA), T6 (element localization).", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.task_type" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/query", "name": "query", "description": "Natural-language question about the document image.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.query" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/gt_answer", "name": "gt_answer", "description": "Primary ground-truth answer, inherited from source dataset.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.gt_answer" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/correctness_metric", "name": "correctness_metric", "description": "Evaluation metric: anls, exact_match, field_f1, or iou.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.correctness_metric" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/tier_final", "name": "tier_final", "description": "Difficulty tier: 1 (Easy), 2 (Medium), 3 (Hard). Assigned by Bayesian posterior over VDS/RDS/SES probe scores.", "dataType": "sc:Integer", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.tier_final" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/vds_probe_avg", "name": "vds_probe_avg", "description": "Visual Dependency Score (1-4): averaged across three probe models. Measures reliance on visual features beyond OCR text.", "dataType": "sc:Float", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.vds_probe_avg" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/rds_probe_avg", "name": "rds_probe_avg", "description": "Reasoning Depth Score (1-4): averaged across three probe models. Measures reasoning steps required.", "dataType": "sc:Float", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.rds_probe_avg" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/ses_probe_avg", "name": "ses_probe_avg", "description": "Spatial Extent Score (1-4): averaged across three probe models. Measures fraction of document that must be attended.", "dataType": "sc:Float", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.ses_probe_avg" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/has_table", "name": "has_table", "description": "Boolean: document image contains a structured table.", "dataType": "sc:Boolean", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.has_table" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/has_chart", "name": "has_chart", "description": "Boolean: document image contains a chart or graph.", "dataType": "sc:Boolean", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.has_chart" } } },
-        { "@type": "cr:Field", "@id": "benchmark_records/image_path", "name": "image_path", "description": "Relative path to document image within the source dataset archive.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "jsonPath": "$.image_path" } } }
+        { "@type": "cr:Field", "@id": "benchmark_records/sample_id", "name": "sample_id", "description": "Unique identifier combining source dataset name and index.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "sample_id" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/split", "name": "split", "description": "Dataset split: anchor (1,500 exhaustively-evaluated samples), validation (750 held-out), or test (2,551 cascade-labeled queries).", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "split" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/source_dataset", "name": "source_dataset", "description": "Source dataset name. One of: DocVQA, SlideVQA, TextVQA, ChartQA, SROIE, InfographicVQA, PubLayNet, RVL-CDIP, MP-DocVQA, ST-VQA, VisualMRC, FUNSD, HierText, WTQ, CORD, TabFact.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "source_dataset" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/task_type", "name": "task_type", "description": "Task family: T1 (document classification), T2 (structured field extraction), T3 (layout and spatial reasoning), T4 (semantic and compositional QA), T5 (multi-page QA), T6 (element localization).", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "task_type" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/query", "name": "query", "description": "Natural-language question about the document image.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "query" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/gt_answer", "name": "gt_answer", "description": "Primary ground-truth answer, inherited from source dataset.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "gt_answer" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/correctness_metric", "name": "correctness_metric", "description": "Evaluation metric: anls, exact_match, field_f1, or iou.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "correctness_metric" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/tier_final", "name": "tier_final", "description": "Difficulty tier: 1 (Easy), 2 (Medium), 3 (Hard). Assigned by Bayesian posterior over VDS/RDS/SES probe scores.", "dataType": "sc:Integer", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "tier_final" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/vds_probe_avg", "name": "vds_probe_avg", "description": "Visual Dependency Score (1-4): averaged across three probe models. Measures reliance on visual features beyond OCR text.", "dataType": "sc:Float", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "vds_probe_avg" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/rds_probe_avg", "name": "rds_probe_avg", "description": "Reasoning Depth Score (1-4): averaged across three probe models. Measures reasoning steps required.", "dataType": "sc:Float", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "rds_probe_avg" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/ses_probe_avg", "name": "ses_probe_avg", "description": "Spatial Extent Score (1-4): averaged across three probe models. Measures fraction of document that must be attended.", "dataType": "sc:Float", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "ses_probe_avg" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/has_table", "name": "has_table", "description": "Boolean: document image contains a structured table.", "dataType": "sc:Boolean", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "has_table" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/has_chart", "name": "has_chart", "description": "Boolean: document image contains a chart or graph.", "dataType": "sc:Boolean", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "has_chart" } } },
+        { "@type": "cr:Field", "@id": "benchmark_records/image_path", "name": "image_path", "description": "Relative path to document image within the source dataset archive.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "benchmark_5000_jsonl" }, "extract": { "column": "image_path" } } }
       ]
     },
     {
@@ -158,11 +191,11 @@
       "description": "Records from routing_labels.jsonl. Each record identifies the cheapest-correct model-budget configuration per sample.",
       "source": { "fileObject": { "@id": "routing_labels_jsonl" } },
       "field": [
-        { "@type": "cr:Field", "@id": "routing_label_records/sample_id", "name": "sample_id", "description": "Sample identifier matching benchmark_5000.jsonl.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "jsonPath": "$.sample_id" } } },
-        { "@type": "cr:Field", "@id": "routing_label_records/cheapest_correct_model", "name": "cheapest_correct_model", "description": "YAML key of cheapest model answering correctly. Null if unroutable.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "jsonPath": "$.cheapest_correct_model" } } },
-        { "@type": "cr:Field", "@id": "routing_label_records/cheapest_correct_budget", "name": "cheapest_correct_budget", "description": "Budget tier of cheapest correct config: B0 (0 tokens), B1 (1,024), B2 (4,096), B3 (16,384). Null if unroutable.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "jsonPath": "$.cheapest_correct_budget" } } },
-        { "@type": "cr:Field", "@id": "routing_label_records/is_routable", "name": "is_routable", "description": "Boolean: at least one model-budget configuration answers correctly. False for the 20.7% unroutable ceiling.", "dataType": "sc:Boolean", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "jsonPath": "$.is_routable" } } },
-        { "@type": "cr:Field", "@id": "routing_label_records/split", "name": "split", "description": "Split membership: anchor, validation, or test.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "jsonPath": "$.split" } } }
+        { "@type": "cr:Field", "@id": "routing_label_records/sample_id", "name": "sample_id", "description": "Sample identifier matching benchmark_5000.jsonl.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "column": "sample_id" } } },
+        { "@type": "cr:Field", "@id": "routing_label_records/cheapest_correct_model", "name": "cheapest_correct_model", "description": "YAML key of cheapest model answering correctly. Null if unroutable.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "column": "cheapest_correct_model" } } },
+        { "@type": "cr:Field", "@id": "routing_label_records/cheapest_correct_budget", "name": "cheapest_correct_budget", "description": "Budget tier of cheapest correct config: B0 (0 tokens), B1 (1,024), B2 (4,096), B3 (16,384). Null if unroutable.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "column": "cheapest_correct_budget" } } },
+        { "@type": "cr:Field", "@id": "routing_label_records/is_routable", "name": "is_routable", "description": "Boolean: at least one model-budget configuration answers correctly. False for the 20.7% unroutable ceiling.", "dataType": "sc:Boolean", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "column": "is_routable" } } },
+        { "@type": "cr:Field", "@id": "routing_label_records/split", "name": "split", "description": "Split membership: anchor, validation, or test.", "dataType": "sc:Text", "source": { "fileObject": { "@id": "routing_labels_jsonl" }, "extract": { "column": "split" } } }
       ]
     }
   ]
