@@ -1,4 +1,4 @@
-# PERCEIVE: A Self-Expanding Benchmark for Psychophysics-grounded Elicitation of Routing Cost-Efficiency In Vision-Language Evaluation
+# PERCEIVE: A Self-Expanding Benchmark for Psychophysics-driven Elicitation of Routing Cost-Efficiency In Vision-Language Evaluation
 
 **NeurIPS 2026 Datasets and Benchmarks Track**
 
@@ -121,17 +121,23 @@ are already in `data/` so most scripts run without API calls.
 | Claim | Value | Script | Needs API? |
 |---|---|---|---|
 | Cascade cost reduction | 60.7% | `scripts/validate_cascade.py` | No |
-| DVR (Dominance Violation Rate) | 6.2% | `scripts/validate_cascade.py` | No |
+| DVR (Dominance Violation Rate, anchor) | 6.2% | `scripts/validate_cascade.py` | No |
 | DVR 95% CI | 4.6%–8.1% | `scripts/compute_bootstrap_cis.py` | No |
-| GT label agreement | 100% | `scripts/validate_cascade.py` | No |
+| GT label agreement (anchor, n=1,244) | 100% | `scripts/validate_cascade.py` | No |
 | GT agreement 95% CI | 99.8%–100% | `scripts/compute_bootstrap_cis.py` | No |
+| Verified-subset DVR (n=1,738) | 0.47% | `scripts/dvr_stratified.py` | No |
+| Per-task DVR (T1–T6 breakdown) | 0.0–1.6% | `scripts/dvr_stratified.py` | No |
+| Cost regret on verified subset | 99.6% zero | `scripts/dvr_stratified.py` | No |
+| Stevens permutation null (canonical recovery) | 1/6 | `scripts/stevens_permutation_null.py` | No |
 | IMC new-model AUC (Qwen3-VL-30B) | 0.833–0.845 | `scripts/run_imc_external_validation.py` | Yes |
 | IMC new-model AUC (Llama-4-Scout) | 0.873 | `scripts/run_imc_external_validation.py` | Yes |
 | IMC held-out queries AUC | 0.876 | `scripts/run_imc_external_validation.py` | No |
-| IMC cross-domain AUC | 0.60 | `scripts/imc_dataset_holdout.py` | No |
-| Router accuracy | 61.6% | `scripts/train_perceive_router.py` | No |
+| IMC cross-domain AUC | 0.624 | `scripts/imc_dataset_holdout.py` | No |
+| Router accuracy (PERCEIVE-IPS) | 61.6% | `scripts/train_perceive_router.py` | No |
+| External baseline (k-NN router) | 51.1% | `scripts/knn_router_baseline.py` | No |
+| External baseline (Cascade-MF) | 52.4% | `scripts/cascade_mf_baseline.py` | No |
 | Oracle ceiling | 79.3% | `scripts/oracle_gap_decomposition.py` | No |
-| Oracle gap: unroutable | 20.7% | `scripts/oracle_gap_decomposition.py` | No |
+| Oracle gap: unroutable | 18.5% | `scripts/oracle_gap_decomposition.py` | No |
 | Oracle gap: hard-routing | 13.0pp | `scripts/oracle_gap_decomposition.py` | No |
 | Oracle gap: cost-tradeoff | 4.7pp | `scripts/oracle_gap_decomposition.py` | No |
 | Probe tier stability (dropout) | 92.3–92.9% | `scripts/probe_sensitivity.py` | No |
@@ -227,7 +233,7 @@ Per-dataset license details are in `data/croissant.json` (`dct:source` block).
 
 ```bibtex
 @inproceedings{perceive2026,
-  title     = {{PERCEIVE}: A Self-Expanding Benchmark for Psychophysics-grounded
+  title     = {{PERCEIVE}: A Self-Expanding Benchmark for Psychophysics-driven
                Elicitation of Routing Cost-Efficiency In Vision-Language Evaluation},
   author    = {Bhatti, Amit Singh and P M, Harikrishnan and Vaddina, Vishal},
   booktitle = {NeurIPS Datasets and Benchmarks Track},
