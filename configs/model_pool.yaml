@@ -1,5 +1,5 @@
 # DocRouteBench — Model Pool Configuration (API-only, locked)
-# 7 models, 23 configs, 4 budget levels (B0/B1/B2/B3)
+# 7 models, 24 configs, up to 4 budget levels (B0/B1/B2/B3)
 # Scope: commercially-available API models only (OpenAI, Anthropic, Google)
 # Rationale: API-only ensures full reproducibility without GPU hardware requirements.
 #            Standardized $/M pricing gives unambiguous cost signal for routing.
@@ -136,8 +136,8 @@ models:
     supports_grounding: true
     supports_multipage: true
     max_context_tokens: 1000000
-    budgets: ["B0", "B1", "B3"]
-    notes: "Google frontier. Most capable Google model. 1M+ context. Replaces Flash Lite for hard tasks."
+    budgets: ["B0", "B1", "B2", "B3"]
+    notes: "Google frontier. Most capable Google model. 1M+ context. Replaces Flash Lite for hard tasks. B2 gap-filled Apr 2026."
 
 # ── External Validation Models (IMC experiment 1.1) ─────────────────────────
 # Two new architecture families added post-collection for IMC external validation.
@@ -180,7 +180,7 @@ models:
 # ── Pool Summary (API-only, locked) ──────────────────────────────────────────
 # Tier A: 2 models,  4 configs  (Flash-Lite B1/B2/B3, GPT-nano B0)
 # Tier B: 2 models,  8 configs  (GPT-mini B0-B3, Sonnet B0-B3)
-# Tier C: 3 models, 12 configs  (GPT-5.4 B0-B3, Opus B0/B1/B3, Gemini Pro B0/B1/B3)
+# Tier C: 3 models, 12 configs  (GPT-5.4 B0-B3, Opus B0-B3, Gemini Pro B0-B3)
 # TOTAL:  7 models, 24 configs
 #
 # Provider coverage:
