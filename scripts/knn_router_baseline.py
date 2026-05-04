@@ -80,6 +80,7 @@ class KNNRouter:
         self._scale = X.std(axis=0, keepdims=True)
         self._scale = np.where(self._scale < 1e-8, 1.0, self._scale)
         Xn = self._normalise(X)
+        Xn = np.nan_to_num(Xn, nan=0.0, posinf=0.0, neginf=0.0)
         norms = np.linalg.norm(Xn, axis=1, keepdims=True)
         norms = np.where(norms < 1e-8, 1.0, norms)
         self._train_X = (Xn / norms).astype(np.float64)
@@ -89,10 +90,13 @@ class KNNRouter:
     def predict(self, dataset) -> np.ndarray:
         assert self._train_X is not None, "Call fit() first"
         Xt = self._normalise(dataset.X.astype(np.float64))
+        Xt = np.nan_to_num(Xt, nan=0.0, posinf=0.0, neginf=0.0)
         norms = np.linalg.norm(Xt, axis=1, keepdims=True)
         norms = np.where(norms < 1e-8, 1.0, norms)
         Xt = Xt / norms
-        sims = Xt @ self._train_X.T  # (n_test, n_train)
+        with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+            sims = Xt @ self._train_X.T  # (n_test, n_train)
+        sims = np.nan_to_num(sims, nan=-1.0, posinf=1.0, neginf=-1.0)
         topk = np.argpartition(-sims, kth=self.k, axis=1)[:, : self.k]
 
         n = len(dataset.sample_ids)
