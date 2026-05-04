@@ -2,7 +2,7 @@
 
 **NeurIPS 2026 Datasets and Benchmarks Track**
 
-PERCEIVE is a 4,801-sample document-image QA benchmark for cost-aware VLM routing. Each sample carries psychophysical complexity annotations (Visual Dependency Score, Reasoning Depth Score, Spatial Extent Score) derived from a three-model probe oracle, a difficulty tier (Easy/Medium/Hard), and a routing label identifying the cheapest model-budget configuration that answers it correctly.
+PERCEIVE is a 4,801-sample document-image QA benchmark for cost-aware VLM routing. Each sample carries psychophysical complexity annotations (Visual Dependency Score, Reasoning Depth Score, Spatial Extent Score) derived from a two-model probe oracle (GPT-5.4-mini and Gemini-2.5-Flash-Lite), a difficulty tier (Easy/Medium/Hard), and a routing label identifying the cheapest model-budget configuration that answers it correctly.
 
 Routing labels are derived via a QUEST-style adaptive cascade at **60.7% cost reduction** with **100% ground-truth label agreement** across 7 commercial VLMs at up to 4 reasoning-budget levels (24 valid configurations).
 
