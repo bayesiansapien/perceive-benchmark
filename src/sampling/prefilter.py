@@ -1,15 +1,15 @@
 """
-DocRouteBench Phase 2 — Prefilter
+DocRouteBench Phase 2, Prefilter
 
 Reduces ~134K deduped samples (data/processed/samples_with_prior.jsonl) to
 ~40K candidates (data/processed/candidates_40k.jsonl) via quality gate + cost quota.
 
 Three passes:
-  Pass 1 — Quality filter: remove obviously bad samples.
-  Pass 2 — Per-dataset cost-control quota: max 8× sample_budget per dataset,
-            random subsample (NOT diversity-ranked — diversity selection is
+  Pass 1, Quality filter: remove obviously bad samples.
+  Pass 2, Per-dataset cost-control quota: max 8× sample_budget per dataset,
+            random subsample (NOT diversity-ranked, diversity selection is
             deferred to C7 post-probe where we have full probe data).
-  Pass 3 — Global target: proportional downsample to 40K if needed;
+  Pass 3, Global target: proportional downsample to 40K if needed;
             warn if result < 20K.
 """
 
@@ -67,7 +67,7 @@ def _centroid(vectors: List[List[float]]) -> List[float]:
     return [sum(v[i] for v in vectors) / n for i in range(len(vectors[0]))]
 
 
-# ── Pass 1 — quality filter ───────────────────────────────────────────────────
+# ── Pass 1. quality filter ───────────────────────────────────────────────────
 
 def _passes_quality(sample: dict) -> Tuple[bool, str]:
     """Return (keep, reason_if_dropped)."""
@@ -93,7 +93,7 @@ def _passes_quality(sample: dict) -> Tuple[bool, str]:
     return True, ""
 
 
-# ── Pass 2 — per-dataset quota with diversity ranking ─────────────────────────
+# ── Pass 2. per-dataset quota with diversity ranking ─────────────────────────
 
 def _diversity_score(sample: dict, centroid: List[float]) -> float:
     return _l2_distance(_feature_vector(sample), centroid)
@@ -171,7 +171,7 @@ def _apply_dataset_quotas(
     for ds, samples in samples_by_dataset.items():
         budget = budgets.get(ds)
         if budget is None:
-            log.warning("Dataset %r has no sample_budget in datasets.yaml — using 200", ds)
+            log.warning("Dataset %r has no sample_budget in datasets.yaml, using 200", ds)
             budget = 200
 
         quota = budget * multiplier
@@ -179,7 +179,7 @@ def _apply_dataset_quotas(
         if len(samples) <= quota:
             kept = samples
         else:
-            # Random subsample — no diversity ranking bias
+            # Random subsample: no diversity ranking bias
             kept = rng.sample(samples, quota)
 
         log.info(
@@ -194,7 +194,7 @@ def _apply_dataset_quotas(
     return output
 
 
-# ── Pass 3 — global target ────────────────────────────────────────────────────
+# ── Pass 3. global target ────────────────────────────────────────────────────
 
 def _global_downsample(samples: List[dict], target: int) -> List[dict]:
     """
@@ -303,7 +303,7 @@ def run_prefilter(
     """
     Reduce ~134K deduped samples to ~40K candidates via quality gate + cost-control quota.
 
-    Diversity selection is NOT done here — it's deferred to C7 (post-probe)
+    Diversity selection is NOT done here: it's deferred to C7 (post-probe)
     where we have full probe-derived features. This pre-filter only ensures:
     1. No junk reaches the probe (quality gate)
     2. No single dataset dominates probe budget (random quota)
@@ -312,7 +312,7 @@ def run_prefilter(
     """
     checkpoint_path = Path(checkpoint_dir) / "prefilter.done"
     if checkpoint_path.exists():
-        log.info("Checkpoint exists — skipping prefilter. Output: %s", output_path)
+        log.info("Checkpoint exists: skipping prefilter. Output: %s", output_path)
         return output_path
 
     # ── Load input ────────────────────────────────────────────────────────
@@ -330,7 +330,7 @@ def run_prefilter(
     log.info("Loaded budgets for %d datasets", len([k for k in budgets if not k[0].isupper()]))
 
     # ════════════════════════════════════════════════════════════════════
-    # PASS 1 — Quality filter
+    # PASS 1: Quality filter
     # ════════════════════════════════════════════════════════════════════
     log.info("── Pass 1: Quality filter ──")
     drop_reasons: Dict[str, int] = defaultdict(int)
@@ -352,7 +352,7 @@ def run_prefilter(
     )
 
     # ════════════════════════════════════════════════════════════════════
-    # PASS 2 — Per-dataset quota
+    # PASS 2: Per-dataset quota
     # ════════════════════════════════════════════════════════════════════
     log.info("── Pass 2: Per-dataset quotas (8× sample_budget, random subsample) ──")
 
@@ -369,7 +369,7 @@ def run_prefilter(
     for ds in by_dataset:
         b = _match_budget(ds, budgets)
         if b is None:
-            log.warning("No budget found for dataset %r — defaulting to 200", ds)
+            log.warning("No budget found for dataset %r, defaulting to 200", ds)
             b = 200
         ds_budgets[ds] = b
 
@@ -382,7 +382,7 @@ def run_prefilter(
     )
 
     # ════════════════════════════════════════════════════════════════════
-    # PASS 3 — Global target
+    # PASS 3: Global target
     # ════════════════════════════════════════════════════════════════════
     log.info("── Pass 3: Global target (%d) ──", target_candidates)
 
@@ -390,7 +390,7 @@ def run_prefilter(
 
     if n_after_quota < 20_000:
         log.warning(
-            "Only %d candidates after Pass 2 — quality filters may be too strict. "
+            "Only %d candidates after Pass 2, quality filters may be too strict. "
             "Target is %d.",
             n_after_quota,
             target_candidates,

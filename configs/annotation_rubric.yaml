@@ -1,4 +1,4 @@
-# DocRouteBench — Complexity Annotation Rubric
+# DocRouteBench: Complexity Annotation Rubric
 # Used by LLM judges (Gemini 3.1 Pro + GPT-5.4 + Opus 4.6 tiebreak)
 
 # ── VDS: Visual Dependency Score ─────────────────────────────────────
@@ -52,19 +52,19 @@ SES:
   levels:
     1:
       label: "Local"
-      rule: "Evidence is in one location — single cell, field, or bounding box."
+      rule: "Evidence is in one location, single cell, field, or bounding box."
       example: "What is the vendor address?"
     2:
       label: "Regional"
-      rule: "Evidence spans a connected region — single table, paragraph, or figure+caption."
+      rule: "Evidence spans a connected region, single table, paragraph, or figure+caption."
       example: "Summarize the findings in the methodology section."
     3:
       label: "Page-Level"
-      rule: "Full page scan required — evidence is distributed across disconnected regions."
+      rule: "Full page scan required: evidence is distributed across disconnected regions."
       example: "List all items mentioned anywhere on this page."
     4:
       label: "Multi-Page"
-      rule: "Evidence spans two or more pages — any cross-page reference or aggregation."
+      rule: "Evidence spans two or more pages, any cross-page reference or aggregation."
       example: "What is the total budget across all departments mentioned in this filing?"
 
 # ── Composite score ───────────────────────────────────────────────────

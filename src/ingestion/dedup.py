@@ -1,5 +1,5 @@
 """
-DocRouteBench — Phase 2 Deduplication
+DocRouteBench: Phase 2 Deduplication
 ======================================
 Removes duplicate samples across the 16 normalized JSONL files.
 
@@ -64,11 +64,11 @@ try:
     import imagehash
     from PIL import Image as PILImage
     _IMAGEHASH_AVAILABLE = True
-    log.info("imagehash available — using perceptual hashing for image dedup")
+    log.info("imagehash available, using perceptual hashing for image dedup")
 except ImportError:
     _IMAGEHASH_AVAILABLE = False
     log.warning(
-        "imagehash not installed — falling back to MD5 of image bytes. "
+        "imagehash not installed, falling back to MD5 of image bytes. "
         "Install with: pip install imagehash"
     )
 
@@ -179,7 +179,7 @@ def run_deduplication(
 
     # ── Checkpoint check ────────────────────────────────────────────────────
     if os.path.exists(checkpoint_file):
-        log.info("Checkpoint found — skipping deduplication. Output: %s", abs_output_path)
+        log.info("Checkpoint found: skipping deduplication. Output: %s", abs_output_path)
         return abs_output_path
 
     # ── Create dirs ─────────────────────────────────────────────────────────
@@ -218,8 +218,8 @@ def run_deduplication(
     # kept_records maps sample_id -> record (the "winner" so far)
     kept_by_id: Dict[str, dict] = {}
 
-    # Image dedup index: for phash — list of (hash_str, sample_id);
-    # for MD5 — dict of md5_str -> sample_id
+    # Image dedup index: for phash, list of (hash_str, sample_id);
+    # for MD5, dict of md5_str -> sample_id
     if use_phash:
         phash_index: list[Tuple[str, str]] = []   # (hash_str, sample_id)
     else:
@@ -257,7 +257,7 @@ def run_deduplication(
 
         if img_key is not None:
             if use_phash:
-                # Linear scan — acceptable for water-test scale; for 5000 samples
+                # Linear scan: acceptable for water-test scale; for 5000 samples
                 # this is at most 5000 comparisons which completes in <1s.
                 for existing_hash, existing_id in phash_index:
                     if _phash_distance(img_key, existing_hash) <= phash_threshold:
@@ -270,7 +270,7 @@ def run_deduplication(
         # A TRUE duplicate requires BOTH text AND image to match the SAME
         # existing sample.  Same query + different image = valid (e.g.,
         # template questions across different documents).  Same image +
-        # different query = valid (same doc page, different question —
+        # different query = valid (same doc page, different question,
         # e.g. T3 layout + T6 grounding from the same PubLayNet page).
         #
         # Previous bug: text_conflict_id and image_conflict_id were checked
@@ -278,18 +278,18 @@ def run_deduplication(
         # matched one existing sample and the image matched a *different*
         # existing sample.  Fix: require they point to the SAME sample.
         if text_conflict_id and image_conflict_id and text_conflict_id == image_conflict_id:
-            # Both signals point to the same existing sample — true duplicate
+            # Both signals point to the same existing sample, true duplicate
             conflict_id = text_conflict_id
         elif text_conflict_id and image_conflict_id is None and img_key is None:
-            # Text matches but no image available to compare — treat as dup
+            # Text matches but no image available to compare, treat as dup
             # (cannot verify different image, conservative)
             conflict_id = text_conflict_id
         else:
             # Only one signal matches, or they point to different samples,
-            # or neither matches — NOT a duplicate
+            # or neither matches, NOT a duplicate
             conflict_id = None
         if conflict_id is None:
-            # No conflict — keep this record and index it
+            # No conflict: keep this record and index it
             kept_by_id[sample_id] = record
             text_index[t_key] = sample_id
             if img_key is not None:
@@ -298,7 +298,7 @@ def run_deduplication(
                 else:
                     md5_index[img_key] = sample_id
         else:
-            # Conflict — decide winner
+            # Conflict: decide winner
             existing_record = kept_by_id.get(conflict_id)
             if existing_record is None:
                 # The conflicting record was itself removed earlier; keep this one
@@ -330,7 +330,7 @@ def run_deduplication(
                     old_img_md5 = _image_key_md5(old_img_path, project_root)
                     if old_img_md5 and md5_index.get(old_img_md5) == conflict_id:
                         md5_index[old_img_md5] = sample_id
-                # (phash_index stores tuples; rewriting would be O(n); skip — the
+                # (phash_index stores tuples; rewriting would be O(n); skip, the
                 # first-match scan will find the new winner via kept_by_id lookup)
             else:
                 # Existing wins; drop incoming
@@ -382,7 +382,7 @@ if __name__ == "__main__":
     import shutil
 
     print("=" * 60)
-    print("DocRouteBench Phase 2 — Deduplication Smoke Test")
+    print("DocRouteBench Phase 2, Deduplication Smoke Test")
     print("=" * 60)
 
     # Allow overriding checkpoint to force re-run during testing

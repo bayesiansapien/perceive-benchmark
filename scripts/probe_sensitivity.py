@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench — Probe Sensitivity Analysis
+DocRouteBench: Probe Sensitivity Analysis
 
 Validates that the Phase 2 sampling pipeline is robust to probe model choice.
 Four experiments using existing probe data (zero additional API cost).
@@ -246,7 +246,7 @@ def run_sensitivity_analysis(probe_path: str, output_path: str) -> dict:
     report["summary"] = {
         "min_stability": round(min(stabilities), 4),
         "all_above_85_pct": all(s >= 0.85 for s in stabilities),
-        "conclusion": "Pipeline is robust to probe model choice" if all(s >= 0.85 for s in stabilities) else "Pipeline shows sensitivity to probe model choice — investigate",
+        "conclusion": "Pipeline is robust to probe model choice" if all(s >= 0.85 for s in stabilities) else "Pipeline shows sensitivity to probe model choice, investigate",
     }
 
     log.info("\n=== SUMMARY ===")

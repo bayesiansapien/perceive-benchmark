@@ -189,7 +189,7 @@ if __name__ == "__main__":
             False,
         ),
         (
-            "String substring match — gt contained in prediction",
+            "String substring match: gt contained in prediction",
             "North America region",
             ["North America"],
             True,

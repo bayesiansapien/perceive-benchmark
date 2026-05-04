@@ -1,5 +1,5 @@
 """
-DocRouteBench — Answer Extractor
+DocRouteBench: Answer Extractor
 
 Clean raw model output into a scorable answer string.
 Critical: wrong extraction = wrong GT labels.
@@ -49,7 +49,7 @@ def _truncate_at_explanation(text: str) -> str:
     # Only truncate for single-word binary/boolean answers followed by explanation.
     # "Yes, it is part of..." → "Yes"
     # "No, the document shows..." → "No"
-    # Do NOT truncate numeric or multi-word answers — commas may be part of the answer
+    # Do NOT truncate numeric or multi-word answers, commas may be part of the answer
     # (e.g. "table, figure", "1, 2, 3", "[0.08, 0.82]")
     _BINARY_ANSWERS = {"yes", "no", "true", "false", "entailed", "refuted"}
     if before.lower().strip() in _BINARY_ANSWERS:

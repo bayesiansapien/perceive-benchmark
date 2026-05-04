@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-IMC Dataset Hold-out Validation — Experiment 1.1b (NeurIPS gap fix)
+IMC Dataset Hold-out Validation: Experiment 1.1b (NeurIPS gap fix)
 
 Validates that IMC generalises to document types not seen during training.
 Holds out three diverse datasets from IMC training, trains on anchor-set data
@@ -177,7 +177,7 @@ def main() -> None:
     test_ids  = {s["sample_id"] for s in test_samples}
 
     log.info(
-        "Dataset split — Train (anchor, non-held-out): %d samples | Test (held-out, any split): %d samples",
+        "Dataset split: Train (anchor, non-held-out): %d samples | Test (held-out, any split): %d samples",
         len(train_samples), len(test_samples),
     )
 
@@ -331,7 +331,7 @@ def main() -> None:
 
         # Only count samples where at least one side has a determination
         if actual_cheapest is None and predicted_cheapest is None:
-            continue  # no ground truth at all — skip
+            continue  # no ground truth at all, skip
 
         routing_total += 1
         # Agreement: both pick same yaml_key+budget OR both find nothing

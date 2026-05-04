@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 3 — Real-time Quality Monitor
+DocRouteBench Phase 3, Real-time Quality Monitor
 
 Runs in the background, periodically scanning collected results for anomalies.
 Flags issues to /tmp/phase3_quality_flags.log.
 
 Checks:
-  1. Empty predicted_answer (no error) — model returned nothing
-  2. B1/B2/B3 with reasoning_tokens=0 — thinking not engaged
-  3. Answer is copy of query — model echoed the question
-  4. Answer too long (>50 words) — model not being concise
-  5. Non-English answer on English query — possible hallucination
-  6. Cost per call way off expected — pricing anomaly
-  7. All models wrong on same sample — possible data issue
-  8. Model accuracy < 1% for 200+ calls — systematic failure
-  9. Repeated identical answers across many samples (>30%) — degenerate
- 10. Latency outliers (>60s) — possible API issues
+  1. Empty predicted_answer (no error), model returned nothing
+  2. B1/B2/B3 with reasoning_tokens=0, thinking not engaged
+  3. Answer is copy of query, model echoed the question
+  4. Answer too long (>50 words), model not being concise
+  5. Non-English answer on English query: possible hallucination
+  6. Cost per call way off expected, pricing anomaly
+  7. All models wrong on same sample, possible data issue
+  8. Model accuracy < 1% for 200+ calls, systematic failure
+  9. Repeated identical answers across many samples (>30%), degenerate
+ 10. Latency outliers (>60s), possible API issues
 """
 import json
 import logging
@@ -97,8 +97,8 @@ def check_record(r: dict, all_records: list) -> list[str]:
     if not predicted.strip() and not error:
         issues.append(f"EMPTY_ANSWER: {config_id} / {sample_id} | raw={raw[:40]!r}")
 
-    # 2. Thinking not engaged for B2/B3 (flag only high budgets — B1 is optional)
-    # B1=low effort, model may skip thinking on easy samples — that's valid
+    # 2. Thinking not engaged for B2/B3 (flag only high budgets, B1 is optional)
+    # B1=low effort, model may skip thinking on easy samples, that's valid
     # B2/B3 should consistently produce reasoning tokens
     if budget in ("B2", "B3") and r_tokens == 0 and not error and cost > 0:
         issues.append(f"NO_THINKING: {config_id} / {sample_id} | budget={budget_tokens} but reasoning_tokens=0")
@@ -142,7 +142,7 @@ def batch_checks(records: list, cumulative: list) -> list[str]:
             if acc < 0.01:
                 issues.append(
                     f"ZERO_ACCURACY: {model} | {stats['correct']}/{stats['total']} ({acc:.1%}) "
-                    f"— systematic failure?"
+                    f", systematic failure?"
                 )
 
     # 9. Degenerate repeated answers (>40% same answer for a model)
@@ -173,7 +173,7 @@ def batch_checks(records: list, cumulative: list) -> list[str]:
     if len(all_wrong) > 50:
         issues.append(
             f"ALL_MODELS_WRONG: {len(all_wrong)} samples where no model is correct "
-            f"— check data quality"
+            f", check data quality"
         )
 
     return issues
@@ -186,7 +186,7 @@ def run_monitor(results_path: str = RESULTS_FILE, interval: int = CHECK_INTERVAL
 
     # Clear flags log
     with open(FLAGS_FILE, "w") as f:
-        f.write(f"=== Phase 3 Quality Monitor — started {time.strftime('%Y-%m-%d %H:%M:%S')} ===\n")
+        f.write(f"=== Phase 3 Quality Monitor: started {time.strftime('%Y-%m-%d %H:%M:%S')} ===\n")
 
     seen_count = 0
     cumulative = []

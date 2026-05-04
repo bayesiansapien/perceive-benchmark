@@ -193,7 +193,7 @@ class OracleCascadeRouter:
     """
     Oracle cascade: try configs in cost order, stop at first correct.
 
-    This is the BEST POSSIBLE cascade — it has a perfect confidence checker.
+    This is the BEST POSSIBLE cascade: it has a perfect confidence checker.
     The cost is cumulative (every failed attempt adds cost).
     """
 
@@ -307,7 +307,7 @@ class LearnedCascadeRouter:
     can solve a query. At inference: try Tier A first, escalate to B if not
     confident, fall through to C. Gate thresholds tuned on training data.
 
-    Routes to cheapest config within the selected tier — tests whether
+    Routes to cheapest config within the selected tier, tests whether
     sequential tier escalation outperforms flat classification.
     """
 

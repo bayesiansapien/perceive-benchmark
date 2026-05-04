@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 3 — GPU Evaluation Harness (DGX)
+DocRouteBench Phase 3, GPU Evaluation Harness (DGX)
 
 Evaluates GPU-based model configs on benchmark samples using vLLM.
 Designed to run on DGX server. Results appended to gpu_results.jsonl,
@@ -141,7 +141,7 @@ def run_gpu_evaluation(
         try:
             image_b64 = load_image_b64(sample.get("image_path", ""))
         except FileNotFoundError:
-            log.warning("Image not found: %s — skipping.", sample_id)
+            log.warning("Image not found: %s, skipping.", sample_id)
             continue
 
         # Inference

@@ -6,10 +6,10 @@ Reads data/ artefacts produced by the pipeline and prints a table comparing
 each paper-reported value against what is stored on disk.
 
 Status codes:
-  OK     — value in file matches expected within tolerance
-  WARN   — value present but outside tolerance band
-  SKIP   — artefact missing; run the indicated script first
-  FIXED  — value hard-coded in oracle_gap_decomposition.py (paper-reported)
+  OK: value in file matches expected within tolerance
+  WARN: value present but outside tolerance band
+  SKIP: artefact missing; run the indicated script first
+  FIXED: value hard-coded in oracle_gap_decomposition.py (paper-reported)
 
 Usage:
     python scripts/eval_paper_claims.py          # offline, no API
@@ -62,7 +62,7 @@ def _pct(v: float) -> str:
 
 def _fmt(v) -> str:
     if v is None:
-        return "—"
+        return ","
     if isinstance(v, float):
         return f"{v:.4f}"
     return str(v)
@@ -85,7 +85,7 @@ class Claim:
         self.label = label
         self.expected = expected
         self.script = script
-        self.actual: str = "—"
+        self.actual: str = ","
         self.status: str = "SKIP"
 
     def run(self) -> "Claim":
@@ -203,7 +203,7 @@ def check_gt_agreement_ci() -> Claim:
     if not anchor_path.exists():
         c.actual = "needs anchor_results.jsonl"
         return c
-    # If anchor data available, CI will be very tight around 100% — just report
+    # If anchor data available, CI will be very tight around 100%, just report
     d = _load(DATA / "phase3_cascade_validation.json")
     if d and d.get("experiment_2_gt_agreement", {}).get("agreement_rate") == 1.0:
         c.actual = "~99.8%–100% (Clopper-Pearson, n=1244)"
@@ -450,7 +450,7 @@ def check_judge_flip_rate() -> Claim:
         if orig is None:
             continue
         if not orig.get("is_routable"):
-            continue  # unroutable — routing label is "none" regardless
+            continue  # unroutable, routing label is "none" regardless
         orig_model = orig.get("cheapest_correct_model", "")
         orig_budget = orig.get("cheapest_correct_budget", "")
         for (yaml_key, budget) in flip_list:
@@ -502,7 +502,7 @@ def main() -> None:
             results.append(fn())
         except Exception as exc:
             name = fn.__name__.replace("check_", "").replace("_", " ")
-            c = Claim(name, "—", "—")
+            c = Claim(name, ",", ",")
             c.actual = f"ERROR: {exc}"
             c.status = "WARN"
             results.append(c)
@@ -513,7 +513,7 @@ def main() -> None:
     sep = "  ".join("─" * w for w in col_w)
 
     print()
-    print("PERCEIVE — Paper Claims Verification")
+    print("PERCEIVE: Paper Claims Verification")
     print("=" * (sum(col_w) + 2 * (len(col_w) - 1)))
     print("  ".join(h.ljust(w) for h, w in zip(header, col_w)))
     print(sep)
@@ -528,7 +528,7 @@ def main() -> None:
     print(f"\nSummary: {ok} OK   {warn} WARN/FIXED   {skip} SKIP (needs data or rerun)")
 
     if skip:
-        print("\nSKIPped claims — run the indicated script or provide missing data files:")
+        print("\nSKIPped claims, run the indicated script or provide missing data files:")
         for r in results:
             if r.status.strip() == "SKIP":
                 print(f"  [{r.label}]  →  {r.script}")

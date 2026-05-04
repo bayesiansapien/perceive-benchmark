@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 2 — Anchor Set Selector
+DocRouteBench Phase 2, Anchor Set Selector
 ============================================
 Selects 1,500 anchor samples and 750 validation samples from the 5,000
 benchmark via submodular facility-location greedy optimization.
 
-Algorithm — Submodular Facility Location (Nemhauser et al. 1978):
+Algorithm: Submodular Facility Location (Nemhauser et al. 1978):
   Objective: F(A) = sum_s max_{a in A} S(s, a)
   Greedy:    iteratively add the sample that maximises marginal gain
   Guarantee: achieves (1 - 1/e) ≈ 63.2% of optimal F
@@ -251,16 +251,16 @@ def _seed_constrained(
             added += 1
         return added
 
-    # 1. Fill per-task minimums — capped to what's actually available
+    # 1. Fill per-task minimums, capped to what's actually available
     per_task_min = constraints["per_task_min"]
     for task, min_count in per_task_min.items():
         available = len(by_task.get(task, []))
         effective_min = min(min_count, available)  # never demand more than exists
         if effective_min == 0:
-            log.warning("Task type %s has no candidates in benchmark — skipping constraint.", task)
+            log.warning("Task type %s has no candidates in benchmark, skipping constraint.", task)
             continue
         if available < min_count:
-            log.warning("Task type %s: only %d available (constraint wants %d) — using all.", task, available, min_count)
+            log.warning("Task type %s: only %d available (constraint wants %d), using all.", task, available, min_count)
         have = sum(1 for i in selected if samples[i]["task_type"] == task)
         need = max(0, effective_min - have)
         added = _fill_to(by_task.get(task, []), task, cursors["task"], need)
@@ -514,15 +514,15 @@ def _log_report_summary(report: dict) -> None:
     all_ok = True
     for task, info in checks["per_task_min"].items():
         if not info["satisfied"]:
-            log.warning("  CONSTRAINT FAIL — task %s: need %d, got %d", task, info["required"], info["actual"])
+            log.warning("  CONSTRAINT FAIL: task %s: need %d, got %d", task, info["required"], info["actual"])
             all_ok = False
     for tier, info in checks["per_tier_min"].items():
         if not info["satisfied"]:
-            log.warning("  CONSTRAINT FAIL — tier %s: need %d, got %d", tier, info["required"], info["actual"])
+            log.warning("  CONSTRAINT FAIL: tier %s: need %d, got %d", tier, info["required"], info["actual"])
             all_ok = False
     for ds, info in checks.get("per_dataset_min", {}).items():
         if not info["satisfied"]:
-            log.warning("  CONSTRAINT FAIL — dataset %s: need %d, got %d", ds, info["required"], info["actual"])
+            log.warning("  CONSTRAINT FAIL: dataset %s: need %d, got %d", ds, info["required"], info["actual"])
             all_ok = False
 
     if all_ok:
@@ -574,7 +574,7 @@ def run_anchor_selection(
 
     # ── Checkpoint check ──────────────────────────────────────────────────────
     if checkpoint_file.exists():
-        log.info("Checkpoint found — anchor selection already complete. Skipping.")
+        log.info("Checkpoint found: anchor selection already complete. Skipping.")
         return anchor_output, validation_output
 
     # ── Load benchmark ────────────────────────────────────────────────────────
@@ -667,7 +667,7 @@ def main() -> None:
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="DocRouteBench — Anchor Set Selector (submodular facility location)"
+        description="DocRouteBench: Anchor Set Selector (submodular facility location)"
     )
     parser.add_argument(
         "--benchmark",

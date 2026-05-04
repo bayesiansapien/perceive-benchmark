@@ -276,7 +276,7 @@ def compute_teds(pred: str, gt: str) -> float:
     Parameters
     ----------
     pred:
-        Model output — may be an HTML table, a Markdown table, or plain text.
+        Model output: may be an HTML table, a Markdown table, or plain text.
     gt:
         Ground-truth HTML table string.
 
@@ -310,7 +310,7 @@ def compute_teds(pred: str, gt: str) -> float:
             distance = _ted(pred_tree, gt_tree)
             return max(0.0, 1.0 - distance / denom)
 
-        # HTML parsing failed — fall back to token F1
+        # HTML parsing failed: fall back to token F1
         return _token_f1(pred, gt)
 
     # ---- no bs4: try heuristic if HTML-like, else token F1 ----

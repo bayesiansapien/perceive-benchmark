@@ -3,7 +3,7 @@ GPU model adapter for Phase 3 evaluation via HuggingFace transformers.
 Handles: Qwen3.5-VL-4B, Phi-4-Vision, InternVL3-8B, Qwen3.5-35B-A3B (MoE)
 Designed to run on DGX server with A100 80GB.
 
-No vLLM dependency — uses transformers directly for ABI compatibility with
+No vLLM dependency: uses transformers directly for ABI compatibility with
 NVIDIA custom PyTorch 2.8.0.
 """
 from __future__ import annotations
@@ -324,7 +324,7 @@ class GPUAdapter(BaseModelAdapter):
         }
 
     def _call_qwen35b_moe(self, pil_image, query: str) -> dict:
-        """Qwen3.5-122B-A10B-FP8 — text-only MoE inference (no image encoder)."""
+        """Qwen3.5-122B-A10B-FP8, text-only MoE inference (no image encoder)."""
         enable_thinking = (
             self.supports_thinking and self.budget_level in ("B1", "B3")
         )
@@ -399,7 +399,7 @@ def _load_phi4vision(hf_id: str):
 
 
 def _load_internvl3(hf_id: str):
-    """Load InternVL3-8B. Returns (model, tokenizer) — tokenizer stored in processor slot."""
+    """Load InternVL3-8B. Returns (model, tokenizer), tokenizer stored in processor slot."""
     from transformers import AutoModel, AutoTokenizer
 
     model = AutoModel.from_pretrained(
@@ -416,7 +416,7 @@ def _load_internvl3(hf_id: str):
 
 
 def _load_qwen35b_moe(hf_id: str):
-    """Load Qwen3.5-122B-A10B-FP8 — text-only MoE, FP8 quantized."""
+    """Load Qwen3.5-122B-A10B-FP8, text-only MoE, FP8 quantized."""
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     model = AutoModelForCausalLM.from_pretrained(

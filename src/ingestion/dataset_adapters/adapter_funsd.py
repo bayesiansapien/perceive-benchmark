@@ -1,5 +1,5 @@
 """
-DocRouteBench — FUNSD Dataset Adapter
+DocRouteBench: FUNSD Dataset Adapter
 
 Task: T2 (Structured Extraction)
 HuggingFace ID: nielsr/funsd-layoutlmv3
@@ -152,7 +152,7 @@ class FunsdAdapter(BaseAdapter):
             logger.error(f"[funsd] Failed to load dataset: {exc}")
             raise
 
-        logger.info(f"[funsd] Dataset loaded — {len(ds)} forms available")
+        logger.info(f"[funsd] Dataset loaded: {len(ds)} forms available")
 
         emitted = 0
 
@@ -191,7 +191,7 @@ class FunsdAdapter(BaseAdapter):
                     if self.max_samples and emitted >= self.max_samples:
                         return
             else:
-                # Fallback: no linked pairs found — ask model to list all fields
+                # Fallback: no linked pairs found, ask model to list all fields
                 sample_id = f"funsd_test_{form_idx:06d}_0000"
                 query = "List all fields and their values present in this form."
 

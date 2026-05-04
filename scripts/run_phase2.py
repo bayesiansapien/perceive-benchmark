@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 2 — Pipeline Orchestrator
+DocRouteBench Phase 2, Pipeline Orchestrator
 ==============================================
 Runs all 8 Phase 2 components in order with checkpoint-aware resumption.
 
@@ -14,7 +14,7 @@ Component order:
     C2  dedup       src/ingestion/dedup.py
     C3  prior       src/sampling/structural_prior.py
     C4  prefilter   src/sampling/prefilter.py
-    C5  api_probe   src/sampling/api_probe.py       [most expensive — resume-critical]
+    C5  api_probe   src/sampling/api_probe.py       [most expensive, resume-critical]
     C6  difficulty  src/sampling/difficulty_estimator.py
     C7  stratify    src/sampling/stratified_sampler.py
     C8  anchor      src/anchor_set/anchor_selector.py
@@ -249,7 +249,7 @@ def _show_status() -> None:
     sep = "-" * len(header)
 
     print()
-    print("DocRouteBench Phase 2 — Component Status")
+    print("DocRouteBench Phase 2, Component Status")
     print(sep)
     print(header)
     print(sep)
@@ -289,7 +289,7 @@ def _show_counts() -> None:
     validation = _count_json_list(COUNT_PATHS["validation"])
 
     def _fmt(n: Optional[int]) -> str:
-        return f"{n:,}" if n is not None else "—"
+        return f"{n:,}" if n is not None else ","
 
     print()
     print("Sample counts through pipeline:")
@@ -318,7 +318,7 @@ def _run_component(
     """
     log.info("")
     log.info("=" * 60)
-    log.info("%s [%s] — %s", component.id, component.name, component.description)
+    log.info("%s [%s], %s", component.id, component.name, component.description)
     log.info("=" * 60)
 
     t0 = time.monotonic()
@@ -443,7 +443,7 @@ Examples:
 
     mode_label = "WATER-TEST" if args.water_test else "FULL"
     log.info("")
-    log.info("DocRouteBench Phase 2 — %s RUN", mode_label)
+    log.info("DocRouteBench Phase 2, %s RUN", mode_label)
     if args.water_test:
         log.info("Water-test mode: max_samples=50, n_probe_samples=20, expected cost ~$0.01")
     log.info("Checkpoint directory: %s", CHECKPOINT_DIR)
@@ -461,16 +461,16 @@ Examples:
     for i, component in enumerate(COMPONENTS):
         if i < start_idx:
             # Skipped via --from flag
-            log.info("%s [%s] — skipped (--from %s)", component.id, component.name, COMPONENTS[start_idx].id)
+            log.info("%s [%s], skipped (--from %s)", component.id, component.name, COMPONENTS[start_idx].id)
             continue
 
         if not args.force and _is_done(component):
-            log.info("%s [%s] — DONE (checkpoint exists, skipping)", component.id, component.name)
+            log.info("%s [%s], DONE (checkpoint exists, skipping)", component.id, component.name)
             timings[component.id] = 0.0
             continue
 
         if args.force and _is_done(component):
-            log.info("%s [%s] — checkpoint exists but --force set; re-running.", component.id, component.name)
+            log.info("%s [%s], checkpoint exists but --force set; re-running.", component.id, component.name)
             _done_path(component).unlink(missing_ok=True)
 
         success = _run_component(component, water_test=args.water_test, timings=timings)

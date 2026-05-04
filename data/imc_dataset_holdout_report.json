@@ -1,5 +1,5 @@
 {
-  "run_timestamp": "2026-04-29T16:21:49.498181+00:00",
+  "run_timestamp": "2026-05-04T00:45:59.461358+00:00",
   "experiment": "1.1b_imc_dataset_holdout",
   "held_out_datasets": [
     "SlideVQA",
@@ -8,18 +8,18 @@
   ],
   "n_train_samples": 1363,
   "n_test_samples": 682,
-  "n_train_observations": 31349,
-  "n_test_observations": 12922,
-  "imc_train_accuracy": 0.8395,
-  "aggregate_auc": 0.6031,
-  "aggregate_label_agreement": 0.3972,
-  "cheapest_correct_routing_agreement": 0.1006,
+  "n_train_observations": 32712,
+  "n_test_observations": 13188,
+  "imc_train_accuracy": 0.8384,
+  "aggregate_auc": 0.6043,
+  "aggregate_label_agreement": 0.4099,
+  "cheapest_correct_routing_agreement": 0.0991,
   "cheapest_correct_routing_n": 666,
   "per_model_results": {
     "a2_flashlite": {
       "model_name": "gemini-2.5-flash-lite",
       "n": 2046,
-      "auc": 0.6671,
+      "auc": 0.6674,
       "label_agreement": 0.4531,
       "pos_rate": 0.1989
     },
@@ -33,57 +33,57 @@
     "b1_gpt54mini": {
       "model_name": "gpt-5.4-mini",
       "n": 2248,
-      "auc": 0.5963,
+      "auc": 0.5951,
       "label_agreement": 0.5089,
       "pos_rate": 0.2562
     },
     "b3_sonnet": {
       "model_name": "claude-sonnet-4-6",
       "n": 2248,
-      "auc": 0.6237,
+      "auc": 0.6241,
       "label_agreement": 0.3701,
       "pos_rate": 0.165
     },
     "c1_gpt54": {
       "model_name": "gpt-5.4",
       "n": 2072,
-      "auc": 0.5933,
-      "label_agreement": 0.3736,
+      "auc": 0.5928,
+      "label_agreement": 0.4614,
       "pos_rate": 0.2669
     },
     "c2_opus": {
       "model_name": "claude-opus-4-6",
       "n": 2072,
-      "auc": 0.6167,
+      "auc": 0.6136,
       "label_agreement": 0.3055,
       "pos_rate": 0.1742
     },
     "c3_gemini_pro": {
       "model_name": "gemini-2.5-pro",
-      "n": 1554,
-      "auc": 0.657,
-      "label_agreement": 0.2027,
-      "pos_rate": 0.157
+      "n": 1820,
+      "auc": 0.6634,
+      "label_agreement": 0.2231,
+      "pos_rate": 0.1676
     }
   },
   "per_dataset_results": {
     "SlideVQA": {
       "n_samples": 560,
-      "n_observations": 11088,
-      "auc": 0.489,
-      "pos_rate": 0.1644
+      "n_observations": 11300,
+      "auc": 0.487,
+      "pos_rate": 0.1639
     },
     "HierText": {
       "n_samples": 72,
-      "n_observations": 1216,
-      "auc": 0.4734,
-      "pos_rate": 0.273
+      "n_observations": 1248,
+      "auc": 0.4699,
+      "pos_rate": 0.2764
     },
     "TabFact": {
       "n_samples": 50,
-      "n_observations": 618,
-      "auc": 0.5772,
-      "pos_rate": 0.835
+      "n_observations": 640,
+      "auc": 0.5767,
+      "pos_rate": 0.8359
     }
   }
 }

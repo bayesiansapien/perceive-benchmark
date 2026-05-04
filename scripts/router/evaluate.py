@@ -1,5 +1,5 @@
 """
-PERCEIVE Router — evaluation metrics.
+PERCEIVE Router: evaluation metrics.
 
 Computes accuracy, cost, oracle efficiency, and breakdowns for routing strategies.
 """
@@ -144,11 +144,11 @@ def compute_oracle_predictions(
     complexity_tiers: np.ndarray | None = None,
 ) -> np.ndarray:
     """
-    Return oracle predictions — cheapest correct config per sample.
+    Return oracle predictions: cheapest correct config per sample.
 
     For routable samples: choose cheapest config where eval_correct is True.
     For non-routable samples: choose cheapest config within the sample's
-    complexity tier (tier-matched routing — spend appropriately even when
+    complexity tier (tier-matched routing, spend appropriately even when
     no config produces a correct answer).
 
     Args:

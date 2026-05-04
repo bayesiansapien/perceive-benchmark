@@ -162,9 +162,9 @@ class PerceiveRouter:
             clip_mask_prob: Probability of zeroing out CLIP features per sample during
                 training (modality dropout). No-op when n_features <= N_TEXT_FEATURES.
             remaining_loss_mode: What losses non-anchor samples contribute to.
-                "all" — model CE on anchor, budget+aux on all (default)
-                "aux_only" — model+budget on anchor, aux on all
-                "none" — all losses on anchor only (remaining for BN enrichment)
+                "all", model CE on anchor, budget+aux on all (default)
+                "aux_only", model+budget on anchor, aux on all
+                "none", all losses on anchor only (remaining for BN enrichment)
             cost_strength: Exponent on cost penalty in model class weights.
                 0.0 = pure inverse-frequency (no cost awareness)
                 1.0 = full cost penalty (default, original behavior)

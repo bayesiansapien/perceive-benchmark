@@ -1,8 +1,8 @@
 """
-DocRouteBench — CORD v2 Dataset Adapter
+DocRouteBench: CORD v2 Dataset Adapter
 
 Dataset : naver-clova-ix/cord-v2
-Task    : T2 — Structured Extraction
+Task    : T2, Structured Extraction
 Metric  : field_f1
 Split   : test (100 samples, all used)
 
@@ -111,7 +111,7 @@ class CORDAdapter(BaseAdapter):
             flat_fields = _parse_gt_json(gt_parse)
 
             if not flat_fields:
-                logger.warning("[cord] Sample %d has empty GT — skipping", idx)
+                logger.warning("[cord] Sample %d has empty GT: skipping", idx)
                 continue
 
             # ----------------------------------------------------------------
@@ -132,7 +132,7 @@ class CORDAdapter(BaseAdapter):
             # ----------------------------------------------------------------
             image = row.get("image")
             if image is None:
-                logger.warning("[cord] Sample %d has no image — skipping", idx)
+                logger.warning("[cord] Sample %d has no image, skipping", idx)
                 continue
 
             yield {
@@ -160,7 +160,7 @@ if __name__ == "__main__":
 
     adapter = CORDAdapter(max_samples=3)
     print(f"\n{'='*60}")
-    print("CORD Adapter — smoke test (3 samples)")
+    print("CORD Adapter: smoke test (3 samples)")
     print("="*60)
 
     for i, sample in enumerate(adapter.iter_samples()):
@@ -176,5 +176,5 @@ if __name__ == "__main__":
         if i >= 2:
             break
 
-    print("\nSmoke test complete — run adapter.run() to write full JSONL output.")
+    print("\nSmoke test complete, run adapter.run() to write full JSONL output.")
     sys.exit(0)

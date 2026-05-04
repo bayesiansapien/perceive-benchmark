@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# PERCEIVE — full end-to-end pipeline
+# PERCEIVE: full end-to-end pipeline
 #
 # Runs all four phases in sequence, then verifies all paper claims.
 # Total wall time: ~48 hours on CPU. Total API cost: ~USD 300.
@@ -49,9 +49,9 @@ done
 
 log()  { echo "[$(date '+%Y-%m-%d %H:%M:%S')]  $*"; }
 hr()   { echo "$(printf '─%.0s' {1..72})"; }
-skip() { log "SKIP — $1 (data not available; run the full pipeline first)"; }
+skip() { log "SKIP: $1 (data not available; run the full pipeline first)"; }
 
-# run_if_data FILE CMD... — runs CMD if FILE exists, else prints a skip message
+# run_if_data FILE CMD...: runs CMD if FILE exists, else prints a skip message
 run_if_data() {
     local guard="$1"; shift
     if [[ -f "$guard" ]]; then
@@ -86,7 +86,7 @@ fi
 # ── Phase 2: probe + anchor evaluation ───────────────────────────────────────
 if [[ $EVAL_ONLY -eq 0 ]]; then
     log "Phase 2: probe annotation + anchor evaluation (~36 h, ~USD 200)"
-    log "Checkpoint-aware — safe to interrupt and resume."
+    log "Checkpoint-aware, safe to interrupt and resume."
     "$PYTHON" scripts/run_phase2.py
     log "Phase 2 done."
     hr

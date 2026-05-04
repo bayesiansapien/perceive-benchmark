@@ -1,12 +1,12 @@
 """
-DocRouteBench — PubLayNet Dataset Adapter
+DocRouteBench: PubLayNet Dataset Adapter
 
 Dataset : JamieSJS/publaynet-samples  (primary HF ID)
           ds4sd/DocLayNet             (fallback HF ID)
           Synthetic fallback          (if both HF loads fail)
 Split   : validation  (train used as proxy when validation absent)
-Tasks   : T3 — Layout & Spatial Reasoning
-          T6 — Visual Grounding
+Tasks   : T3, Layout & Spatial Reasoning
+          T6, Visual Grounding
 Metrics : exact_match (T3)  |  iou (T6)
 
 PubLayNet is a document-layout detection benchmark.  Each image carries
@@ -14,9 +14,9 @@ bounding-box annotations for five element types:
   text, title, list, figure, table
 
 Conversion strategy (1-2 QA pairs per image):
-  T3  — pick an element whose bbox centroid falls in a cardinal region
+  T3 , pick an element whose bbox centroid falls in a cardinal region
         (top / bottom / left / right); ask what element type is there.
-  T6  — pick a random element; ask the model to locate it and return
+  T6 , pick a random element; ask the model to locate it and return
         its bbox normalised to [0, 1].
 
 Bbox format in the source: [x1, y1, width, height] (COCO style).
@@ -236,7 +236,7 @@ class PubLayNetAdapter(BaseAdapter):
             if bbox is None:
                 continue
 
-            # COCO [x,y,w,h] vs xyxy — detect by checking if x2>x1 makes sense
+            # COCO [x,y,w,h] vs xyxy, detect by checking if x2>x1 makes sense
             if len(bbox) == 4:
                 x1, y1, v3, v4 = bbox
                 # heuristic: if v3 < img_w and v4 < img_h and v3 > x1, likely xyxy
@@ -277,7 +277,7 @@ class PubLayNetAdapter(BaseAdapter):
                 continue
 
             # DocLayNet bboxes are normalised [x1,y1,x2,y2] in [0,1000] range
-            # or already in pixel coords — normalise defensively
+            # or already in pixel coords, normalise defensively
             x1, y1, x2, y2 = bbox
             if max(x1, y1, x2, y2) > 1:
                 # Pixel coordinates
@@ -400,7 +400,7 @@ class PubLayNetAdapter(BaseAdapter):
             except Exception as e2:
                 logger.warning(f"[publaynet] Fallback HF load failed: {e2}")
                 logger.warning(
-                    "[publaynet] Both HF datasets unavailable — using synthetic fallback. "
+                    "[publaynet] Both HF datasets unavailable: using synthetic fallback. "
                     "Install datasets and ensure network access for real data."
                 )
                 source = "synthetic"
@@ -460,7 +460,7 @@ class PubLayNetAdapter(BaseAdapter):
                     qa_count += 1
 
         logger.info(
-            f"[publaynet] iter_samples complete — {qa_count} QA pairs from {img_idx + 1} images"
+            f"[publaynet] iter_samples complete, {qa_count} QA pairs from {img_idx + 1} images"
         )
 
 

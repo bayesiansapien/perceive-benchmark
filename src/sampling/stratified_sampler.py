@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 2 — Stratified Sampler
+DocRouteBench Phase 2, Stratified Sampler
 
 Selects the final 5,000 benchmark samples from a ~25K candidate pool using
 greedy coverage with a confidence × diversity priority score.
 
 Inputs:
-    data/processed/difficulty_scores.jsonl   — scored candidates
-    data/processed/samples_with_prior.jsonl  — full sample metadata
+    data/processed/difficulty_scores.jsonl  , scored candidates
+    data/processed/samples_with_prior.jsonl , full sample metadata
 
 Outputs:
-    data/benchmark/benchmark_5000_ids.json   — list of selected sample_ids
-    data/benchmark/benchmark_5000.jsonl      — full sample dicts for selected samples
-    data/benchmark/sampling_report.json      — distribution statistics
+    data/benchmark/benchmark_5000_ids.json  , list of selected sample_ids
+    data/benchmark/benchmark_5000.jsonl     , full sample dicts for selected samples
+    data/benchmark/sampling_report.json     , distribution statistics
 
 Usage:
     python -m src.sampling.stratified_sampler              # full run (5000 samples)
@@ -383,7 +383,7 @@ def _select_tier(
     selected_vecs: list[tuple] = []
     selected_ids: set[str] = set()
 
-    # Phase 1: Seed — ensure each task_type gets at least one sample
+    # Phase 1 Seed: ensure each task_type gets at least one sample
     # (pick highest-confidence sample per task_type first)
     tasks_present = {s.get("task_type") for s in candidates}
     for tt in task_types:
@@ -496,7 +496,7 @@ def run_stratified_sampling(
     # ── Checkpoint guard ──────────────────────────────────────────────────────
     if checkpoint_file.exists() and not overwrite:
         log.info(
-            "Checkpoint found: %s — skipping (use --overwrite to re-run).",
+            "Checkpoint found: %s, skipping (use --overwrite to re-run).",
             checkpoint_file,
         )
         return str(output_jsonl_path)
@@ -556,7 +556,7 @@ def run_stratified_sampling(
     )
     if not has_full_metadata:
         log.info(
-            "Scores lack full metadata — merging from %s …", all_samples_path
+            "Scores lack full metadata: merging from %s …", all_samples_path
         )
         try:
             for row in load_jsonl(all_samples_path):
@@ -614,7 +614,7 @@ def run_stratified_sampling(
         pool = by_tier[tier]
 
         if not pool:
-            log.warning("Tier %d has no candidates — skipping.", tier)
+            log.warning("Tier %d has no candidates, skipping.", tier)
             continue
 
         if len(pool) < tier_quota:
@@ -844,7 +844,7 @@ def run_water_test() -> None:
     import shutil
 
     log.info("=" * 60)
-    log.info("WATER-TEST MODE — stratified_sampler (target=30)")
+    log.info("WATER-TEST MODE: stratified_sampler (target=30)")
     log.info("=" * 60)
 
     # ── Generate synthetic difficulty scores from normalized files ────────────
@@ -939,7 +939,7 @@ def run_water_test() -> None:
     assert not missing, f"Missing task types in selection: {missing}"
     log.info("Task types covered: %s", sorted(covered_task_types))
 
-    # Tier distribution — for small N (30) allow wide bounds
+    # Tier distribution: for small N (30) allow wide bounds
     # Note: JSON round-trip converts int keys to strings ("1", "2", "3")
     tier_counts = report["tier_counts"]
     log.info("Tier distribution: %s", tier_counts)
@@ -967,7 +967,7 @@ def run_water_test() -> None:
     )
 
     log.info("=" * 60)
-    log.info("WATER-TEST PASSED — stratified_sampler")
+    log.info("WATER-TEST PASSED: stratified_sampler")
     log.info("=" * 60)
 
     shutil.rmtree(tmp_dir, ignore_errors=True)
@@ -977,7 +977,7 @@ def run_water_test() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="DocRouteBench Phase 2 — Stratified Sampler",
+        description="DocRouteBench Phase 2, Stratified Sampler",
     )
     parser.add_argument(
         "--scores",

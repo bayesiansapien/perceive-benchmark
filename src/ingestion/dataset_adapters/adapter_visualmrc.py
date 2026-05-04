@@ -1,5 +1,5 @@
 """
-DocRouteBench — VisualMRC Dataset Adapter
+DocRouteBench: VisualMRC Dataset Adapter
 
 Dataset : jeepliu/VisualMRC
 Split   : test
@@ -127,7 +127,7 @@ if __name__ == "__main__":
             f"gt_answer={sample['gt_answer'][:60]!r} | "
             f"image={sample['image']}"
         )
-    print("Smoke test complete — calling adapter.run() to write JSONL")
+    print("Smoke test complete: calling adapter.run() to write JSONL")
     adapter2 = VisualMRCAdapter(max_samples=3)
     n = adapter2.run()
     print(f"Written {n} samples.")

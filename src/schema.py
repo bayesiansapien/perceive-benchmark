@@ -1,5 +1,5 @@
 """
-DocRouteBench — Unified Data Schema
+DocRouteBench: Unified Data Schema
 
 Four normalized tables:
   Sample         → task definition (no results)
@@ -44,7 +44,7 @@ VALID_METRICS = [
 class Sample:
     """
     One row per benchmark sample. Contains the task definition only.
-    No model results — those live in Result table.
+    No model results: those live in Result table.
     Question text stored once, not repeated per config.
     """
     sample_id: str              # e.g. "docvqa_val_00412"
@@ -91,7 +91,7 @@ class Sample:
 @dataclass
 class ModelConfig:
     """
-    One row per model configuration. Static — defined once, never changes.
+    One row per model configuration. Static: defined once, never changes.
     Total: 28 configs from 11 models.
     """
     config_id: str              # e.g. "c2_gpt54_B2"
@@ -126,7 +126,7 @@ class ModelConfig:
 class Result:
     """
     One row per (sample, config) evaluation.
-    MINIMAL — only foreign keys + direct observation data.
+    MINIMAL: only foreign keys + direct observation data.
     No redundant fields from Sample or ModelConfig.
     """
     sample_id: str              # FK → Sample.sample_id
@@ -224,7 +224,7 @@ def append_jsonl(path: str, record: dict) -> None:
 def get_completed_keys(results_path: str) -> set:
     """
     Load set of (sample_id, config_id) already completed.
-    Used for resume support — skip already-done calls.
+    Used for resume support: skip already-done calls.
     """
     completed = set()
     try:

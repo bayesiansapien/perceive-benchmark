@@ -1,6 +1,6 @@
-# DocRouteBench — Dataset Configuration
+# DocRouteBench: Dataset Configuration
 # 18 datasets across 6 task families
-# All entries are observed (gold standard — no inference in core benchmark)
+# All entries are observed (gold standard, no inference in core benchmark)
 
 datasets:
 
@@ -249,7 +249,7 @@ sampling:
   total_target: 5000
   min_per_dataset: 100        # no dataset has fewer than 100 samples
   tier_distribution:          # routing-optimized (oversamples medium/hard)
-    tier_1: 0.25              # easy — cheap models win
-    tier_2: 0.50              # medium — routing decisions live here
-    tier_3: 0.25              # hard — frontier required
+    tier_1: 0.25              # easy, cheap models win
+    tier_2: 0.50              # medium, routing decisions live here
+    tier_3: 0.25              # hard, frontier required
   random_seed: 42

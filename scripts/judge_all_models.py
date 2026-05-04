@@ -76,7 +76,7 @@ def judge_one(record, bench_sample):
 
 
 def main():
-    # Load data — anchor + validation
+    # Load data: anchor + validation
     results = []
     for results_file in [
         _ROOT / 'data/model_eval_results/api_results_anchor.jsonl',
@@ -93,7 +93,7 @@ def main():
             s = json.loads(line.strip())
             bench[s['sample_id']] = s
 
-    # Filter: exclude errors, require raw_answer (Opus now included — B2 is new)
+    # Filter: exclude errors, require raw_answer (Opus now included: B2 is new)
     to_judge = [
         r for r in results
         if not r.get('error')

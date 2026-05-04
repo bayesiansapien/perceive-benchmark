@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench — Anchor Set Analysis
+DocRouteBench: Anchor Set Analysis
 Generates a multi-dimensional report on the 1,500-sample anchor dataset.
 
 Usage:
@@ -192,13 +192,13 @@ def safe_pct(num, den):
 
 def fmt_pct(val, width=7):
     if val is None:
-        return "—".rjust(width)
+        return ",".rjust(width)
     return f"{val*100:.1f}%".rjust(width)
 
 
 def fmt_n(val, width=6):
     if val is None:
-        return "—".rjust(width)
+        return ",".rjust(width)
     return str(val).rjust(width)
 
 
@@ -233,7 +233,7 @@ def agg_acc(records, key_fn=None):
 # ---------------------------------------------------------------------------
 
 def section1_dataset_overview(bench_meta):
-    header("SECTION 1 — Dataset Overview")
+    header("SECTION 1, Dataset Overview")
     n = len(bench_meta)
     emit(f"  Total anchor samples: {n}")
 
@@ -288,7 +288,7 @@ def section1_dataset_overview(bench_meta):
 
 
 def section2_model_overview(eval_records):
-    header("SECTION 2 — Model Overview (Overall Accuracy)")
+    header("SECTION 2, Model Overview (Overall Accuracy)")
 
     # Aggregate per model (all budgets combined)
     per_model = defaultdict(lambda: {"nano": [], "rule": []})
@@ -321,13 +321,13 @@ def section2_model_overview(eval_records):
         disp = meta.get("display", yk)
         tier = meta.get("tier", "?")
         cost = meta.get("cost_per_m", 0)
-        delta_str = (f"{delta*100:+.1f}pp" if delta is not None else "—").rjust(col_w[6])
+        delta_str = (f"{delta*100:+.1f}pp" if delta is not None else ",").rjust(col_w[6])
         emit(f"  {disp:<{col_w[0]}} {tier:>{col_w[1]}} ${cost:>{col_w[2]-1}.2f}"
              f" {n:>{col_w[3]}} {fmt_pct(rule_acc, col_w[4])} {fmt_pct(nano_acc, col_w[5])} {delta_str}")
 
 
 def section3_accuracy_by_task(eval_records):
-    header("SECTION 3 — Accuracy by Task Type (nano_correct)")
+    header("SECTION 3, Accuracy by Task Type (nano_correct)")
 
     # (yaml_key, task_type) -> [nano_correct ints]
     acc = defaultdict(list)
@@ -374,14 +374,14 @@ def section3_accuracy_by_task(eval_records):
     emit(f"  {'Task Type':<22}  {'Best Model':<14}  {'Best%':>7}  {'Worst Model':<14}  {'Worst%':>7}  {'Spread':>8}")
     emit("  " + "-" * 80)
     for tt in TASK_ORDER:
-        b_name, b_acc = task_best.get(tt, ("—", None))
-        w_name, w_acc = task_worst.get(tt, ("—", None))
+        b_name, b_acc = task_best.get(tt, (",", None))
+        w_name, w_acc = task_worst.get(tt, (",", None))
         spread = ((b_acc - w_acc) if (b_acc is not None and w_acc is not None) else None)
         emit(f"  {TASK_LABELS.get(tt,tt):<22}  {b_name:<14}  {fmt_pct(b_acc,7)}  {w_name:<14}  {fmt_pct(w_acc,7)}  {fmt_pct(spread,8)}")
 
 
 def section4_accuracy_by_tier(eval_records):
-    header("SECTION 4 — Accuracy by Complexity Tier (nano_correct)")
+    header("SECTION 4, Accuracy by Complexity Tier (nano_correct)")
 
     acc = defaultdict(list)   # (yaml_key, tier) -> [nano_correct ints]
     for r in eval_records:
@@ -422,12 +422,12 @@ def section4_accuracy_by_tier(eval_records):
         drop = ((a1 - a3) if (a1 is not None and a3 is not None) else None)
         signal = "Strong" if (drop is not None and drop > 0.15) else \
                  "Moderate" if (drop is not None and drop > 0.07) else \
-                 "Weak" if drop is not None else "—"
+                 "Weak" if drop is not None else ","
         emit(f"  {disp:<15}  {fmt_pct(a1,9)}  {fmt_pct(a3,9)}  {fmt_pct(drop,9)}  {signal:>10}")
 
 
 def section5_accuracy_by_budget(eval_records):
-    header("SECTION 5 — Accuracy by Reasoning Budget (nano_correct)")
+    header("SECTION 5, Accuracy by Reasoning Budget (nano_correct)")
 
     acc = defaultdict(list)  # (yaml_key, budget_level) -> [nano_correct ints]
     for r in eval_records:
@@ -471,12 +471,12 @@ def section5_accuracy_by_budget(eval_records):
                 gain = a_to - a_from
                 gains.append(f"{gain*100:+.1f}pp".rjust(8))
             else:
-                gains.append("—".rjust(8))
+                gains.append(",".rjust(8))
         emit(f"  {disp:<15}  {'  '.join(gains)}")
 
 
 def section6_3d_task_tier(eval_records):
-    header("SECTION 6 — 3D Analysis: Task × Tier per Model (nano_correct)")
+    header("SECTION 6, 3D Analysis: Task × Tier per Model (nano_correct)")
 
     # (yaml_key, task_type, tier) -> [nano_correct ints]
     acc = defaultdict(list)
@@ -512,7 +512,7 @@ def section6_3d_task_tier(eval_records):
 
 
 def section7_cost_efficiency(eval_records):
-    header("SECTION 7 — Cost Efficiency")
+    header("SECTION 7, Cost Efficiency")
 
     # (yaml_key, budget_level) -> (n, nano_correct_sum, total_cost)
     agg = defaultdict(lambda: {"n": 0, "nano": 0, "cost": 0.0})
@@ -567,8 +567,8 @@ def section7_cost_efficiency(eval_records):
     emit("  " + "-" * 85)
     for row in rows_sorted_by_acc:
         is_pareto = "*" if (row["yk"], row["bl"]) in pareto else " "
-        marginal_str = (f"{row['marginal']*100:+.1f}pp" if row["marginal"] is not None else "—").rjust(8)
-        acc_per_m_str = (f"{row['acc_per_m']:.0f}" if row["acc_per_m"] else "—").rjust(9)
+        marginal_str = (f"{row['marginal']*100:+.1f}pp" if row["marginal"] is not None else ",").rjust(8)
+        acc_per_m_str = (f"{row['acc_per_m']:.0f}" if row["acc_per_m"] else ",").rjust(9)
         emit(f"  {row['disp']:<14}  {row['tier']:>4}  ${row['cost_per_m']:>5.2f}"
              f"  {BUDGET_LABELS.get(row['bl'], row['bl']):>8}"
              f"  {fmt_pct(row['nano_acc'], 9)}"
@@ -581,7 +581,7 @@ def section7_cost_efficiency(eval_records):
 
 
 def section8_routing_signal(eval_records):
-    header("SECTION 8 — Routing Signal Strength by Task Type")
+    header("SECTION 8, Routing Signal Strength by Task Type")
 
     # (yaml_key, task_type) -> [nano_correct]
     acc = defaultdict(list)
@@ -634,7 +634,7 @@ def section8_routing_signal(eval_records):
 
 
 def section9_summary(eval_records, bench_meta):
-    header("SECTION 9 — Summary Statistics")
+    header("SECTION 9, Summary Statistics")
 
     total_calls = len(eval_records)
     total_cost = sum(r.get("total_cost_usd", 0) or 0 for r in eval_records)
@@ -660,7 +660,7 @@ def section9_summary(eval_records, bench_meta):
                 reasoning_helps.append((disp, gain))
                 emit(f"  + {disp:<14}: {gain:+.1f}pp (B0={b0_acc*100:.1f}% -> B3={b3_acc*100:.1f}%)")
     if not reasoning_helps:
-        emit("  None — reasoning budget provides < 3pp lift across all models")
+        emit("  None: reasoning budget provides < 3pp lift across all models")
 
     # Task types where frontier models justify cost (gap > 10pp vs Tier A)
     subheader("Frontier model value (gap > 10pp vs Tier-A average)")
@@ -687,7 +687,7 @@ def section9_summary(eval_records, bench_meta):
             frontier_value_tasks.append((TASK_LABELS.get(tt, tt), gap))
             emit(f"  + {TASK_LABELS.get(tt,tt):<22}: Tier-C vs Tier-A gap = {gap*100:.1f}pp")
     if not frontier_value_tasks:
-        emit("  None — Tier-C gap over Tier-A is < 10pp on all task types")
+        emit("  None: Tier-C gap over Tier-A is < 10pp on all task types")
 
     # Hardest / easiest task type (by mean nano_correct across all models)
     subheader("Task difficulty ranking (mean nano_acc across all models)")
@@ -726,7 +726,7 @@ def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     banner = "=" * 90
-    title = "  DocRouteBench — Anchor Set Analysis (1500 samples)"
+    title = "  DocRouteBench: Anchor Set Analysis (1500 samples)"
     emit(banner)
     emit(title)
     emit(banner)

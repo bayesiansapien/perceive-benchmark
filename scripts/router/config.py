@@ -1,5 +1,5 @@
 """
-PERCEIVE Router — shared configuration.
+PERCEIVE Router: shared configuration.
 
 Defines the 24 valid (model, budget) configurations, cost model,
 feature columns, and tier mappings used by all router modules.

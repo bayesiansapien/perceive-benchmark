@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 3 — API Evaluation Orchestrator
+DocRouteBench Phase 3, API Evaluation Orchestrator
 
 Runs the staged Phase 3 evaluation on this Vertex AI VM (API models).
 GPU models run separately on DGX via run_phase3_gpu.py.
@@ -18,7 +18,7 @@ Usage:
 Staged approach:
   Stage 1a: Anchor (1,500) x 21 API configs = 31,500 calls  ~$383
   Stage 1b: Validation (750) x 21 API, Tier C on Tier3 only  ~$67
-  [GPU track on DGX runs simultaneously — push results when done]
+  [GPU track on DGX runs simultaneously: push results when done]
   Merge:    Combine API + GPU results per split
   Validate: 4 cascade experiments on merged anchor
   Stage 2:  Cascade remaining 2,551 (or full fallback)        ~$194
@@ -85,7 +85,7 @@ def show_status():
 def run_water_test():
     """10 anchor samples x all 21 API configs. Verifies everything works."""
     log.info("=" * 60)
-    log.info("WATER TEST — 10 anchor samples x all API configs")
+    log.info("WATER TEST: 10 anchor samples x all API configs")
     log.info("=" * 60)
 
     import json, tempfile
@@ -123,7 +123,7 @@ def run_water_test():
     log.info("Review results, then run --stage 1a to start full evaluation.")
 
 
-# ── Stage 1a — Anchor ─────────────────────────────────────────────────────────
+# ── Stage 1a. Anchor ─────────────────────────────────────────────────────────
 
 def run_stage_1a():
     """Full eval on anchor (1,500 x all 21 API configs)."""
@@ -141,7 +141,7 @@ def run_stage_1a():
     log.info("Stage 1A done.")
 
 
-# ── Stage 1b — Validation ─────────────────────────────────────────────────────
+# ── Stage 1b. Validation ─────────────────────────────────────────────────────
 
 def run_stage_1b():
     """
@@ -156,7 +156,7 @@ def run_stage_1b():
     all_samples = load_jsonl(BENCHMARK_PATH)
     val_all   = [s for s in all_samples if s.get("in_validation_set")]
     val_tier3 = [s for s in val_all if s.get("tier_final", 2) == 3]
-    log.info("Stage 1B: Validation — %d total, %d Tier 3", len(val_all), len(val_tier3))
+    log.info("Stage 1B Validation: %d total, %d Tier 3", len(val_all), len(val_tier3))
 
     out = str(RESULTS_DIR / "api_results_validation.jsonl")
 
@@ -216,7 +216,7 @@ def run_cascade_validate():
     run_cascade_validation(anchor_results_path=merged_path)
 
 
-# ── Stage 2 — Remaining ───────────────────────────────────────────────────────
+# ── Stage 2. Remaining ───────────────────────────────────────────────────────
 
 def run_stage_2(full: bool = False):
     """Cascade (or full) eval on remaining 2,551 samples."""

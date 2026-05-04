@@ -172,7 +172,7 @@ class TwoPhaseRouter:
         rem = (~is_anchor).float()
         model_logits = outputs["model_logits"]
 
-        # Model CE — anchor: full 7-class CE
+        # Model CE on anchor: full 7-class CE
         ce = F.cross_entropy(
             model_logits, targets["y_model"],
             weight=model_weights, reduction="none",
@@ -180,7 +180,7 @@ class TwoPhaseRouter:
         sw_anc = sw * anc
         l_model_anc = (ce * sw_anc).sum() / (sw_anc.sum() + 1e-8)
 
-        # Model CE — remaining: observation-weighted 7-class CE
+        # Model CE on remaining: observation-weighted 7-class CE
         # Weight by observation confidence (n_observed / 7)
         model_obs = targets.get("model_observed")
         if model_obs is not None:
@@ -206,7 +206,7 @@ class TwoPhaseRouter:
                 sw_neg = sw * rem
                 l_neg = (neg_per_sample * sw_neg).sum() / (sw_neg.sum() + 1e-8)
 
-        # Budget — all observed (anchor fully, remaining where cascade observed)
+        # Budget: all observed (anchor fully, remaining where cascade observed)
         ms = targets["model_solvable"]
         if ms.sum() > 0:
             se = (outputs["budget_preds"] - targets["budget_targets"]) ** 2
@@ -215,7 +215,7 @@ class TwoPhaseRouter:
         else:
             l_budget = torch.tensor(0.0)
 
-        # Aux — all samples
+        # Aux: all samples
         l_vds = (
             (outputs["vds"].squeeze() - targets["y_vds"]) ** 2 * sw
         ).mean()

@@ -1,5 +1,5 @@
 """
-DocRouteBench — ChartQA Dataset Adapter
+DocRouteBench: ChartQA Dataset Adapter
 
 HuggingFace ID : lmms-lab/ChartQA
 Split          : test
@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
-    print("=== ChartQA Adapter — smoke test (5 samples) ===")
+    print("=== ChartQA Adapter: smoke test (5 samples) ===")
     adapter = ChartQAAdapter(max_samples=5)
 
     for i, sample in enumerate(adapter.iter_samples()):

@@ -1,9 +1,9 @@
 """
-DocRouteBench — HierText Dataset Adapter
+DocRouteBench: HierText Dataset Adapter
 
 Dataset : google-research-datasets/hiertext  (HuggingFace)
 Split   : validation
-Task    : T2 — Degraded / Scene Text Recognition
+Task    : T2, Degraded / Scene Text Recognition
 Metric  : field_f1
 
 HierText provides hierarchical OCR annotations over natural scene images:
@@ -122,7 +122,7 @@ class HierTextAdapter(BaseAdapter):
                         if len(parts) >= 8:
                             words.append(parts[7])
                         elif len(parts) == 7:
-                            # illegible or no text — skip
+                            # illegible or no text, skip
                             pass
 
             # Fall back to legacy dict-style paragraphs field if present

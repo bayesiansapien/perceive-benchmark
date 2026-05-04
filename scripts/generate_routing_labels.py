@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench — Routing Label Generator
+DocRouteBench: Routing Label Generator
 
 Combines all evaluation signals (rule-based, neural judge, oracle) to produce:
   1. data/model_eval_results/final_eval_correct.jsonl
@@ -125,7 +125,7 @@ def _load_judgments_v2() -> dict[tuple, dict]:
     records = _load_jsonl(JUDGMENTS_PATH)
     if records:
         print(
-            f"  judgments_v2 not found — falling back to all_models_judgments.jsonl "
+            f"  judgments_v2 not found, falling back to all_models_judgments.jsonl "
             f"({len(records):,} records, using nano_correct as neural signal)",
             file=sys.stderr,
         )
@@ -148,7 +148,7 @@ def _load_judgments_v2() -> dict[tuple, dict]:
             }
         return out
 
-    print("  WARNING: no judgments file found — using rule-only fallback", file=sys.stderr)
+    print("  WARNING: no judgments file found, using rule-only fallback", file=sys.stderr)
     return {}
 
 
@@ -191,7 +191,7 @@ def get_final_eval_correct(
     if key in raw_results:
         return bool(raw_results[key].get("is_correct", False)), "rule"
 
-    # 4. Unknown — treat as incorrect
+    # 4. Unknown: treat as incorrect
     return False, "rule"
 
 

@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 2 — Difficulty Estimator
+DocRouteBench Phase 2, Difficulty Estimator
 
 Combines structural prior with enriched probe results (visual elements,
 VDS/RDS/SES assessments, correctness) into probe-driven difficulty estimates.
 
 Input:
-    data/processed/samples_with_prior.jsonl   — samples with tier_prior_soft field
-    data/processed/probe_results.jsonl        — enriched probe records (correctness + visual + VDS/RDS/SES)
+    data/processed/samples_with_prior.jsonl  , samples with tier_prior_soft field
+    data/processed/probe_results.jsonl       , enriched probe records (correctness + visual + VDS/RDS/SES)
 
 Output:
-    data/processed/difficulty_scores.jsonl    — one line per sample, posterior fields
+    data/processed/difficulty_scores.jsonl   , one line per sample, posterior fields
 
 Usage:
     python -m src.sampling.difficulty_estimator              # full run
@@ -114,7 +114,7 @@ def _bayesian_update(
 
     for model_id, is_correct in probe_results.items():
         if is_correct is None:
-            continue  # missing probe — use prior only
+            continue  # missing probe, use prior only
         for i, tier in enumerate(TIERS):
             posterior[i] *= compute_likelihood(model_id, task_type, is_correct, tier)
 
@@ -153,7 +153,7 @@ def _load_probe_index(probe_path: str) -> dict[str, dict[str, dict]]:
     try:
         records = load_jsonl(probe_path)
     except FileNotFoundError:
-        log.warning("Probe results file not found: %s — treating all as missing.", probe_path)
+        log.warning("Probe results file not found: %s, treating all as missing.", probe_path)
         return {}
 
     for r in records:
@@ -168,7 +168,7 @@ def _load_probe_index(probe_path: str) -> dict[str, dict[str, dict]]:
 
         key = _PROBE_MODEL_MAP.get(raw_mid)
         if key is None:
-            log.debug("Unknown model_id in probe results: %r — skipping.", raw_mid)
+            log.debug("Unknown model_id in probe results: %r, skipping.", raw_mid)
             continue
 
         index[sid][key] = r  # store full record
@@ -252,7 +252,7 @@ def _aggregate_probe_features(sample_probes: dict[str, dict]) -> dict:
 
 # Expected composite score per tier (centre of Gaussian likelihood)
 _TIER_COMPOSITE_MEAN = {1: 1.5, 2: 2.5, 3: 3.5}
-_TIER_COMPOSITE_SIGMA = 0.6  # std dev — controls how sharply complexity maps to tier
+_TIER_COMPOSITE_SIGMA = 0.6  # std dev, controls how sharply complexity maps to tier
 
 
 def _complexity_likelihood(probe_composite: float, tier: int) -> float:
@@ -260,7 +260,7 @@ def _complexity_likelihood(probe_composite: float, tier: int) -> float:
     P(probe_composite | tier) modelled as Gaussian.
 
     A probe composite of 3.5 is very likely under Tier 3 and unlikely under
-    Tier 1.  This provides an independent signal from binary correctness —
+    Tier 1.  This provides an independent signal from binary correctness,
     if both models get a complex question right, the complexity likelihood
     still pushes toward higher tiers, preventing naive Tier 1 assignment.
     """
@@ -311,7 +311,7 @@ def estimate_difficulty(
         model_data = sample_probes.get(model_key, {})
         is_correct = model_data.get("is_correct")
         if is_correct is None:
-            continue  # missing probe — skip this likelihood term
+            continue  # missing probe, skip this likelihood term
         for i, tier in enumerate(TIERS):
             posterior[i] *= compute_likelihood(model_key, task_type, is_correct, tier)
 
@@ -399,7 +399,7 @@ def run_difficulty_estimator(
 
     # ── Check checkpoint ──────────────────────────────────────────────────────
     if checkpoint_file.exists() and not overwrite:
-        log.info("Checkpoint found: %s — skipping (use --overwrite to re-run).", checkpoint_file)
+        log.info("Checkpoint found: %s, skipping (use --overwrite to re-run).", checkpoint_file)
         return output_path
 
     if Path(output_path).exists() and not overwrite:
@@ -488,7 +488,7 @@ def run_water_test() -> None:
     import random
 
     log.info("=" * 60)
-    log.info("WATER-TEST MODE — difficulty_estimator")
+    log.info("WATER-TEST MODE: difficulty_estimator")
     log.info("=" * 60)
 
     # Collect all available samples from normalized files
@@ -527,7 +527,7 @@ def run_water_test() -> None:
         for s in samples:
             f.write(json.dumps(s) + "\n")
 
-    # Empty probe file — test the "both probes missing" path
+    # Empty probe file: test the "both probes missing" path
     Path(probe_path).write_text("")
 
     # Also inject synthetic probe results for half the samples (test update path)
@@ -613,7 +613,7 @@ def run_water_test() -> None:
     log.info("Tier distribution: %s", tier_counts)
 
     log.info("=" * 60)
-    log.info("WATER-TEST PASSED — difficulty_estimator")
+    log.info("WATER-TEST PASSED: difficulty_estimator")
     log.info("=" * 60)
 
     # Cleanup
@@ -625,7 +625,7 @@ def run_water_test() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="DocRouteBench Phase 2 — Difficulty Estimator",
+        description="DocRouteBench Phase 2, Difficulty Estimator",
     )
     parser.add_argument(
         "--samples",

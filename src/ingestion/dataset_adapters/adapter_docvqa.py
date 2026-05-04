@@ -1,5 +1,5 @@
 """
-DocRouteBench — DocVQA Dataset Adapter
+DocRouteBench: DocVQA Dataset Adapter
 
 Dataset: lmms-lab/DocVQA  (config="DocVQA")
 Task: T4 (Semantic & Compositional QA)
@@ -65,9 +65,9 @@ class DocVQAAdapter(BaseAdapter):
         Yield one sample per DocVQA validation example.
 
         Expected HuggingFace fields:
-          question  — natural-language question string
-          image     — PIL Image (or bytes)
-          answers   — list of acceptable answer strings
+          question , natural-language question string
+          image    , PIL Image (or bytes)
+          answers  , list of acceptable answer strings
           (questionId / docId may also be present but are not required)
 
         We handle alternative field names defensively.

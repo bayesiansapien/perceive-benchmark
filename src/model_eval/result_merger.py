@@ -1,5 +1,5 @@
 """
-DocRouteBench — Result Merger
+DocRouteBench: Result Merger
 
 Merges API track (this VM) and GPU track (DGX) result files
 into a single deduplicated JSONL for a given split.

@@ -70,7 +70,7 @@ def _anls_single(prediction: str, ground_truth: str, threshold: float = 0.5) -> 
     """
     max_len = max(len(prediction), len(ground_truth))
     if max_len == 0:
-        # Both strings are empty — treat as a perfect match
+        # Both strings are empty: treat as a perfect match
         return 1.0
 
     edit_dist = _levenshtein_distance(prediction, ground_truth)
@@ -111,7 +111,7 @@ def compute_anls(
         ground_truths = [ground_truths]
 
     if not ground_truths:
-        # No ground-truth aliases available — cannot score
+        # No ground-truth aliases available, cannot score
         return 0.0
 
     best = 0.0
@@ -167,7 +167,7 @@ if __name__ == "__main__":
             False,
         ),
         (
-            "Multiple aliases — correct match on second alias",
+            "Multiple aliases: correct match on second alias",
             "12,345",
             ["twelve thousand three hundred forty-five", "12,345", "12345"],
             True,
@@ -179,7 +179,7 @@ if __name__ == "__main__":
             True,
         ),
         (
-            "Completely wrong answer — large edit distance exceeds threshold",
+            "Completely wrong answer: large edit distance exceeds threshold",
             "elephant",
             ["quarterly report"],
             False,

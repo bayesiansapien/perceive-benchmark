@@ -1,8 +1,8 @@
 """
-DocRouteBench — SROIE Dataset Adapter
+DocRouteBench: SROIE Dataset Adapter
 
 Dataset : darentang/sroie  (fallback: jinhybr/OCR-SROIE-2019)
-Task    : T2 — Structured Extraction
+Task    : T2, Structured Extraction
 Metric  : field_f1
 Split   : test
 
@@ -50,7 +50,7 @@ def _load_sroie_dataset():
         try:
             logger.info("[sroie] Trying HuggingFace ID: %s …", hf_id)
             ds = load_dataset(hf_id, split="test", )
-            logger.info("[sroie] Loaded '%s' — %d samples", hf_id, len(ds))
+            logger.info("[sroie] Loaded '%s', %d samples", hf_id, len(ds))
             return ds, hf_id
         except Exception as exc:
             logger.warning("[sroie] '%s' failed: %s", hf_id, exc)
@@ -73,7 +73,7 @@ def _extract_entity_field(row: dict, field: str) -> str:
       2. row["entities"] is a JSON string → parse then index
       3. Direct column: row[field] or row[field.upper()]
     """
-    # Layout 1 & 2 — nested under an "entities" column
+    # Layout 1 & 2, nested under an "entities" column
     entities_raw = row.get("entities") or row.get("annotation")
     if entities_raw is not None:
         if isinstance(entities_raw, str):
@@ -89,7 +89,7 @@ def _extract_entity_field(row: dict, field: str) -> str:
             )
             return str(val).strip() if val else ""
 
-    # Layout 3 — flat columns
+    # Layout 3, flat columns
     for key in (field, field.upper(), field.capitalize()):
         val = row.get(key)
         if val is not None and str(val).strip():
@@ -125,7 +125,7 @@ class SROIEAdapter(BaseAdapter):
         for idx, row in enumerate(ds):
             image = row.get("image")
             if image is None:
-                logger.warning("[sroie] Sample %d has no image — skipping", idx)
+                logger.warning("[sroie] Sample %d has no image, skipping", idx)
                 continue
 
             # priyank-m/SROIE_2019_text_recognition: each sample is a cropped
@@ -140,7 +140,7 @@ class SROIEAdapter(BaseAdapter):
                     for field in ["company", "date", "address", "total"]
                 }
                 if not any(gt_dict.values()):
-                    logger.warning("[sroie] Sample %d has no GT — skipping", idx)
+                    logger.warning("[sroie] Sample %d has no GT: skipping", idx)
                     continue
                 gt_answer = json.dumps(gt_dict, ensure_ascii=False)
                 metric = self.metric
@@ -173,7 +173,7 @@ if __name__ == "__main__":
 
     adapter = SROIEAdapter(max_samples=3)
     print(f"\n{'='*60}")
-    print("SROIE Adapter — smoke test (3 samples)")
+    print("SROIE Adapter: smoke test (3 samples)")
     print("="*60)
 
     for i, sample in enumerate(adapter.iter_samples()):
@@ -188,5 +188,5 @@ if __name__ == "__main__":
         if i >= 2:
             break
 
-    print("\nSmoke test complete — run adapter.run() to write full JSONL output.")
+    print("\nSmoke test complete, run adapter.run() to write full JSONL output.")
     sys.exit(0)

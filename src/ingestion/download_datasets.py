@@ -1,5 +1,5 @@
 """
-DocRouteBench — Dataset Download & Normalization Orchestrator
+DocRouteBench: Dataset Download & Normalization Orchestrator
 
 Runs all 18 dataset adapters, optionally in parallel.
 Produces: data/processed/{dataset}_normalized.jsonl for each dataset.
@@ -38,8 +38,8 @@ ADAPTER_REGISTRY = {
     "stvqa":          "src.ingestion.dataset_adapters.adapter_stvqa.STVQAAdapter",
     "hiertext":       "src.ingestion.dataset_adapters.adapter_hiertext.HierTextAdapter",
     "publaynet":      "src.ingestion.dataset_adapters.adapter_publaynet.PubLayNetAdapter",
-    # docbank: DROPPED — 47GB manual download, HF mirror broken, redistribution prohibited
-    # deepform: DROPPED — requires multi-day PDF download from DocumentCloud
+    # docbank (DROPPED): 47GB manual download, HF mirror broken, redistribution prohibited
+    # deepform (DROPPED): requires multi-day PDF download from DocumentCloud
     "docvqa":         "src.ingestion.dataset_adapters.adapter_docvqa.DocVQAAdapter",
     "infographicvqa": "src.ingestion.dataset_adapters.adapter_infographicvqa.InfographicVQAAdapter",
     "chartqa":        "src.ingestion.dataset_adapters.adapter_chartqa.ChartQAAdapter",

@@ -1,5 +1,5 @@
 """
-DocRouteBench — ST-VQA Dataset Adapter
+DocRouteBench: ST-VQA Dataset Adapter
 
 Task: T2 (OCR-grounded QA)
 HF ID: vikhyatk/st-vqa
@@ -53,12 +53,12 @@ class STVQAAdapter(BaseAdapter):
 
             image = row.get("image")
             if image is None:
-                logger.warning(f"[stvqa] Row {row_idx} has no image field — skipping")
+                logger.warning(f"[stvqa] Row {row_idx} has no image field, skipping")
                 continue
 
             qas = row.get("qas", [])
             if not qas:
-                logger.warning(f"[stvqa] Row {row_idx} has no qas — skipping")
+                logger.warning(f"[stvqa] Row {row_idx} has no qas, skipping")
                 continue
 
             for qa_idx, qa in enumerate(qas):

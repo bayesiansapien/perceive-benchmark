@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Train PERCEIVE-IPS (TwoPhaseRouter) — text-only, two-phase cascade-aligned router.
+Train PERCEIVE-IPS (TwoPhaseRouter), text-only, two-phase cascade-aligned router.
 
 Paper configuration (reproduces 61.6%):
     encoder = None   (text-only, 48 features)

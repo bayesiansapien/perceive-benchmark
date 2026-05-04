@@ -2,7 +2,7 @@ from __future__ import annotations
 import json
 import ast as _ast
 """
-DocRouteBench — MP-DocVQA Dataset Adapter
+DocRouteBench: MP-DocVQA Dataset Adapter
 
 Dataset : lmms-lab/MP-DocVQA
 Split   : validation
@@ -201,7 +201,7 @@ class MPDocVQAAdapter(BaseAdapter):
                 composite_image, num_pages = _extract_image(row)
             except Exception as exc:
                 logger.warning(
-                    f"[{self.dataset_name}] Skipping idx={idx} — image error: {exc}"
+                    f"[{self.dataset_name}] Skipping idx={idx}, image error: {exc}"
                 )
                 continue
 
@@ -252,7 +252,7 @@ if __name__ == "__main__":
             f"query={sample['query'][:60]!r} | "
             f"gt_answer={sample['gt_answer'][:60]!r}"
         )
-    print("Smoke test complete — calling adapter.run() to write JSONL")
+    print("Smoke test complete: calling adapter.run() to write JSONL")
     adapter2 = MPDocVQAAdapter(max_samples=3)
     n = adapter2.run()
     print(f"Written {n} samples.")

@@ -1,5 +1,5 @@
 """
-DocRouteBench — DocBank Dataset Adapter
+DocRouteBench: DocBank Dataset Adapter
 
 Dataset: ds4sd/DocBank (HuggingFace)
 Task: T3 (Layout & Spatial Reasoning)
@@ -32,10 +32,10 @@ DOCBANK_LABELS = {
 }
 
 # HuggingFace dataset ID candidates (try in order)
-# NOTE: DocBank requires manual download — 47GB images from Azure Blob Storage.
+# NOTE: DocBank requires manual download: 47GB images from Azure Blob Storage.
 # HF mirror (liminghao1630/DocBank) has broken zip files.
 # Official download: https://github.com/doc-analysis/DocBank
-# Redistribution prohibited — users must download themselves.
+# Redistribution prohibited: users must download themselves.
 # This adapter falls back to synthetic samples if HF is unavailable.
 HF_IDS = ["liminghao1630/DocBank", "ds4sd/DocBank", "ds4sd/docbank"]
 
@@ -191,7 +191,7 @@ class DocBankAdapter(BaseAdapter):
                     break
 
             if target_label is None:
-                # Nothing recognisable — fall back to first label
+                # Nothing recognisable: fall back to first label
                 target_label = labels[0] if labels else "paragraph"
 
             excerpt = self._pick_text_excerpt(tokens, labels, target_label)

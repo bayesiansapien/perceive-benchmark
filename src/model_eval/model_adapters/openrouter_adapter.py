@@ -1,5 +1,5 @@
 """
-OpenRouter adapter — Qwen3-VL-Plus (B0-B3) and Llama 4 Scout (B0 only).
+OpenRouter adapter: Qwen3-VL-Plus (B0-B3) and Llama 4 Scout (B0 only).
 
 Both models are accessed via OpenRouter's OpenAI-compatible gateway.
 Required env var: OPENROUTER_API_KEY
@@ -8,7 +8,7 @@ Qwen3-VL-Plus thinking budget is passed via extra_body (DashScope passthrough):
   B0: enable_thinking=False
   B1/B2/B3: enable_thinking=True, thinking_budget=<tokens>
 
-Llama 4 Scout has no thinking support — treated as B0-only like gpt-5.4-nano.
+Llama 4 Scout has no thinking support, treated as B0-only like gpt-5.4-nano.
 """
 from __future__ import annotations
 

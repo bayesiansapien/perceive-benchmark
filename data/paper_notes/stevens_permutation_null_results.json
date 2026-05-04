@@ -1,0 +1,141 @@
+{
+  "summary": {
+    "n_all_benchmark": 4801,
+    "n_anchor_routable": 1236,
+    "reference_rho_additive_vs_stevens_all": 0.9976,
+    "reference_rho_additive_vs_stevens_anchor": 0.999,
+    "identity_rho_vs_routing_labels": 0.3182,
+    "n_permutations": 6,
+    "n_canonical_full_ordering_ok": 1,
+    "canonical_full_ordering_recovery_rate": 0.1667,
+    "chance_recovery_rate_full_ordering": 0.1667,
+    "n_canonical_dominant_axis_ok": 2,
+    "mean_rho_vs_additive_non_identity": 0.9817,
+    "max_rho_vs_additive_non_identity": 0.988,
+    "identity_rho_vs_additive": 0.9976,
+    "mean_rho_vs_routing_non_identity": 0.3128,
+    "max_rho_vs_routing_non_identity": 0.3255
+  },
+  "per_permutation": [
+    {
+      "permutation": "VDS@VDS->RDS@RDS->SES@SES",
+      "perm_indices": [
+        0,
+        1,
+        2
+      ],
+      "is_identity": true,
+      "exponents_assigned_to_original_axes": {
+        "VDS": 0.3,
+        "RDS": 0.5,
+        "SES": 0.2
+      },
+      "dominant_axis": "RDS",
+      "canonical_dominant_axis_ok": true,
+      "canonical_full_ordering_ok": true,
+      "exponent_ordering": "RDS>VDS>SES",
+      "rho_vs_additive_formula": 0.9976,
+      "rho_vs_routing_labels": 0.3182
+    },
+    {
+      "permutation": "VDS@VDS->SES@RDS->RDS@SES",
+      "perm_indices": [
+        0,
+        2,
+        1
+      ],
+      "is_identity": false,
+      "exponents_assigned_to_original_axes": {
+        "VDS": 0.3,
+        "RDS": 0.2,
+        "SES": 0.5
+      },
+      "dominant_axis": "SES",
+      "canonical_dominant_axis_ok": false,
+      "canonical_full_ordering_ok": false,
+      "exponent_ordering": "SES>VDS>RDS",
+      "rho_vs_additive_formula": 0.9803,
+      "rho_vs_routing_labels": 0.3105
+    },
+    {
+      "permutation": "RDS@VDS->VDS@RDS->SES@SES",
+      "perm_indices": [
+        1,
+        0,
+        2
+      ],
+      "is_identity": false,
+      "exponents_assigned_to_original_axes": {
+        "VDS": 0.5,
+        "RDS": 0.3,
+        "SES": 0.2
+      },
+      "dominant_axis": "VDS",
+      "canonical_dominant_axis_ok": false,
+      "canonical_full_ordering_ok": false,
+      "exponent_ordering": "VDS>RDS>SES",
+      "rho_vs_additive_formula": 0.988,
+      "rho_vs_routing_labels": 0.3019
+    },
+    {
+      "permutation": "RDS@VDS->SES@RDS->VDS@SES",
+      "perm_indices": [
+        1,
+        2,
+        0
+      ],
+      "is_identity": false,
+      "exponents_assigned_to_original_axes": {
+        "VDS": 0.5,
+        "RDS": 0.2,
+        "SES": 0.3
+      },
+      "dominant_axis": "VDS",
+      "canonical_dominant_axis_ok": false,
+      "canonical_full_ordering_ok": false,
+      "exponent_ordering": "VDS>SES>RDS",
+      "rho_vs_additive_formula": 0.9842,
+      "rho_vs_routing_labels": 0.3033
+    },
+    {
+      "permutation": "SES@VDS->VDS@RDS->RDS@SES",
+      "perm_indices": [
+        2,
+        0,
+        1
+      ],
+      "is_identity": false,
+      "exponents_assigned_to_original_axes": {
+        "VDS": 0.2,
+        "RDS": 0.3,
+        "SES": 0.5
+      },
+      "dominant_axis": "SES",
+      "canonical_dominant_axis_ok": false,
+      "canonical_full_ordering_ok": false,
+      "exponent_ordering": "SES>RDS>VDS",
+      "rho_vs_additive_formula": 0.9697,
+      "rho_vs_routing_labels": 0.3255
+    },
+    {
+      "permutation": "SES@VDS->RDS@RDS->VDS@SES",
+      "perm_indices": [
+        2,
+        1,
+        0
+      ],
+      "is_identity": false,
+      "exponents_assigned_to_original_axes": {
+        "VDS": 0.2,
+        "RDS": 0.5,
+        "SES": 0.3
+      },
+      "dominant_axis": "RDS",
+      "canonical_dominant_axis_ok": true,
+      "canonical_full_ordering_ok": false,
+      "exponent_ordering": "RDS>SES>VDS",
+      "rho_vs_additive_formula": 0.9861,
+      "rho_vs_routing_labels": 0.3226
+    }
+  ]
+}

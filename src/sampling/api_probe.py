@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 2 — API Probe Runner
+DocRouteBench Phase 2, API Probe Runner
 
 Runs GPT-5.2 (OpenAI) and Gemini 2.5 Flash (Vertex AI) in parallel on ~15K
 candidate samples to produce a difficulty signal for dataset curation.
@@ -54,7 +54,7 @@ log = logging.getLogger("api_probe")
 GCP_PROJECT   = "speedy-aurora-193605"
 GEMINI_LOCATION = "us-central1"
 
-# Probe model definitions — instruct mode only (B0), no reasoning budget.
+# Probe model definitions: instruct mode only (B0), no reasoning budget.
 PROBE_MODELS: list[dict] = [
     {
         "model_id": "gpt52",
@@ -78,26 +78,26 @@ You are a document understanding expert. Answer the question about the document 
 
 RESPOND IN THIS EXACT FORMAT (one item per line):
 
-ANSWER: <concise — just the number, name, phrase, or short text>
+ANSWER: <concise, just the number, name, phrase, or short text>
 DOC_TYPE: <form|receipt|invoice|academic_paper|report|letter|memo|slide|webpage|table_render|infographic|certificate|handwritten_note|scene_photo|other>
 VISUAL: <comma-separated elements visible in the image from: table, bar_chart, line_chart, pie_chart, scatter_plot, diagram, flowchart, equation, figure, photograph, map, handwriting, signature, stamp, logo, form_field, checkbox, dense_text, multi_column, header_footer, bullet_list, none>
 VDS: <level> | <evidence>
 RDS: <level> | <evidence>
 SES: <level> | <evidence>
 
-VDS — Visual Dependency (does answering require understanding the image beyond raw text?):
+VDS: Visual Dependency (does answering require understanding the image beyond raw text?):
   TEXT_ONLY         answer derivable from OCR text alone
   LAYOUT_DEPENDENT  spatial position, reading order, or alignment of text matters
   VISUAL_ELEMENT    must interpret a chart, figure, diagram, or table structure
   CROSS_MODAL       must fuse textual content with visual elements together
 
-RDS — Reasoning Depth (how many cognitive steps from observation to answer?):
+RDS: Reasoning Depth (how many cognitive steps from observation to answer?):
   DIRECT_LOOKUP     answer literally visible (a label, title, header, cell value)
   SINGLE_STEP       one extraction, match, or comparison operation
   MULTI_STEP        2+ chained inferences, simple calculation, or cross-referencing
   COMPLEX           arithmetic, domain knowledge, logical deduction, or synthesis
 
-SES — Spatial Extent (how much of the document must be examined?):
+SES: Spatial Extent (how much of the document must be examined?):
   SINGLE_FIELD      one cell, word, or labeled value
   ONE_REGION        one paragraph, table, or figure
   FULL_PAGE         evidence scattered across the page
@@ -177,7 +177,7 @@ def load_image_b64(image_path: str, project_root: Path = _PROJECT_ROOT) -> str:
         img.save(buf, format="PNG")
         return base64.b64encode(buf.getvalue()).decode("ascii")
     except ImportError:
-        # Pillow not installed — just encode as-is and hope the API handles it.
+        # Pillow not installed: just encode as-is and hope the API handles it.
         return base64.b64encode(raw).decode("ascii")
 
 
@@ -517,7 +517,7 @@ def _probe_one(
     # API call with retries
     raw = _call_with_retry(model_cfg, image_b64, query)
     if raw is None:
-        # All retries exhausted — record a failure row so we don't retry forever
+        # All retries exhausted: record a failure row so we don't retry forever
         # on a persistently broken sample.  is_correct=False, cost=0.
         result = {
             "sample_id":        sample_id,
@@ -707,7 +707,7 @@ def run_api_probe(
     )
 
     if total_work == 0:
-        log.info("Nothing left to do — all samples already probed.")
+        log.info("Nothing left to do: all samples already probed.")
         return get_probe_summary(results_path)
 
     # ── Shared state ──────────────────────────────────────────────────────────
@@ -901,14 +901,14 @@ def _validate_water_test(summary: dict) -> None:
         for e in errors:
             log.error("  • %s", e)
     else:
-        log.info("Water-test PASSED — both models returned results with valid schema.")
+        log.info("Water-test PASSED: both models returned results with valid schema.")
 
 
 # ── CLI entry point ───────────────────────────────────────────────────────────
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="DocRouteBench Phase 2 — API Probe Runner",
+        description="DocRouteBench Phase 2, API Probe Runner",
     )
     parser.add_argument(
         "--candidates",

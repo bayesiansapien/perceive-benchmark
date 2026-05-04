@@ -1,5 +1,5 @@
 """
-DocRouteBench — DeepForm Dataset Adapter
+DocRouteBench: DeepForm Dataset Adapter
 
 Task:   T5 (Multi-Page Long-Document Extraction)
 Metric: field_f1  (token-level F1 across extracted field values)
@@ -37,7 +37,7 @@ from ingestion.base_adapter import BaseAdapter
 
 logger = logging.getLogger(__name__)
 
-# Fixed extraction query — same for every DeepForm sample
+# Fixed extraction query: same for every DeepForm sample
 _EXTRACTION_QUERY = (
     "Extract the advertiser name, contract start date, contract end date, "
     "and total amount from this political advertising disclosure form."
@@ -52,7 +52,7 @@ _TARGET_FIELDS = [
     "total_amount",        # total dollar value of the contract
 ]
 
-# Candidate HuggingFace dataset IDs — tried in order
+# Candidate HuggingFace dataset IDs: tried in order
 # NOTE: DeepForm requires manual download from Google Drive + DocumentCloud PDF pipeline.
 # Official: https://github.com/jstray/deepform
 # Download: https://drive.google.com/drive/folders/1bsV4A-8A9B7KZkzdbsBnCGKLMZftV2fQ
@@ -294,7 +294,7 @@ class DeepFormAdapter(BaseAdapter):
             image = self._extract_first_image(row)
             if image is None:
                 logger.warning(
-                    f"[deepform] {sample_id}: no page image found — skipping. "
+                    f"[deepform] {sample_id}: no page image found, skipping. "
                     "TODO: inspect dataset schema and update _extract_first_image()."
                 )
                 continue
@@ -336,7 +336,7 @@ if __name__ == "__main__":
         format="%(asctime)s %(levelname)s %(message)s",
     )
 
-    print("=== DeepForm Adapter — smoke test ===")
+    print("=== DeepForm Adapter: smoke test ===")
     adapter = DeepFormAdapter(max_samples=3)
 
     samples = []
@@ -355,10 +355,10 @@ if __name__ == "__main__":
         sys.exit(1)
 
     if not samples:
-        print("\n[WARN] No samples yielded — dataset may not be accessible.")
+        print("\n[WARN] No samples yielded: dataset may not be accessible.")
         sys.exit(0)
 
-    print(f"\n=== {len(samples)} sample(s) OK — running full pipeline on 2 samples ===")
+    print(f"\n=== {len(samples)} sample(s) OK: running full pipeline on 2 samples ===")
     adapter2 = DeepFormAdapter(max_samples=2)
     n = adapter2.run()
     print(f"Written {n} record(s) to {adapter2.output_path}")

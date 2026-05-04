@@ -90,7 +90,7 @@ def main():
     preds_tier_task = predict(val, map_tier_task, ["tier_final", "task_type"])
     acc_tier_task = accuracy(preds_tier_task)
 
-    # Policy C: oracle cheat (use true label) — should equal oracle_acc
+    # Policy C: oracle cheat (use true label), should equal oracle_acc
     preds_oracle = [{"correct": r["is_routable"]} for r in val]
     acc_oracle_check = sum(p["correct"] for p in preds_oracle) / n_val
 

@@ -9,8 +9,7 @@ Matrix Factorization adapted to the 2D routing setting:
 The model learns a low-rank factorisation of the (n_samples x 24) correctness matrix:
     P_hat[i, j] = sigmoid(u_i @ v_j + b_j)
 
-where u_i is inferred from sample features X_i via a linear encoder (NOT a lookup —
-this enables prediction on unseen queries at test time), and v_j is a learned config
+where u_i is inferred from sample features X_i via a linear encoder (NOT a lookup: this enables prediction on unseen queries at test time), and v_j is a learned config
 embedding. Routing decision: pick cheapest j where P_hat[i,j] >= threshold.
 
 Framed as: "natural generalisation of RouteLLM-MF to the 2D (model x budget) routing
@@ -67,7 +66,7 @@ class CascadeMFModel(nn.Module):
         Args:
             X: (batch, n_features)
         Returns:
-            logits: (batch, n_configs) — raw scores before sigmoid
+            logits: (batch, n_configs), raw scores before sigmoid
         """
         u = self.encoder(X)                            # (batch, rank)
         V = self.config_emb.weight                     # (n_configs, rank)

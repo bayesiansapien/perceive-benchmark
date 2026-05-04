@@ -66,7 +66,7 @@ def _normalize_number(text: str) -> str:
 # Date normalisation
 # ---------------------------------------------------------------------------
 
-# (regex, named groups) pairs — tried in order
+# (regex, named groups) pairs, tried in order
 _DATE_PATTERNS: List[tuple] = [
     # YYYY-MM-DD or YYYY/MM/DD
     (
@@ -147,7 +147,7 @@ def _is_list_answer(text: str) -> bool:
     """Heuristic: answer is a list if it contains ';' or a comma not inside a number."""
     if ";" in text:
         return True
-    # Comma inside a number: "1,234" — don't treat as list
+    # Comma inside a number: "1,234", don't treat as list
     cleaned = re.sub(r"\d,\d", "", text)
     return "," in cleaned
 
@@ -187,7 +187,7 @@ def _normalize_answer(text: str) -> Union[str, List[str]]:
     """
     t = text.strip()
 
-    # Attempt date parsing before list detection — a date like "January 5, 2020"
+    # Attempt date parsing before list detection, a date like "January 5, 2020"
     # contains a comma but is not a list.
     date = _try_parse_date(t)
     if date is not None:

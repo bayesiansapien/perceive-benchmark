@@ -134,7 +134,7 @@ def load_disagreements(v2_path: Path, v1_path: Path) -> list:
         return records
 
     # Fallback to v1: nano_correct is the neural judge
-    print(f"v2 file not found — falling back to {v1_path}")
+    print(f"v2 file not found, falling back to {v1_path}")
     if not v1_path.exists():
         sys.exit(f"ERROR: neither {v2_path} nor {v1_path} found.")
 
@@ -189,7 +189,7 @@ def build_user_msg(record: dict, bench_sample: dict) -> str:
         f"Ground truth: {gt}\n"
         f"Model response: {raw[:400]}\n\n"
         f"Rule scorer: {'CORRECT' if rule_correct else 'WRONG'}\n"
-        f"Semantic judge: {'CORRECT' if neural_correct else 'WRONG'} — {neural_reason}\n\n"
+        f"Semantic judge: {'CORRECT' if neural_correct else 'WRONG'}, {neural_reason}\n\n"
         f"Make the definitive call:"
     )
 
@@ -259,7 +259,7 @@ def main():
         print(f"Total disagreements: {len(all_disagreements)} | Pending: {len(pending)}")
 
     if not pending:
-        print("Nothing to process — all disagreements already arbitrated.")
+        print("Nothing to process: all disagreements already arbitrated.")
         _print_summary(out_path)
         return
 
@@ -347,9 +347,9 @@ def _print_summary(out_path: Path):
     print(f"Total disagreements processed : {total}")
     print(f"Oracle agreed with rule       : {agreed_rule:>6} ({agreed_rule/total*100:5.1f}%)")
     print(f"Oracle agreed with neural     : {agreed_neural:>6} ({agreed_neural/total*100:5.1f}%)")
-    print(f"Confidence — high             : {conf_counts['high']:>6} ({conf_counts['high']/total*100:5.1f}%)")
-    print(f"Confidence — medium           : {conf_counts['medium']:>6} ({conf_counts['medium']/total*100:5.1f}%)")
-    print(f"Confidence — low              : {conf_counts['low']:>6} ({conf_counts['low']/total*100:5.1f}%)")
+    print(f"Confidence (high)            : {conf_counts['high']:>6} ({conf_counts['high']/total*100:5.1f}%)")
+    print(f"Confidence (medium)          : {conf_counts['medium']:>6} ({conf_counts['medium']/total*100:5.1f}%)")
+    print(f"Confidence (low)             : {conf_counts['low']:>6} ({conf_counts['low']/total*100:5.1f}%)")
     print("=" * 60)
 
 

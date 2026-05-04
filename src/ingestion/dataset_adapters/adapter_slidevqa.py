@@ -1,5 +1,5 @@
 """
-DocRouteBench — SlideVQA Dataset Adapter
+DocRouteBench: SlideVQA Dataset Adapter
 
 Task:   T5 (Multi-Page / Slide Deck Reasoning)
 Metric: slidevqa_em (exact match)
@@ -56,7 +56,7 @@ def make_slide_grid(slides: list, max_slides: int = MAX_SLIDES) -> Image.Image:
         # Return a blank placeholder if no slides at all
         return Image.new("RGB", (SLIDE_W, SLIDE_H), color=(200, 200, 200))
 
-    # For a single slide just resize and return — no grid needed
+    # For a single slide just resize and return, no grid needed
     if n == 1:
         return selected[0].convert("RGB").resize((SLIDE_W, SLIDE_H), Image.LANCZOS)
 
@@ -83,7 +83,7 @@ class SlideVQAAdapter(BaseAdapter):
     task_type    = "T5"
     metric       = "slidevqa_em"
 
-    # Candidate HuggingFace dataset IDs — tried in order
+    # Candidate HuggingFace dataset IDs: tried in order
     _HF_IDS = [
         "Ahren09/SlideVQA",
         "NTT-hil-insight/SlideVQA",
@@ -178,7 +178,7 @@ class SlideVQAAdapter(BaseAdapter):
                         pil_slides.append(Image.open(io.BytesIO(item)))
                 if pil_slides:
                     return pil_slides
-            # Single image — wrap in list
+            # Single image: wrap in list
             if isinstance(val, Image.Image):
                 return [val]
             if isinstance(val, dict) and "bytes" in val:
@@ -216,7 +216,7 @@ class SlideVQAAdapter(BaseAdapter):
 
             if not slides:
                 logger.warning(
-                    f"[slidevqa] {sample_id}: no slide images found — skipping"
+                    f"[slidevqa] {sample_id}: no slide images found, skipping"
                 )
                 continue
 
@@ -254,7 +254,7 @@ if __name__ == "__main__":
         format="%(asctime)s %(levelname)s %(message)s",
     )
 
-    print("=== SlideVQA Adapter — smoke test ===")
+    print("=== SlideVQA Adapter: smoke test ===")
     adapter = SlideVQAAdapter(max_samples=3)
 
     samples = []
@@ -272,10 +272,10 @@ if __name__ == "__main__":
         sys.exit(1)
 
     if not samples:
-        print("\n[WARN] No samples yielded — dataset may not be accessible.")
+        print("\n[WARN] No samples yielded: dataset may not be accessible.")
         sys.exit(0)
 
-    print(f"\n=== {len(samples)} sample(s) OK — running full pipeline on 2 samples ===")
+    print(f"\n=== {len(samples)} sample(s) OK: running full pipeline on 2 samples ===")
     adapter2 = SlideVQAAdapter(max_samples=2)
     n = adapter2.run()
     print(f"Written {n} record(s) to {adapter2.output_path}")

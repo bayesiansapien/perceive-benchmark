@@ -1,5 +1,5 @@
 """
-DocRouteBench — Phase 2 Structural Prior
+DocRouteBench: Phase 2 Structural Prior
 =========================================
 Assigns rule-based VDS / RDS / SES estimates and a P(Tier1/2/3) prior to
 every sample in the deduped JSONL, producing an enriched output file.
@@ -96,10 +96,10 @@ def _word_count(query: str) -> int:
 def _estimate_vds(record: dict) -> int:
     """
     Visual Dependency Score (1-4).
-      4 — has_chart AND has_figure (cross-modal fusion)
-      3 — has_chart OR has_figure
-      2 — spatial keywords present in query
-      1 — otherwise
+      4, has_chart AND has_figure (cross-modal fusion)
+      3, has_chart OR has_figure
+      2, spatial keywords present in query
+      1, otherwise
     """
     has_chart = record.get("has_chart", False)
     has_figure = record.get("has_figure", False)
@@ -118,10 +118,10 @@ def _estimate_vds(record: dict) -> int:
 def _estimate_rds(record: dict) -> int:
     """
     Reasoning Depth Score (1-4).
-      4 — cross-document / multi-page reference keywords
-      3 — calculation or comparison keywords
-      1 — short query (<8 words) with no calc/comparison keywords
-      2 — otherwise
+      4, cross-document / multi-page reference keywords
+      3, calculation or comparison keywords
+      1, short query (<8 words) with no calc/comparison keywords
+      2, otherwise
     """
     query = record.get("query", "")
     ql = _query_lower(query)
@@ -140,10 +140,10 @@ def _estimate_rds(record: dict) -> int:
 def _estimate_ses(record: dict) -> int:
     """
     Spatial Extent Score (1-4).
-      4 — num_pages > 1
-      3 — (has_table AND has_figure) OR spatial-spread keywords in query
-      2 — has_table OR has_figure
-      1 — otherwise
+      4, num_pages > 1
+      3, (has_table AND has_figure) OR spatial-spread keywords in query
+      2, has_table OR has_figure
+      1, otherwise
     """
     num_pages = record.get("num_pages", 1)
     if num_pages > 1:
@@ -244,17 +244,17 @@ def _apply_dataset_priors(
     """
     src = record.get("source_dataset", "").lower().replace("-", "").replace(" ", "")
 
-    # rvlcdip — classification is always easy
+    # rvlcdip, classification is always easy
     if src in ("rvlcdip", "rvl-cdip", "rvlcdip"):
         tier = 1
 
-    # MP-DocVQA — multi-page → ses always 4, weight toward tier 2-3
+    # MP-DocVQA: multi-page → ses always 4, weight toward tier 2-3
     if src in ("mpdocvqa", "mp-docvqa"):
         ses = 4
         if tier == 1:
             tier = 2   # can't be easy if it's multi-page
 
-    # SlideVQA — arithmetic subtypes → tier 2; single-slide → tier 1
+    # SlideVQA: arithmetic subtypes → tier 2; single-slide → tier 1
     if src == "slidevqa":
         query = record.get("query", "").lower()
         is_arithmetic = _has_any(query, _CALC_COMPARISON_KEYWORDS)
@@ -263,15 +263,15 @@ def _apply_dataset_priors(
         else:
             tier = min(tier, 2)   # single-slide at most tier 2
 
-    # CORD / SROIE — receipts; at most tier 2
+    # CORD / SROIE: receipts; at most tier 2
     if src in ("cord", "sroie"):
         tier = min(tier, 2)
 
-    # TabFact — always requires table reading, rds >= 2
+    # TabFact: always requires table reading, rds >= 2
     if src == "tabfact":
         rds = max(rds, 2)
 
-    # WikiTableQuestions — multi-step table reasoning, rds >= 3
+    # WikiTableQuestions: multi-step table reasoning, rds >= 3
     if src in ("wtq", "wikitablequestions"):
         rds = max(rds, 3)
 
@@ -340,7 +340,7 @@ def run_structural_prior(
 
     # ── Checkpoint check ────────────────────────────────────────────────────
     if os.path.exists(checkpoint_file):
-        log.info("Checkpoint found — skipping structural prior. Output: %s", abs_output)
+        log.info("Checkpoint found: skipping structural prior. Output: %s", abs_output)
         return abs_output
 
     # ── Create dirs ─────────────────────────────────────────────────────────
@@ -411,7 +411,7 @@ if __name__ == "__main__":
     from collections import Counter
 
     print("=" * 60)
-    print("DocRouteBench Phase 2 — Structural Prior Smoke Test")
+    print("DocRouteBench Phase 2, Structural Prior Smoke Test")
     print("=" * 60)
 
     force_rerun = "--force" in sys.argv
@@ -431,7 +431,7 @@ if __name__ == "__main__":
     # If dedup output doesn't exist yet, run dedup first
     dedup_output = os.path.join(project_root, "data/processed/all_samples_deduped.jsonl")
     if not os.path.exists(dedup_output):
-        print("Deduped file not found — running deduplication first...")
+        print("Deduped file not found: running deduplication first...")
         # Add src to path so we can import dedup
         src_path = str(Path(__file__).resolve().parents[1])
         if src_path not in sys.path:
@@ -489,7 +489,7 @@ if __name__ == "__main__":
         print(f"  {ds:<30s}  {c[1]:>3d}   {c[2]:>3d}   {c[3]:>3d}   {avg_c:.3f}")
 
     # ── Sample of soft probabilities ──────────────────────────────────────
-    print("\nFirst 5 samples — prior fields:")
+    print("\nFirst 5 samples, prior fields:")
     for r in records[:5]:
         print(
             f"  {r['sample_id']:<35s}  "

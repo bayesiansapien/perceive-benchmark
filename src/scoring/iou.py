@@ -249,12 +249,12 @@ if __name__ == "__main__":
             [0.8, 0.8, 1.0, 1.0],
         ),
         (
-            "partial overlap — string pred, list gt",
+            "partial overlap, string pred, list gt",
             "[0.0, 0.0, 0.6, 0.6]",
             [0.4, 0.4, 1.0, 1.0],
         ),
         (
-            "multiple GT boxes — correct against second box",
+            "multiple GT boxes: correct against second box",
             "0.5 0.5 0.9 0.9",
             [[0.0, 0.0, 0.1, 0.1], [0.45, 0.45, 0.95, 0.95]],
         ),

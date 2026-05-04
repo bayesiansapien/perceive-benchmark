@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 3 — GPU Evaluation Script (run on DGX)
+DocRouteBench Phase 3, GPU Evaluation Script (run on DGX)
 
 Pull the repo, run this script for each GPU model, push results.
 

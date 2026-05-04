@@ -1,0 +1,9 @@
+{
+  "sample_holdout_noprobe": {
+    "auc": 0.8758,
+    "accuracy": 0.8319,
+    "n": 7200,
+    "n_holdout_samples": 300
+  },
+  "feat_dim": 10
+}

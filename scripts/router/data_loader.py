@@ -1,5 +1,5 @@
 """
-PERCEIVE Router — data loading and feature extraction.
+PERCEIVE Router: data loading and feature extraction.
 
 Loads benchmark samples, eval results, routing labels, and API results,
 then builds feature matrices for training/evaluation.
@@ -55,23 +55,23 @@ class RouterDataset:
     """Container for router training/evaluation data."""
 
     X: np.ndarray              # (n_samples, n_features) float32
-    y_model: np.ndarray        # (n_samples,) int64 — index into MODEL_LIST, -1 if not routable
-    y_config: np.ndarray       # (n_samples,) int64 — index into CONFIG_LIST, -1 if not routable
-    y_vds: np.ndarray          # (n_samples,) float32 — vds_probe_avg
-    y_rds: np.ndarray          # (n_samples,) float32 — rds_probe_avg
-    y_ses: np.ndarray          # (n_samples,) float32 — ses_probe_avg
-    eval_correct: np.ndarray   # (n_samples, 24) bool — correctness for each config
+    y_model: np.ndarray        # (n_samples,) int64, index into MODEL_LIST, -1 if not routable
+    y_config: np.ndarray       # (n_samples,) int64, index into CONFIG_LIST, -1 if not routable
+    y_vds: np.ndarray          # (n_samples,) float32, vds_probe_avg
+    y_rds: np.ndarray          # (n_samples,) float32, rds_probe_avg
+    y_ses: np.ndarray          # (n_samples,) float32, ses_probe_avg
+    eval_correct: np.ndarray   # (n_samples, 24) bool, correctness for each config
     sample_ids: list[str]
     is_routable: np.ndarray    # (n_samples,) bool
     feature_names: list[str]
-    complexity_tiers: np.ndarray  # (n_samples,) int — tier_final (1/2/3)
-    sample_weights: np.ndarray  # (n_samples,) float32 — 1.0 for anchor, 0.7 for remaining
-    is_anchor: np.ndarray       # (n_samples,) bool — True for anchor split samples
+    complexity_tiers: np.ndarray  # (n_samples,) int, tier_final (1/2/3)
+    sample_weights: np.ndarray  # (n_samples,) float32, 1.0 for anchor, 0.7 for remaining
+    is_anchor: np.ndarray       # (n_samples,) bool, True for anchor split samples
     # Budget regression targets (for decomposed model+budget architecture)
-    budget_targets: np.ndarray  # (n_samples, 7) float32 — log(reasoning_tokens+1) per model
-    model_solvable: np.ndarray  # (n_samples, 7) bool — True if model has a correct budget
+    budget_targets: np.ndarray  # (n_samples, 7) float32, log(reasoning_tokens+1) per model
+    model_solvable: np.ndarray  # (n_samples, 7) bool, True if model has a correct budget
     # Observation mask (for IPS-weighted training on partially observed data)
-    model_observed: np.ndarray  # (n_samples, 7) bool — True if any config of model was evaluated
+    model_observed: np.ndarray  # (n_samples, 7) bool, True if any config of model was evaluated
 
 
 # ── Feature extraction ────────────────────────────────────────────────────────
@@ -234,7 +234,7 @@ def _build_observation_mask(
     """Build per-model observation mask: True if any config of that model was evaluated.
 
     Uses api_results (explicit call logs) when available. Falls back to eval_results
-    (final_eval_correct.jsonl entries) for samples with no api_results coverage — this
+    (final_eval_correct.jsonl entries) for samples with no api_results coverage, this
     handles remaining-split samples when api_results_remaining.jsonl is absent, deriving
     observation from the fact that an entry exists in the eval matrix at all.
     """

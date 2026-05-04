@@ -117,7 +117,7 @@ class AnthropicAdapter(BaseModelAdapter):
         )
 
         # Enable extended thinking for B1/B2/B3
-        # Note: no 'betas' kwarg — not supported on AnthropicVertex
+        # Note: no 'betas' kwarg, not supported on AnthropicVertex
         if thinking_budget is not None:
             kwargs["thinking"] = {
                 "type": "enabled",

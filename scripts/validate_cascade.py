@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 3 — Cascade Validation
+DocRouteBench Phase 3, Cascade Validation
 
 Validates the cascade evaluation methodology on the fully-observed anchor set.
 Run AFTER anchor results (both API + GPU) are merged.
@@ -83,7 +83,7 @@ def run_cascade_validation(
 
     dvr = violations / total_pairs if total_pairs > 0 else 0.0
     dvr_pass = dvr < 0.10
-    log.info("  DVR = %.1f%% (%d/%d pairs) — %s",
+    log.info("  DVR = %.1f%% (%d/%d pairs), %s",
              dvr * 100, violations, total_pairs, "PASS" if dvr_pass else "FAIL")
 
     # ── Experiment 2: Cascade GT Agreement ───────────────────────────────────
@@ -127,7 +127,7 @@ def run_cascade_validation(
 
     gt_agreement = cascade_agree / cascade_total if cascade_total > 0 else 0.0
     gt_pass = gt_agreement > 0.92
-    log.info("  GT Agreement = %.1f%% (%d/%d) — %s",
+    log.info("  GT Agreement = %.1f%% (%d/%d), %s",
              gt_agreement * 100, cascade_agree, cascade_total, "PASS" if gt_pass else "FAIL")
 
     # ── Experiment 3: Cost Regression R² ─────────────────────────────────────
@@ -155,12 +155,12 @@ def run_cascade_validation(
             y_pred = reg.predict(X_arr[split:])
             r2 = float(r2_score(y_arr[split:], y_pred))
             r2_pass = r2 > 0.50
-        log.info("  Cost R² = %.3f — %s", r2 or 0, "PASS" if r2_pass else "FAIL")
+        log.info("  Cost R² = %.3f, %s", r2 or 0, "PASS" if r2_pass else "FAIL")
     except ImportError:
-        log.warning("  sklearn not installed — skipping R² test (treated as PASS)")
+        log.warning("  sklearn not installed, skipping R² test (treated as PASS)")
 
     # ── Experiment 4: KS distributional similarity ────────────────────────────
-    log.info("Experiment 4: KS test — anchor vs non-anchor feature distributions...")
+    log.info("Experiment 4: KS test: anchor vs non-anchor feature distributions...")
     ks_results = {}
     ks_pass = True
     try:
@@ -182,7 +182,7 @@ def run_cascade_validation(
                 log.info("  KS %s: stat=%.4f p=%.4f %s",
                          feat, stat, pval, "OK" if pval > 0.05 else "WARN")
     except ImportError:
-        log.warning("  scipy not installed — skipping KS test (treated as PASS)")
+        log.warning("  scipy not installed, skipping KS test (treated as PASS)")
 
     # ── Experiment 5: Cascade cost reduction ─────────────────────────────────
     # Compare configs evaluated in cascade vs exhaustive (all N_CONFIGS per sample).
@@ -253,7 +253,7 @@ def run_cascade_validation(
         "recommendation": (
             "Proceed with cascade Stage 2 evaluation"
             if cascade_valid else
-            "FALLBACK — run full evaluation on remaining samples (Plan B)"
+            "FALLBACK: run full evaluation on remaining samples (Plan B)"
         ),
     }
 

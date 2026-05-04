@@ -11,7 +11,7 @@ Coverage:
   - _rbf_kernel() produces a valid symmetric similarity matrix in [0,1]
   - _sample_validation() returns indices disjoint from anchor_indices
   - Full run_anchor_selection() round-trip on synthetic 2000-sample pool
-    (uses temp directories — no real data, no API calls)
+    (uses temp directories, no real data, no API calls)
 
 Synthetic data: 2000 samples covering all 6 task types and 3 tiers.
 All tests run in-process; no network I/O, no disk reads from project data/.
@@ -49,7 +49,7 @@ from src.schema import TASK_TYPES
 
 ANCHOR_SIZE = 1000
 VALIDATION_SIZE = 500
-POOL_SIZE = 2000       # synthetic pool — small enough to run fast
+POOL_SIZE = 2000       # synthetic pool, small enough to run fast
 
 # We use only 4 of the 16 ALL_DATASETS in the synthetic pool to keep it
 # tractable, while still exercising multi-dataset logic.
@@ -327,7 +327,7 @@ class TestSampleValidation:
         val_set = set(val_idxs)
         overlap = val_set & anchor_indices
         assert len(overlap) == 0, (
-            f"Validation and anchor share {len(overlap)} indices — must be disjoint"
+            f"Validation and anchor share {len(overlap)} indices, must be disjoint"
         )
 
     def test_validation_exact_size_when_pool_is_large(self, synthetic_samples):
@@ -583,7 +583,7 @@ class TestAnchorSelectionEdgeCases:
         assert Path(anchor_out).exists()
         anchor_mtime = Path(anchor_out).stat().st_mtime
 
-        # Second run — should skip (checkpoint exists)
+        # Second run: should skip (checkpoint exists)
         run_anchor_selection(
             benchmark_path=str(benchmark_jsonl),
             anchor_output=anchor_out,

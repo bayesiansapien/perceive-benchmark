@@ -105,7 +105,7 @@ def _relaxed_numeric_match(predicted: str, gt: str) -> bool:
     gt_val = _try_parse_number(gt)
 
     if pred_val is None or gt_val is None:
-        # Cannot parse one or both — fall back to string exact match
+        # Cannot parse one or both, fall back to string exact match
         return _normalize_string(predicted) == _normalize_string(gt)
 
     if gt_val == 0.0:
@@ -208,14 +208,14 @@ if __name__ == "__main__":
             "1000",
             "What is the total revenue across all slides?",
             True,
-            "Arithmetic (keyword 'total'): 5% tolerance — 1050 within 5% of 1000",
+            "Arithmetic (keyword 'total'): 5% tolerance, 1050 within 5% of 1000",
         ),
         (
             "1100",
             "1000",
             "What is the total revenue across all slides?",
             False,
-            "Arithmetic: 10% off — outside 5% tolerance",
+            "Arithmetic: 10% off, outside 5% tolerance",
         ),
         (
             "42",

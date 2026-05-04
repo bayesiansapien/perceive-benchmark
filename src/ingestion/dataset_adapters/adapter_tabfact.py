@@ -1,7 +1,7 @@
 """
-DocRouteBench — TabFact Dataset Adapter
+DocRouteBench: TabFact Dataset Adapter
 
-Task: T4 — Table Fact Verification
+Task: T4, Table Fact Verification
 Metric: exact_match
 Source: table-benchmark/tabfact (HuggingFace)
 
@@ -40,7 +40,7 @@ TEXT_COLOR = (30, 30, 30)
 # ── Table parsing helpers ──────────────────────────────────────────────────────
 
 def _parse_html_table(html: str) -> list[list[str]]:
-    """Very lightweight HTML table parser — no external deps."""
+    """Very lightweight HTML table parser: no external deps."""
     from html.parser import HTMLParser
 
     class _TableParser(HTMLParser):
@@ -86,10 +86,10 @@ def _normalize_table(table_data) -> list[list[str]]:
     """
     Accept multiple table representations and return list-of-lists of strings.
     Supported inputs:
-      - list[list[str|int|float]]  — already parsed
-      - str starting with '<'      — HTML
-      - str with commas            — CSV
-      - dict with 'header'/'rows'  — some HF formats
+      - list[list[str|int|float]] , already parsed
+      - str starting with '<'     , HTML
+      - str with commas           , CSV
+      - dict with 'header'/'rows' , some HF formats
     """
     if isinstance(table_data, list):
         # Already list-of-lists; stringify every cell
@@ -205,7 +205,7 @@ def render_table_as_image(table_data) -> Image.Image:
     draw.line([(0, 0), (0, y)], fill=BORDER_COLOR, width=1)
 
     if truncated:
-        note = f"[Table truncated — showing first {ROW_LIMIT} data rows]"
+        note = f"[Table truncated: showing first {ROW_LIMIT} data rows]"
         draw.text((CELL_PAD_X, y + 2), note, fill=(120, 80, 0), font=font)
 
     return img
@@ -232,7 +232,7 @@ class TabFactAdapter(BaseAdapter):
         for hf_id in ("table-benchmark/tabfact", "table-benchmark/tabfact", "EleutherAI/tab-fact"):
             try:
                 ds = load_dataset(hf_id, split="test", )
-                logger.info(f"[tabfact] Loaded '{hf_id}' — {len(ds)} samples")
+                logger.info(f"[tabfact] Loaded '{hf_id}', {len(ds)} samples")
                 break
             except Exception as exc:
                 logger.debug(f"[tabfact] Could not load '{hf_id}': {exc}")
@@ -318,7 +318,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 3
-    print(f"TabFact smoke test — loading {n} samples")
+    print(f"TabFact smoke test: loading {n} samples")
 
     adapter = TabFactAdapter(max_samples=n)
 
@@ -333,4 +333,4 @@ if __name__ == "__main__":
 
     print("\nRunning full pipeline (save images + write JSONL)…")
     count = adapter.run()
-    print(f"Done — {count} samples written.")
+    print(f"Done: {count} samples written.")

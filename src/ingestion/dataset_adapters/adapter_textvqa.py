@@ -1,5 +1,5 @@
 """
-DocRouteBench — TextVQA Dataset Adapter
+DocRouteBench: TextVQA Dataset Adapter
 
 Task: T2 (OCR-grounded QA)
 HF ID: lmms-lab/textvqa  (fallback: textvqa)
@@ -77,7 +77,7 @@ class TextVQAAdapter(BaseAdapter):
                 answers = [str(row["answer"])]
 
             if not answers:
-                logger.warning(f"[textvqa] Row {idx} has no answers — skipping")
+                logger.warning(f"[textvqa] Row {idx} has no answers, skipping")
                 continue
 
             # Mode answer as the canonical gt_answer

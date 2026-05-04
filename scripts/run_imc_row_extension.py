@@ -1,5 +1,5 @@
 """
-IMC K-Anchor Row Extension — Experiment 1.1c (NeurIPS gap fix)
+IMC K-Anchor Row Extension: Experiment 1.1c (NeurIPS gap fix)
 
 Symmetric complement to the column extension (1.1a). Whereas 1.1a showed that
 IMC generalises to new MODEL columns with K=25 anchor evaluations, this experiment
@@ -13,7 +13,7 @@ Protocol:
   - K=0 reproduces the existing AUC=0.60 baseline (zero anchors).
   - Report AUC vs K curve. Expected: strong improvement by K=25, mirroring 1.1a.
 
-No new API calls required — all eval results already exist in
+No new API calls required: all eval results already exist in
 data/model_eval_results/final_eval_correct.jsonl.
 
 Usage:
@@ -189,7 +189,7 @@ def run_one(
     clf = LogisticRegression(C=1.0, max_iter=1000, solver="lbfgs")
     clf.fit(X_train, y_train)
 
-    # Build test observations — predict per (sample, config) pair
+    # Build test observations: predict per (sample, config) pair
     config_keys = set()
     for (sid, yk, bl) in eval_matrix:
         if sid in set(test_ids):

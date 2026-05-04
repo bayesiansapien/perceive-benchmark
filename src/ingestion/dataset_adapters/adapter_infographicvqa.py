@@ -1,5 +1,5 @@
 """
-DocRouteBench — InfographicVQA Dataset Adapter
+DocRouteBench: InfographicVQA Dataset Adapter
 
 Task type : T4 (Visual Compositional QA)
 Metric    : anls
@@ -110,7 +110,7 @@ class InfographicVQAAdapter(BaseAdapter):
             if self.max_samples is not None and idx >= self.max_samples:
                 break
 
-            # Normalise answers — some versions use 'answers' (list), others 'answer' (str)
+            # Normalise answers: some versions use 'answers' (list), others 'answer' (str)
             if isinstance(row.get("answers"), list):
                 answers: list[str] = row["answers"]
                 gt_answer = answers[0] if answers else ""
@@ -142,7 +142,7 @@ if __name__ == "__main__":
 
     _logging.basicConfig(level=_logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
-    print("=== InfographicVQA Adapter — smoke test (5 samples) ===")
+    print("=== InfographicVQA Adapter: smoke test (5 samples) ===")
     adapter = InfographicVQAAdapter(max_samples=5)
 
     for i, sample in enumerate(adapter.iter_samples()):

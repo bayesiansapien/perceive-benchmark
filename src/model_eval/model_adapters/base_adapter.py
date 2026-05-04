@@ -19,10 +19,10 @@ class BaseModelAdapter(ABC):
         """
         Run inference on one sample.
         Returns:
-            answer: str           — raw model output (before extraction)
+            answer: str          , raw model output (before extraction)
             input_tokens: int
             output_tokens: int
-            reasoning_tokens: int — 0 for B0
+            reasoning_tokens: int, 0 for B0
             latency_ms: int
         """
 

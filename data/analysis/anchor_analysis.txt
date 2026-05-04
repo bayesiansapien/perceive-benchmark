@@ -1,0 +1,286 @@
+==========================================================================================
+  DocRouteBench: Anchor Set Analysis (1500 samples)
+==========================================================================================
+  Data sources:
+    Benchmark:    /private/tmp/perceive-benchmark-repro/data/benchmark/benchmark_5000.jsonl
+    API results:  /private/tmp/perceive-benchmark-repro/data/anchor_evaluations/api_results_anchor.jsonl
+    Judgments:    /private/tmp/perceive-benchmark-repro/data/model_eval_results/all_models_judgments_v2.jsonl
+
+  Loading data ...
+  Benchmark anchor samples:   1500
+  Judgment records:           78308
+  API result records:         36000
+
+==========================================================================================
+  SECTION 1, Dataset Overview
+==========================================================================================
+  Total anchor samples: 1500
+
+--- By Task Type ---
+  Task Type                Count        %
+  ----------------------  ------  -------
+  T1-DocClass                177    11.8%
+  T2-TextSpot                461    30.7%
+  T3-TableParse              108     7.2%
+  T4-DocVQA                  478    31.9%
+  T5-LayoutUnd               165    11.0%
+  T6-ElemLocal               111     7.4%
+
+--- By Complexity Tier ---
+  Tier             Count        %
+  --------------  ------  -------
+  Tier 1 (easy)      799    53.3%
+  Tier 2 (med)       493    32.9%
+  Tier 3 (hard)      208    13.9%
+
+--- By Source Dataset ---
+  Source Dataset           Count        %
+  ----------------------  ------  -------
+  DocVQA                     340    22.7%
+  PubLayNet                  219    14.6%
+  SROIE                      215    14.3%
+  RVL-CDIP                   177    11.8%
+  SlideVQA                   104     6.9%
+  TextVQA                    102     6.8%
+  ST-VQA                      77     5.1%
+  MP-DocVQA                   61     4.1%
+  VisualMRC                   41     2.7%
+  FUNSD                       34     2.3%
+  ChartQA                     34     2.3%
+  InfographicVQA              26     1.7%
+  WTQ                         22     1.5%
+  HierText                    18     1.2%
+  CORD                        15     1.0%
+  TabFact                     15     1.0%
+
+--- Cross-tab: Task Type × Complexity Tier (count) ---
+  Task Type                T1(easy)    T2(med)   T3(hard)    Total
+  ----------------------  ---------  ---------  ---------  -------
+  T1-DocClass                   107         48         22      177
+  T2-TextSpot                   305         97         59      461
+  T3-TableParse                   9         75         24      108
+  T4-DocVQA                     304        113         61      478
+  T5-LayoutUnd                   29         94         42      165
+  T6-ElemLocal                   45         66          0      111
+  TOTAL                         799        493        208     1500
+==========================================================================================
+  SECTION 2, Model Overview (Overall Accuracy)
+==========================================================================================
+  Model             Tier   Cost/M  N_evals  Rule_Acc  Nano_Acc    Delta
+  ----------------------------------------------------------------------
+  GPT-5.4              C $   3.00     6000     70.0%     70.0%   +0.0pp
+  GPT-mini             B $   0.20     6000     68.2%     68.2%   +0.0pp
+  Sonnet               B $   3.00     6000     68.0%     68.0%   +0.0pp
+  Gemini Pro           C $   1.25     6000     65.8%     65.8%   +0.0pp
+  Opus                 C $  15.00     6000     65.1%     65.1%   +0.0pp
+  Flash-Lite           A $   0.05     4500     62.6%     62.6%   +0.0pp
+  GPT-nano             A $   0.04     1500     56.7%     56.7%   +0.0pp
+==========================================================================================
+  SECTION 3, Accuracy by Task Type (nano_correct)
+==========================================================================================
+  Task Type               N_evals   Flash-Lit    GPT-nano    GPT-mini      Sonnet     GPT-5.4        Opus   Gemini Pr
+  -------------------------------------------------------------------------------------------------------------------
+  T1-DocClass                4248       19.8%       16.9%       19.5%       19.6%       19.9%       19.5%       18.9%
+  T2-TextSpot               11064       84.2%       74.8%       86.8%       89.0%       86.0%       83.6%       83.7%
+  T3-TableParse              2592       34.3%       25.0%       49.3%       51.2%       57.4%       49.5%       51.9%
+  T4-DocVQA                 11472       87.5%       80.3%       90.3%       90.3%       90.7%       88.8%       90.4%
+  T5-LayoutUnd               3960       25.9%       28.5%       41.4%       32.3%       44.5%       27.7%       29.5%
+  T6-ElemLocal               2664       16.5%       16.2%       30.9%       30.9%       43.9%       30.2%       27.5%
+
+  Best / Worst model per task type:
+  Task Type               Best Model        Best%  Worst Model      Worst%    Spread
+  --------------------------------------------------------------------------------
+  T1-DocClass             GPT-5.4           19.9%  GPT-nano          16.9%      3.0%
+  T2-TextSpot             Sonnet            89.0%  GPT-nano          74.8%     14.2%
+  T3-TableParse           GPT-5.4           57.4%  GPT-nano          25.0%     32.4%
+  T4-DocVQA               GPT-5.4           90.7%  GPT-nano          80.3%     10.4%
+  T5-LayoutUnd            GPT-5.4           44.5%  Flash-Lite        25.9%     18.7%
+  T6-ElemLocal            GPT-5.4           43.9%  GPT-nano          16.2%     27.7%
+==========================================================================================
+  SECTION 4, Accuracy by Complexity Tier (nano_correct)
+==========================================================================================
+  Tier             Flash-Lite    GPT-nano    GPT-mini      Sonnet     GPT-5.4        Opus  Gemini Pro
+  ---------------------------------------------------------------------------------------------------
+  T1 (easy)             73.5%       67.7%       75.3%       75.3%       75.6%       74.0%       74.4%
+  T2 (medium)           51.6%       47.1%       62.0%       59.9%       66.0%       56.9%       57.0%
+  T3 (hard)             47.1%       37.5%       55.2%       58.7%       57.7%       50.5%       53.4%
+
+  Accuracy drop T1→T3 per model (routing signal strength):
+  Model             T1(easy)   T3(hard)       Drop      Signal
+  ------------------------------------------------------------
+  Flash-Lite           73.5%      47.1%      26.4%      Strong
+  GPT-nano             67.7%      37.5%      30.2%      Strong
+  GPT-mini             75.3%      55.2%      20.1%      Strong
+  Sonnet               75.3%      58.7%      16.7%      Strong
+  GPT-5.4              75.6%      57.7%      17.9%      Strong
+  Opus                 74.0%      50.5%      23.5%      Strong
+  Gemini Pro           74.4%      53.4%      21.0%      Strong
+==========================================================================================
+  SECTION 5, Accuracy by Reasoning Budget (nano_correct)
+==========================================================================================
+  Budget        Flash-Lite    GPT-nano    GPT-mini      Sonnet     GPT-5.4        Opus  Gemini Pro
+  ------------------------------------------------------------------------------------------------
+  B0(0)                  ,       56.7%       64.1%       65.5%       67.5%       64.9%       63.7%
+  B1(1k)             64.7%           ,       68.7%       68.1%       70.1%       66.3%       67.2%
+  B2(4k)             59.6%           ,       69.8%       68.8%       70.7%       61.8%       64.7%
+  B3(16k)            63.6%           ,       69.9%       69.4%       71.5%       67.5%       67.5%
+
+  Marginal gain per budget step (B0→B1, B1→B2, B2→B3):
+  Model               B0→B1     B1→B2     B2→B3
+  ----------------------------------------------
+  Flash-Lite              ,    -5.1pp    +4.0pp
+  GPT-nano                ,         ,         ,
+  GPT-mini           +4.6pp    +1.1pp    +0.1pp
+  Sonnet             +2.5pp    +0.7pp    +0.6pp
+  GPT-5.4            +2.6pp    +0.7pp    +0.8pp
+  Opus               +1.4pp    -4.5pp    +5.7pp
+  Gemini Pro         +3.5pp    -2.5pp    +2.9pp
+==========================================================================================
+  SECTION 6, 3D Analysis: Task × Tier per Model (nano_correct)
+==========================================================================================
+
+  Model: Flash-Lite (Tier A, $0.05/M tokens)
+  Task Type                T1(easy)    T2(med)   T3(hard)       Mean
+  ----------------------  ---------  ---------  ---------  ---------
+  T1-DocClass                  3.7%      57.6%      15.2%      25.5%
+  T2-TextSpot                 88.0%      85.2%      63.3%      78.8%
+  T3-TableParse               37.0%      29.8%      47.2%      38.0%
+  T4-DocVQA                   91.3%      88.5%      66.7%      82.2%
+  T5-LayoutUnd                93.1%      11.0%      12.7%      38.9%
+  T6-ElemLocal                15.6%      17.2%          ,      16.4%
+
+  Model: GPT-nano (Tier A, $0.04/M tokens)
+  Task Type                T1(easy)    T2(med)   T3(hard)       Mean
+  ----------------------  ---------  ---------  ---------  ---------
+  T1-DocClass                  2.8%      47.9%      18.2%      23.0%
+  T2-TextSpot                 82.0%      70.1%      45.8%      65.9%
+  T3-TableParse               33.3%      18.7%      41.7%      31.2%
+  T4-DocVQA                   85.5%      82.3%      50.8%      72.9%
+  T5-LayoutUnd                79.3%      19.1%      14.3%      37.6%
+  T6-ElemLocal                 4.4%      24.2%          ,      14.3%
+
+  Model: GPT-mini (Tier B, $0.2/M tokens)
+  Task Type                T1(easy)    T2(med)   T3(hard)       Mean
+  ----------------------  ---------  ---------  ---------  ---------
+  T1-DocClass                  3.3%      57.8%      14.8%      25.3%
+  T2-TextSpot                 90.6%      89.4%      63.1%      81.0%
+  T3-TableParse               36.1%      46.0%      64.6%      48.9%
+  T4-DocVQA                   92.8%      91.4%      76.2%      86.8%
+  T5-LayoutUnd                90.5%      31.6%      29.2%      50.4%
+  T6-ElemLocal                23.3%      36.0%          ,      29.7%
+
+  Model: Sonnet (Tier B, $3.0/M tokens)
+  Task Type                T1(easy)    T2(med)   T3(hard)       Mean
+  ----------------------  ---------  ---------  ---------  ---------
+  T1-DocClass                  3.3%      58.9%      13.6%      25.3%
+  T2-TextSpot                 92.0%      86.9%      77.1%      85.3%
+  T3-TableParse               36.1%      49.7%      61.5%      49.1%
+  T4-DocVQA                   91.8%      92.0%      79.5%      87.8%
+  T5-LayoutUnd                87.9%      18.6%      24.4%      43.7%
+  T6-ElemLocal                22.8%      36.4%          ,      29.6%
+
+  Model: GPT-5.4 (Tier C, $3.0/M tokens)
+  Task Type                T1(easy)    T2(med)   T3(hard)       Mean
+  ----------------------  ---------  ---------  ---------  ---------
+  T1-DocClass                  3.5%      59.4%      13.6%      25.5%
+  T2-TextSpot                 89.3%      89.7%      62.7%      80.6%
+  T3-TableParse               50.0%      55.3%      66.7%      57.3%
+  T4-DocVQA                   92.4%      90.9%      81.6%      88.3%
+  T5-LayoutUnd                89.7%      35.4%      33.9%      53.0%
+  T6-ElemLocal                36.7%      48.9%          ,      42.8%
+
+  Model: Opus (Tier C, $15.0/M tokens)
+  Task Type                T1(easy)    T2(med)   T3(hard)       Mean
+  ----------------------  ---------  ---------  ---------  ---------
+  T1-DocClass                  3.5%      57.8%      13.6%      25.0%
+  T2-TextSpot                 90.2%      77.3%      60.2%      75.9%
+  T3-TableParse               41.7%      49.7%      52.1%      47.8%
+  T4-DocVQA                   91.3%      89.8%      74.2%      85.1%
+  T5-LayoutUnd                82.8%      13.8%      20.8%      39.1%
+  T6-ElemLocal                16.1%      39.8%          ,      27.9%
+
+  Model: Gemini Pro (Tier C, $1.25/M tokens)
+  Task Type                T1(easy)    T2(med)   T3(hard)       Mean
+  ----------------------  ---------  ---------  ---------  ---------
+  T1-DocClass                  2.8%      57.3%      13.6%      24.6%
+  T2-TextSpot                 87.6%      86.9%      58.1%      77.5%
+  T3-TableParse               38.9%      50.3%      61.5%      50.2%
+  T4-DocVQA                   92.2%      91.2%      79.9%      87.8%
+  T5-LayoutUnd                96.6%      11.2%      24.4%      44.0%
+  T6-ElemLocal                27.8%      27.3%          ,      27.5%
+==========================================================================================
+  SECTION 7, Cost Efficiency
+==========================================================================================
+  Model           Tier     $/M    Budget   Nano_Acc    Total$     Acc/$M     vs B0  Pareto
+  -------------------------------------------------------------------------------------
+  GPT-5.4            C  $ 3.00   B3(16k)      71.5%  $  29.84      23973    +4.1pp       *
+  GPT-5.4            C  $ 3.00    B2(4k)      70.7%  $  15.11      46817    +3.3pp       *
+  GPT-5.4            C  $ 3.00    B1(1k)      70.1%  $   8.31      84311    +2.6pp       *
+  GPT-mini           B  $ 0.20   B3(16k)      69.9%  $   1.97     355577    +5.8pp       *
+  GPT-mini           B  $ 0.20    B2(4k)      69.8%  $   1.14     614257    +5.7pp       *
+  Sonnet             B  $ 3.00   B3(16k)      69.4%  $   6.76     102713    +3.9pp        
+  Sonnet             B  $ 3.00    B2(4k)      68.8%  $   6.34     108544    +3.3pp        
+  GPT-mini           B  $ 0.20    B1(1k)      68.7%  $   0.57    1215114    +4.6pp       *
+  Sonnet             B  $ 3.00    B1(1k)      68.1%  $   5.41     125894    +2.5pp        
+  Gemini Pro         C  $ 1.25   B3(16k)      67.5%  $   7.28      92806    +3.9pp        
+  GPT-5.4            C  $ 3.00     B0(0)      67.5%  $   5.37     125693         ,        
+  Opus               C  $15.00   B3(16k)      67.5%  $  31.55      21384    +2.5pp        
+  Gemini Pro         C  $ 1.25    B1(1k)      67.2%  $   5.99     112164    +3.5pp        
+  Opus               C  $15.00    B1(1k)      66.3%  $  29.61      22401    +1.4pp        
+  Sonnet             B  $ 3.00     B0(0)      65.5%  $   4.73     138660         ,        
+  Opus               C  $15.00     B0(0)      64.9%  $  23.13      28068         ,        
+  Flash-Lite         A  $ 0.05    B1(1k)      64.7%  $   0.20    3261105         ,       *
+  Gemini Pro         C  $ 1.25    B2(4k)      64.7%  $   6.97      92730    +1.0pp        
+  GPT-mini           B  $ 0.20     B0(0)      64.1%  $   0.36    1788668         ,        
+  Gemini Pro         C  $ 1.25     B0(0)      63.7%  $   5.30     120032         ,        
+  Flash-Lite         A  $ 0.05   B3(16k)      63.6%  $   0.57    1121889         ,        
+  Opus               C  $15.00    B2(4k)      61.8%  $  31.12      19857    -3.1pp        
+  Flash-Lite         A  $ 0.05    B2(4k)      59.6%  $   0.14    4369711         ,       *
+  GPT-nano           A  $ 0.04     B0(0)      56.7%  $   0.07    7919261         ,       *
+
+  * = Pareto-optimal (cheapest config at that accuracy level)
+==========================================================================================
+  SECTION 8, Routing Signal Strength by Task Type
+==========================================================================================
+  Task Type               Best Model        Best%  Worst Model      Worst%    Spread  Recommendation      
+  ----------------------------------------------------------------------------------------------------
+  T1-DocClass             GPT-5.4           19.9%  GPT-nano          16.9%      3.0%  Tier A sufficient   
+  T2-TextSpot             Sonnet            89.0%  GPT-nano          74.8%     14.2%  Tier B sufficient   
+  T3-TableParse           GPT-5.4           57.4%  GPT-nano          25.0%     32.4%  Route to Tier C     
+  T4-DocVQA               GPT-5.4           90.7%  GPT-nano          80.3%     10.4%  Route to Tier B/C   
+  T5-LayoutUnd            GPT-5.4           44.5%  Flash-Lite        25.9%     18.7%  Route to Tier B/C   
+  T6-ElemLocal            GPT-5.4           43.9%  GPT-nano          16.2%     27.7%  Route to Tier C     
+==========================================================================================
+  SECTION 9, Summary Statistics
+==========================================================================================
+  Total API evaluation calls in anchor: 36,000
+  Total estimated cost:                 $227.82
+
+--- Reasoning benefit (B0 → B3 gain > 3pp) ---
+  + GPT-mini      : +5.8pp (B0=64.1% -> B3=69.9%)
+  + Sonnet        : +3.9pp (B0=65.5% -> B3=69.4%)
+  + GPT-5.4       : +4.1pp (B0=67.5% -> B3=71.5%)
+  + Gemini Pro    : +3.9pp (B0=63.7% -> B3=67.5%)
+
+--- Frontier model value (gap > 10pp vs Tier-A average) ---
+  + T3-TableParse         : Tier-C vs Tier-A gap = 23.3pp
+  + T6-ElemLocal          : Tier-C vs Tier-A gap = 17.5pp
+
+--- Task difficulty ranking (mean nano_acc across all models) ---
+  #1 T1-DocClass           : 19.4% <- HARDEST
+  #2 T6-ElemLocal          : 30.0%
+  #3 T5-LayoutUnd          : 33.7%
+  #4 T3-TableParse         : 48.5%
+  #5 T2-TextSpot           : 85.2%
+  #6 T4-DocVQA             : 89.4% <- EASIEST
+
+--- Overall ---
+  Mean nano_acc (all models/budgets): 66.4%
+  Mean rule_acc (all models/budgets): 66.4%
+  Nano vs rule delta:                 +0.0pp
+  Unique anchor samples:              1500
+  Avg evals per sample:               24.0
+  Avg cost per sample:                $0.1519
+==========================================================================================
+  END OF REPORT
+==========================================================================================

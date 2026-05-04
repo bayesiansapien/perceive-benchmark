@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-IMC External Validation — Experiment 1.1a (NeurIPS gap fix)
+IMC External Validation: Experiment 1.1a (NeurIPS gap fix)
 
 Validates that IMC generalises to genuinely new architecture families not present
 in the original 7-model pool. Uses Qwen3-VL-Plus (Alibaba) and Llama 4 Scout (Meta)
 accessed via OpenRouter.
 
 Protocol:
-  Phase A — K=25 anchor seed: run new model on 25 stratified anchor samples.
+  Phase A: K=25 anchor seed: run new model on 25 stratified anchor samples.
              Sanity-checks pipeline before the expensive Phase B run.
-  Phase B — Ground truth: run new model on remaining ~1,475 anchor samples.
-  Phase C — IMC prediction: train IMC on existing 7-model anchor matrix,
+  Phase B: Ground truth: run new model on remaining ~1,475 anchor samples.
+  Phase C: IMC prediction: train IMC on existing 7-model anchor matrix,
              predict new model performance using only its config features + K=25 seed,
              compute AUC against Phase B ground truth.
 
@@ -27,9 +27,9 @@ Usage:
 
 Output:
   data/imc_external_validation/
-    phase_a_results.jsonl       — K=25 seed evaluations
-    phase_b_results.jsonl       — remaining 1,475 ground truth evaluations
-    imc_report.json             — AUC, routing regret, per-tier breakdown
+    phase_a_results.jsonl      , K=25 seed evaluations
+    phase_b_results.jsonl      , remaining 1,475 ground truth evaluations
+    imc_report.json            , AUC, routing regret, per-tier breakdown
 """
 from __future__ import annotations
 
@@ -505,7 +505,7 @@ def run_imc_analysis(
             if br["auc"] is not None:
                 print(f"  {budget}: AUC={br['auc']:.4f}  label_agreement={br['label_agreement']:.4f}  n={br['n']}")
             else:
-                print(f"  {budget}: insufficient ground truth (n={br['n']}) — run Phase B")
+                print(f"  {budget}: insufficient ground truth (n={br['n']}), run Phase B")
     print("=" * 60)
 
     return report

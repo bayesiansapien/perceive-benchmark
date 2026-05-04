@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 3 — Merge API + GPU Results
+DocRouteBench Phase 3, Merge API + GPU Results
 
 Merges API track (this VM) and GPU track (DGX) result files for a given split.
 Run after pushing GPU results from DGX.

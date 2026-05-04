@@ -183,7 +183,7 @@ def write_report(results: list[dict], model_label: str,
                  bench_idx: dict, out_json: Path) -> None:
     judged = [r for r in results if r.get("new_correct") is not None]
     if not judged:
-        print("No judged records — cannot write report.")
+        print("No judged records: cannot write report.")
         return
 
     n_total   = len(judged)

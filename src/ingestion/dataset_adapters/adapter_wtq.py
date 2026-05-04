@@ -1,7 +1,7 @@
 """
-DocRouteBench — WikiTableQuestions (WTQ) Dataset Adapter
+DocRouteBench: WikiTableQuestions (WTQ) Dataset Adapter
 
-Task: T4 — Compositional Table Reasoning
+Task: T4, Compositional Table Reasoning
 Metric: denotation
 Source: TableSenseAI/WikiTableQuestions (HuggingFace)
 
@@ -84,10 +84,10 @@ def _normalize_table(table_data) -> list[list[str]]:
     """
     Accept multiple table representations and return list-of-lists of strings.
     Supported inputs:
-      - list[list[str|int|float]]  — already parsed
-      - str starting with '<'      — HTML
-      - str containing commas      — CSV
-      - dict with 'header'/'rows'  — common HF dict format
+      - list[list[str|int|float]] , already parsed
+      - str starting with '<'     , HTML
+      - str containing commas     , CSV
+      - dict with 'header'/'rows' , common HF dict format
     """
     if isinstance(table_data, list):
         return [[str(cell) for cell in row] for row in table_data]
@@ -199,7 +199,7 @@ def render_table_as_image(table_data) -> Image.Image:
     draw.line([(0, 0), (0, y)], fill=BORDER_COLOR, width=1)
 
     if truncated:
-        note = f"[Table truncated — showing first {ROW_LIMIT} data rows]"
+        note = f"[Table truncated: showing first {ROW_LIMIT} data rows]"
         draw.text((CELL_PAD_X, y + 2), note, fill=(120, 80, 0), font=font)
 
     return img
@@ -263,7 +263,7 @@ class WTQAdapter(BaseAdapter):
         ):
             try:
                 ds = load_dataset(hf_id, split="test", )
-                logger.info(f"[wtq] Loaded '{hf_id}' — {len(ds)} samples")
+                logger.info(f"[wtq] Loaded '{hf_id}', {len(ds)} samples")
                 break
             except Exception as exc:
                 logger.debug(f"[wtq] Could not load '{hf_id}': {exc}")
@@ -345,7 +345,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 3
-    print(f"WTQ smoke test — loading {n} samples")
+    print(f"WTQ smoke test: loading {n} samples")
 
     adapter = WTQAdapter(max_samples=n)
 
@@ -360,4 +360,4 @@ if __name__ == "__main__":
 
     print("\nRunning full pipeline (save images + write JSONL)…")
     count = adapter.run()
-    print(f"Done — {count} samples written.")
+    print(f"Done: {count} samples written.")

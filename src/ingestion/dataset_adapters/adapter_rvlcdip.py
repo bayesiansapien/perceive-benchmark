@@ -1,5 +1,5 @@
 """
-DocRouteBench — RVL-CDIP Dataset Adapter
+DocRouteBench: RVL-CDIP Dataset Adapter
 
 Task: T1 (Document Classification)
 HuggingFace ID: aharley/rvl_cdip
@@ -78,7 +78,7 @@ class RvlCdipAdapter(BaseAdapter):
         if ds is None:
             raise RuntimeError("Could not load RVL-CDIP from any known HF ID.")
 
-        logger.info("[rvlcdip] Streaming — samples will download on demand")
+        logger.info("[rvlcdip] Streaming: samples will download on demand")
 
         for idx, row in enumerate(ds):
             label_int = row["label"]

@@ -9,7 +9,7 @@ Coverage:
   - composite_est formula: 0.30*VDS + 0.45*RDS + 0.25*SES
   - tier_prior_soft sums to ~1.0
   - All required output fields present
-  - _compute_prior() is pure — no disk I/O
+  - _compute_prior() is pure, no disk I/O
 """
 
 import sys
@@ -365,7 +365,7 @@ class TestDatasetPriors:
         )
 
     def test_rvlcdip_case_variants(self):
-        """Source dataset normalisation — 'rvl-cdip' and 'rvlcdip' both apply prior."""
+        """Source dataset normalisation: 'rvl-cdip' and 'rvlcdip' both apply prior."""
         for ds_name in ("rvl-cdip", "rvlcdip", "RVL-CDIP"):
             rec = _sample(source_dataset=ds_name, num_pages=5, has_chart=True, has_figure=True)
             prior = _compute_prior(rec)

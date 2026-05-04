@@ -1,10 +1,10 @@
 {
-  "run_timestamp": "2026-04-29T16:23:25.391719+00:00",
+  "run_timestamp": "2026-05-04T00:49:16.250212+00:00",
   "k_seed": 25,
   "n_anchor": 1500,
   "n_seed": 25,
   "n_eval": 1475,
-  "imc_training_obs": 34500,
+  "imc_training_obs": 36000,
   "results": {
     "ext_qwen3vl": {
       "model_name": "qwen3-vl-30b",
@@ -19,26 +19,26 @@
       "budget_results": {
         "B0": {
           "n": 1475,
-          "auc": 0.8448,
+          "auc": 0.8466,
           "label_agreement": 0.8122,
           "mean_gt_correct": 0.6027
         },
         "B1": {
           "n": 1475,
-          "auc": 0.8383,
+          "auc": 0.8367,
           "label_agreement": 0.7831,
           "mean_gt_correct": 0.6156
         },
         "B2": {
           "n": 1475,
-          "auc": 0.8358,
+          "auc": 0.8355,
           "label_agreement": 0.7871,
           "mean_gt_correct": 0.6251
         },
         "B3": {
           "n": 1475,
-          "auc": 0.8326,
-          "label_agreement": 0.7925,
+          "auc": 0.8333,
+          "label_agreement": 0.7885,
           "mean_gt_correct": 0.6197
         }
       },
@@ -70,7 +70,7 @@
       "budget_results": {
         "B0": {
           "n": 1475,
-          "auc": 0.8727,
+          "auc": 0.8715,
           "label_agreement": 0.819,
           "mean_gt_correct": 0.5363
         }

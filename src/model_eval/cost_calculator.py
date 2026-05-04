@@ -1,4 +1,4 @@
-"""DocRouteBench — Cost Calculator for model evaluation results."""
+"""DocRouteBench: Cost Calculator for model evaluation results."""
 
 
 def compute_cost(

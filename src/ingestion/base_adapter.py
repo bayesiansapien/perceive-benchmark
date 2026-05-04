@@ -1,5 +1,5 @@
 """
-DocRouteBench — Base Dataset Adapter
+DocRouteBench: Base Dataset Adapter
 
 All 18 dataset adapters inherit from BaseAdapter.
 Each adapter:
@@ -105,7 +105,7 @@ class BaseAdapter(ABC):
                         existing_ids.add(json.loads(line)["sample_id"])
                     except Exception:
                         pass
-            logger.info(f"[{self.dataset_name}] Resuming — {len(existing_ids)} already done")
+            logger.info(f"[{self.dataset_name}] Resuming: {len(existing_ids)} already done")
 
         count = 0
         with open(self.output_path, "a") as out_f:
@@ -174,7 +174,7 @@ class BaseAdapter(ABC):
                 if self.max_samples and count >= self.max_samples:
                     break
 
-        logger.info(f"[{self.dataset_name}] Done — {count} new samples written to {self.output_path}")
+        logger.info(f"[{self.dataset_name}] Done: {count} new samples written to {self.output_path}")
         return count
 
 

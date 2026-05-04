@@ -1,4 +1,4 @@
-# DocRouteBench — Model Pool Configuration (API-only, locked)
+# DocRouteBench: Model Pool Configuration (API-only, locked)
 # 7 models, 24 configs, up to 4 budget levels (B0/B1/B2/B3)
 # Scope: commercially-available API models only (OpenAI, Anthropic, Google)
 # Rationale: API-only ensures full reproducibility without GPU hardware requirements.
@@ -75,7 +75,7 @@ models:
       B1: "low"
       B2: "medium"
       B3: "high"
-    notes: "OpenAI mid-tier. Full 4-budget curve — key for studying reasoning budget non-monotonicity."
+    notes: "OpenAI mid-tier. Full 4-budget curve, key for studying reasoning budget non-monotonicity."
 
   b3_sonnet:
     name: "claude-sonnet-4-6"
@@ -123,7 +123,7 @@ models:
     supports_multipage: true
     max_context_tokens: 200000
     budgets: ["B0", "B1", "B2", "B3"]
-    notes: "Anthropic frontier. Most expensive model in pool. Routing ceiling — only justified for hardest samples. B2 gap-filled Apr 2026."
+    notes: "Anthropic frontier. Most expensive model in pool. Routing ceiling: only justified for hardest samples. B2 gap-filled Apr 2026."
 
   c3_gemini_pro:
     name: "gemini-2.5-pro"
@@ -159,7 +159,7 @@ models:
     max_context_tokens: 128000
     budgets: ["B0", "B1", "B2", "B3"]
     imc_validation_only: true
-    notes: "Alibaba Qwen3-VL 30B — new family not in core pool. B0 uses instruct variant; B1-B3 use thinking variant with thinking_budget parameter. Confirmed working on OpenRouter."
+    notes: "Alibaba Qwen3-VL 30B, new family not in core pool. B0 uses instruct variant; B1-B3 use thinking variant with thinking_budget parameter. Confirmed working on OpenRouter."
 
   ext_llama4scout:
     name: "llama-4-scout"
@@ -175,7 +175,7 @@ models:
     max_context_tokens: 128000
     budgets: ["B0"]
     imc_validation_only: true
-    notes: "Meta Llama-4 family — new architecture family not in core 7-model pool. B0 only (no thinking API), consistent with gpt-5.4-nano precedent."
+    notes: "Meta Llama-4 family, new architecture family not in core 7-model pool. B0 only (no thinking API), consistent with gpt-5.4-nano precedent."
 
 # ── Pool Summary (API-only, locked) ──────────────────────────────────────────
 # Tier A: 2 models,  4 configs  (Flash-Lite B1/B2/B3, GPT-nano B0)

@@ -1,5 +1,5 @@
 """
-DocRouteBench — Unified Scoring Dispatcher
+DocRouteBench: Unified Scoring Dispatcher
 
 Single entry point for all correctness checks:
     is_correct(predicted, ground_truth, metric, **kwargs) -> bool
@@ -68,7 +68,7 @@ def is_correct(
         return exact_match_any(predicted, gt_list, dataset=dataset)
 
     elif m == "teds":
-        # Table structure — single GT expected
+        # Table structure: single GT expected
         return is_correct_teds(predicted, gt_list[0] if gt_list else "", **kwargs)
 
     elif m == "iou":
@@ -98,7 +98,7 @@ def is_correct(
 
 
 if __name__ == "__main__":
-    # Smoke test — one case per metric
+    # Smoke test: one case per metric
     tests = [
         # (predicted, gt, metric, dataset, expected)
         ("January 15", "January 15, 1994", "anls", "", True),

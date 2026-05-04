@@ -177,19 +177,19 @@ if __name__ == "__main__":
             "the cat sat",
             ["the cat sat on the mat"],
             True,
-            "Partial match — high overlap, should be >= 0.5",
+            "Partial match: high overlap, should be >= 0.5",
         ),
         (
             "dog ran across field",
             ["the cat sat on the mat"],
             False,
-            "Low overlap — should be < 0.5",
+            "Low overlap: should be < 0.5",
         ),
         (
             "Paris is the capital of France",
             ["Paris is the capital of France", "The capital city is Paris"],
             True,
-            "Multiple GT answers — max taken; pred matches first GT exactly",
+            "Multiple GT answers: max taken; pred matches first GT exactly",
         ),
         (
             "",

@@ -80,7 +80,7 @@ def _normalize(text: str) -> str:
             float(num)  # if it still parses as a number, use it as-is
             processed.append(num)
         except ValueError:
-            # Not a number — strip punctuation then keep
+            # Not a number: strip punctuation then keep
             cleaned = _PUNCT_RE.sub(" ", tok).strip()
             sub_tokens = _WHITESPACE_RE.split(cleaned)
             processed.extend(t for t in sub_tokens if t)
@@ -208,7 +208,7 @@ if __name__ == "__main__":
             "paris",
             _make_gt("London", 10),
             False,
-            "Wrong answer — zero annotator matches",
+            "Wrong answer: zero annotator matches",
         ),
     ]
 

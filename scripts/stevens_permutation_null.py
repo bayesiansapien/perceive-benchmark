@@ -1,5 +1,5 @@
 """
-Stevens Power Law — Permuted-Axis Null Test
+Stevens Power Law: Permuted-Axis Null Test
 ============================================
 
 Tests whether the VDS/RDS/SES axis assignments are structurally meaningful.

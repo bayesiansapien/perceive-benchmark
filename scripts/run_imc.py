@@ -2,7 +2,7 @@
 Inductive Matrix Completion (IMC) for PERCEIVE benchmark extension.
 
 Validates that the (sample × config) evaluation matrix has learnable structure
-exploitable for efficient benchmark extension — new models or new samples can
+exploitable for efficient benchmark extension, new models or new samples can
 be evaluated selectively rather than exhaustively.
 
 Experiments run:
@@ -60,7 +60,7 @@ def sample_features(s: dict) -> np.ndarray:
 
     Full (13-dim): VDS, RDS, SES, tier, has_table, has_chart, has_figure, task×6
     No-probe (10-dim): tier, has_table, has_chart, has_figure, task×6
-      — all derivable from document parsing alone, zero LLM probe calls required.
+     , all derivable from document parsing alone, zero LLM probe calls required.
     """
     if _NO_PROBE_FEATURES:
         feats = [
@@ -251,7 +251,7 @@ def exp_sample_holdout(data: dict, n_holdout: int = 300, seed: int = 42) -> dict
 
 
 def exp_confidence_threshold(data: dict, seed: int) -> dict:
-    """Exp 4: Confidence threshold sweep — how much can we skip?"""
+    """Exp 4: Confidence threshold sweep: how much can we skip?"""
     rng = np.random.default_rng(seed)
     n = len(data["y"])
     idx = np.arange(n)
@@ -283,7 +283,7 @@ def exp_confidence_threshold(data: dict, seed: int) -> dict:
 
 
 def exp_learning_curve(data: dict, seed: int) -> dict:
-    """Exp 5: Learning curve — AUC vs number of anchor samples."""
+    """Exp 5: Learning curve: AUC vs number of anchor samples."""
     sizes = [150, 300, 450, 750, 1050, 1500]
     rng = np.random.default_rng(seed)
     entry_idx = data["entry_idx"]
@@ -309,7 +309,7 @@ def exp_learning_curve(data: dict, seed: int) -> dict:
 
 
 def exp_label_churn(data: dict) -> dict:
-    """Exp 6: Routing label churn — how many labels change when each model is removed?"""
+    """Exp 6: Routing label churn: how many labels change when each model is removed?"""
     M = data["M"]
     sample_ids = data["sample_ids"]
     configs = data["configs"]
@@ -360,7 +360,7 @@ def exp_label_churn(data: dict) -> dict:
 
 
 def exp_kshot_model_extension(data: dict, seed: int) -> dict:
-    """Exp 7: K-shot model extension — partial observability sweep.
+    """Exp 7: K-shot model extension, partial observability sweep.
 
     Simulates adding a new model to the benchmark when only K anchor-set
     evaluations are available (not the full 1,500). For each of the 7 models,
@@ -422,10 +422,10 @@ def exp_trivial_baselines(data: dict, seed: int) -> dict:
     """Exp 8: Trivial baselines vs IMC on random 30% hold-out.
 
     Baselines:
-      B1 — Global mean: predict overall training correctness rate for every entry.
-      B2 — Config mean: predict per-config (column) mean correctness.
-      B3 — Sample mean: predict per-sample (row) mean correctness.
-      B4 — Tier × tier lookup: predict mean correctness for (doc_tier, model_tier) cell.
+      B1, Global mean: predict overall training correctness rate for every entry.
+      B2, Config mean: predict per-config (column) mean correctness.
+      B3, Sample mean: predict per-sample (row) mean correctness.
+      B4, Tier × tier lookup: predict mean correctness for (doc_tier, model_tier) cell.
     All baselines use the same 70/30 split as IMC for direct comparison.
     """
     rng = np.random.default_rng(seed)
@@ -503,7 +503,7 @@ def exp_trivial_baselines(data: dict, seed: int) -> dict:
 
 
 def exp_routing_regret(data: dict, seed: int) -> dict:
-    """Exp 9: Routing regret — does IMC produce good routing decisions?
+    """Exp 9: Routing regret: does IMC produce good routing decisions?
 
     Holds out 300 samples entirely (same protocol as Exp 3). For each held-out
     routable sample IMC predicts correctness probabilities across all 24 configs.
@@ -511,7 +511,7 @@ def exp_routing_regret(data: dict, seed: int) -> dict:
     check whether that config actually solved the query.
 
     Also reports a 'fallback' variant: if IMC predicts no config as correct,
-    fall back to the cheapest model (AlwaysCheapest on that sample) — measuring
+    fall back to the cheapest model (AlwaysCheapest on that sample), measuring
     practical routing quality with a safety net.
 
     Per-model breakdown: for each model, what fraction of entries routed TO that

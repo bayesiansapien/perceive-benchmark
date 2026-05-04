@@ -1,5 +1,5 @@
 """
-Tests for DocRouteBench Phase 2 scoring — all 10 metrics via unified dispatcher.
+Tests for DocRouteBench Phase 2 scoring, all 10 metrics via unified dispatcher.
 
 Run with:
     pytest tests/test_scoring.py -v
@@ -25,7 +25,7 @@ from src.scoring.slidevqa_em import em_or_relaxed, is_correct as slidevqa_is_cor
 
 
 # ---------------------------------------------------------------------------
-# Unified dispatcher — routing and None/empty guard
+# Unified dispatcher: routing and None/empty guard
 # ---------------------------------------------------------------------------
 
 class TestUnifiedDispatcher:
@@ -118,7 +118,7 @@ class TestANLS:
         assert compute_anls("quarterly report", ["quarterly report"]) == pytest.approx(1.0)
 
     def test_minor_typo_within_threshold(self):
-        # "quartely" vs "quarterly" — 1 edit in 9 chars < 0.5 threshold
+        # "quartely" vs "quarterly", 1 edit in 9 chars < 0.5 threshold
         assert is_correct_anls("quartely report", ["quarterly report"]) is True
 
     def test_completely_wrong_answer(self):
@@ -191,7 +191,7 @@ class TestRelaxedAccuracy:
 
     @pytest.mark.parametrize("pred,gt_list,expected", [
         ("42",    ["42"],     True),
-        ("42.5",  ["42"],     False),   # 1.2% — within tolerance? 0.5/42 = 1.2% < 5% → True actually
+        ("42.5",  ["42"],     False),   # 1.2%, within tolerance? 0.5/42 = 1.2% < 5% → True actually
         ("999",   ["100"],    False),   # way off
         ("hello", ["hello"],  True),
         ("",      ["hello"],  False),
@@ -199,7 +199,7 @@ class TestRelaxedAccuracy:
     def test_parametrized_cases(self, pred, gt_list, expected):
         # For 42.5 vs 42: |42.5-42|/42 = 0.5/42 ≈ 0.012 < 0.05 → True
         if pred == "42.5" and gt_list == ["42"]:
-            pytest.skip("42.5 vs 42 is within 5% tolerance — test intent is outside-tolerance cases")
+            pytest.skip("42.5 vs 42 is within 5% tolerance, test intent is outside-tolerance cases")
         assert is_correct_relaxed_accuracy(pred, gt_list) is expected
 
     def test_via_unified(self):
@@ -310,7 +310,7 @@ class TestExactMatch:
         assert em_is_correct(pred, gt, dataset=dataset) is expected
 
     def test_via_unified(self):
-        # exact_match route returns float (1.0 / 0.0) — use truthiness
+        # exact_match route returns float (1.0 / 0.0), use truthiness
         assert is_correct("invoice", "invoice", "exact_match")
         assert not is_correct("letter", "invoice", "exact_match")
 

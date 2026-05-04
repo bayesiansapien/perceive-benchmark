@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DocRouteBench Phase 3 — API Evaluation Harness
+DocRouteBench Phase 3, API Evaluation Harness
 
 Evaluates all API-based model configs on benchmark samples.
 Mirrors the structure of src/sampling/api_probe.py.
@@ -189,14 +189,14 @@ def _eval_one(
     try:
         image_b64 = load_image_b64(sample.get("image_path", ""))
     except FileNotFoundError:
-        log.warning("Image not found for %s — skipping.", sample_id)
+        log.warning("Image not found for %s, skipping.", sample_id)
         return None
 
     # Get adapter
     provider = model_cfg.get("provider", "")
     AdapterClass = PROVIDER_TO_ADAPTER.get(provider)
     if AdapterClass is None:
-        log.warning("No adapter for provider %r — skipping %s", provider, config_id)
+        log.warning("No adapter for provider %r, skipping %s", provider, config_id)
         return None
 
     adapter = AdapterClass(yaml_key, model_cfg, budget_level)
@@ -325,7 +325,7 @@ def run_evaluation(
              len(samples) * len(api_configs), len(completed), len(pending))
 
     if not pending:
-        log.info("All done — nothing to evaluate.")
+        log.info("All done: nothing to evaluate.")
         return output_path
 
     tracker = _CostTracker(daily_spend_limit)
@@ -340,7 +340,7 @@ def run_evaluation(
         }
         for future in as_completed(futures):
             if tracker.aborted:
-                log.warning("Daily spend limit $%.2f reached — aborting.", daily_spend_limit)
+                log.warning("Daily spend limit $%.2f reached, aborting.", daily_spend_limit)
                 pool.shutdown(wait=False, cancel_futures=True)
                 break
             try:
