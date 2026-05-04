@@ -75,6 +75,13 @@ Python 3.10+. No GPU required. All experiments run on CPU.
 ```bash
 git clone https://github.com/bayesiansapien/perceive-benchmark
 cd perceive-benchmark
+
+# Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate          # macOS/Linux
+# .venv\Scripts\activate           # Windows PowerShell
+
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -121,8 +128,8 @@ are already in `data/` so most scripts run without API calls.
 | Claim | Value | Script | Needs API? |
 |---|---|---|---|
 | Cascade cost reduction | 60.7% | `scripts/validate_cascade.py` | No |
-| DVR (Dominance Violation Rate, anchor) | 6.2% | `scripts/validate_cascade.py` | No |
-| DVR 95% CI | 4.6%–8.1% | `scripts/compute_bootstrap_cis.py` | No |
+| Per-check DVR (n=171,392) | 8.2% | `scripts/validate_cascade.py` | No |
+| DVR 95% CI (Wilson) | 8.0%–8.3% | `scripts/compute_bootstrap_cis.py` | No |
 | GT label agreement (anchor, n=1,244) | 100% | `scripts/validate_cascade.py` | No |
 | GT agreement 95% CI | 99.8%–100% | `scripts/compute_bootstrap_cis.py` | No |
 | Verified-subset DVR (n=1,738) | 0.47% | `scripts/dvr_stratified.py` | No |
