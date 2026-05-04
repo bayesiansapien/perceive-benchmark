@@ -4,7 +4,7 @@
 
 PERCEIVE is a 4,801-sample document-image QA benchmark for cost-aware VLM routing. Each sample carries psychophysical complexity annotations (Visual Dependency Score, Reasoning Depth Score, Spatial Extent Score) derived from a three-model probe oracle, a difficulty tier (Easy/Medium/Hard), and a routing label identifying the cheapest model-budget configuration that answers it correctly.
 
-Routing labels are derived via a QUEST-style adaptive cascade at **60.7% cost reduction** with **100% ground-truth label agreement** across 7 commercial VLMs at 4 reasoning-budget levels (28 configurations).
+Routing labels are derived via a QUEST-style adaptive cascade at **60.7% cost reduction** with **100% ground-truth label agreement** across 7 commercial VLMs at up to 4 reasoning-budget levels (24 valid configurations).
 
 **Dataset:** https://huggingface.co/datasets/quantiphi-routing/perceive-benchmark
 
@@ -16,7 +16,7 @@ Routing labels are derived via a QUEST-style adaptive cascade at **60.7% cost re
 perceive/
 ├── configs/
 │   ├── datasets.yaml          # 16 source dataset definitions, sample budgets, metrics
-│   ├── model_pool.yaml        # 7 VLMs x 4 reasoning budgets (28 configs), pricing
+│   ├── model_pool.yaml        # 7 VLMs x up to 4 reasoning budgets (24 valid configs), pricing
 │   └── annotation_rubric.yaml # Probe prompt rubric for VDS/RDS/SES elicitation
 ├── data/
 │   ├── croissant.json                    # NeurIPS Croissant metadata (RAI fields, checksums)
