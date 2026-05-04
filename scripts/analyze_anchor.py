@@ -19,10 +19,10 @@ from collections import defaultdict
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BENCHMARK_PATH = os.path.join(REPO_ROOT, "data", "benchmark", "benchmark_5000.jsonl")
 API_RESULTS_PATH = os.path.join(
-    REPO_ROOT, "data", "model_eval_results", "api_results_anchor.jsonl"
+    REPO_ROOT, "data", "anchor_evaluations", "api_results_anchor.jsonl"
 )
 JUDGMENTS_PATH = os.path.join(
-    REPO_ROOT, "data", "model_eval_results", "all_models_judgments.jsonl"
+    REPO_ROOT, "data", "model_eval_results", "all_models_judgments_v2.jsonl"
 )
 OUTPUT_DIR = os.path.join(REPO_ROOT, "data", "analysis")
 OUTPUT_PATH = os.path.join(OUTPUT_DIR, "anchor_analysis.txt")
